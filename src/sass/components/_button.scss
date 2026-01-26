@@ -1,0 +1,15 @@
+@use '../abstracts/' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-align: center;
+  border: none;
+  background: clr(primary, 400);
+  color: clr(neutral, 100);
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  cursor: pointer;
+}

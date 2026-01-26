@@ -1,0 +1,18 @@
+@use '../abstracts/' as *;
+
+.container {
+  @include fluid-clamp($container-padding-inline, true, 'padding-inline');
+  --max-width: #{$container-max-width};
+  width: min(calc(100% - (var(--padding-inline) * 2)), var(--max-width));
+  margin-inline: auto;
+}
+
+.container[data-container='small'] {
+  --max-width: #{$container-max-width-small};
+}
+.container[data-container='large'] {
+  --max-width: #{$container-max-width-large};
+}
+.container[data-container='full-bleed'] {
+  --max-width: #{$container-max-width-full-bleed};
+}

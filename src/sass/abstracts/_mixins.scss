@@ -1,0 +1,119 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'breakpoints' as *;
+
+@function check-size($size, $name: 'breakpoint') {
+  @if (map.has-key($breakpoints, $size)) {
+    @return map.get($breakpoints, $size);
+  } @else if (meta.type-of($size) == number) {
+    @if (math.is-unitless($size)) {
+      @return 'The value of #{$size} you provided for #{$name} is a number but has no unit. Please use a unit';
+    } @else {
+      @return $size;
+    }
+  } @else {
+    @return 'The value of #{$size} you provided for #{$name} is not a key in the map. Please use a key from the map or a number with a unit';
+  }
+}
+
+@mixin mq($breakpoint-1, $min-or-max: min-width, $breakpoint-2: 0em) {
+  $check-1: check-size($breakpoint-1, 'breakpoint-1');
+  @if (meta.type-of($check-1) == string) {
+    @error $check-1;
+  }
+
+  $size-1: $check-1;
+  @if ($min-or-max == min-width) {
+    @media screen and (min-width: $size-1) {
+      @content;
+    }
+  } @else if ($min-or-max == max-width) {
+    @media screen and (max-width: $size-1) {
+      @content;
+    }
+  } @else if ($min-or-max == between) {
+    $check-2: check-size($breakpoint-2, 'breakpoint-2');
+    @if (meta.type-of($check-2) == string) {
+      @error $check-2;
+    }
+
+    $size-2: $check-2;
+    @media screen and (min-width: $size-1) and (max-width: $size-2) {
+      @content;
+    }
+  } @else {
+    @error 'The value of #{$min-or-max} you provided for $min-or-max is invalid. Please use min-width, max-width or between';
+  }
+}
+
+@mixin mq($size) {
+  @if (map.has-key($breakpoints, $size)) {
+    $breakpoint: map.get($breakpoints, $size);
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  } @else if (meta.type-of($size) == number) {
+    @if (math.is-unitless($size)) {
+      @error 'Provided value of #{$size} has no unit';
+    } @else {
+      $breakpoint: $size;
+      @media screen and (min-width: $breakpoint) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'Provided value of #{$size} is not in the $breakponts map. Use a value from $breakpoints map or a number with a unit';
+  }
+}
+
+@function get-required($map, $key) {
+  @if (map.has-key($map, $key)) {
+    @return map.get($map, $key);
+  }
+  @error 'fluid-clamp(): #{$key} is missing from the #{$map} map.';
+}
+
+@mixin fluid-clamp(
+  $size-map,
+  $skip-second-range: false,
+  $property: padding-block
+) {
+  // Check map
+  @if $size-map == null or list.length(map.keys($size-map)) == 0 {
+    @error 'No map was passed into fluid-clamp(). Pass a map with small, medium, large,min-width, mid-width, max-width.';
+  }
+  // Extract required values
+  $small: get-required($size-map, small);
+  $medium: get-required($size-map, medium);
+
+  $min-width: get-required($size-map, min-width);
+  $mid-width: get-required($size-map, mid-width);
+
+  // First range
+  $slope1: calc(($medium - $small) / ($mid-width - $min-width));
+  $y-intercept1: $small - ($slope1 * $min-width);
+
+  --#{$property}: #{clamp(
+      #{$small}rem,
+      calc(#{($y-intercept1)}rem + #{($slope1 * 100)}vw),
+      #{$medium}rem
+    )};
+
+  // Optional second range
+  @if $skip-second-range != true {
+    $large: get-required($size-map, large);
+    $max-width: get-required($size-map, max-width);
+    @media (min-width: #{$mid-width}em) {
+      $slope2: calc(($large - $medium) / ($max-width - $mid-width));
+      $y-intercept2: $medium - ($slope2 * $mid-width);
+
+      --#{$property}: #{clamp(
+          #{$medium}rem,
+          calc(#{$y-intercept2}rem + #{$slope2 * 100}vw),
+          #{$large}rem
+        )};
+    }
+  }
+}

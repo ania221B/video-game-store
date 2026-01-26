@@ -1,0 +1,52 @@
+$sizes: (
+  4: 0.25rem,
+  8: 0.5rem,
+  12: 0.75rem,
+  16: 1rem,
+  20: 1.25rem,
+  24: 1.5rem,
+  32: 2rem,
+  36: 2.25rem,
+  48: 3rem,
+);
+
+$bg-min-height: 14.5rem;
+$bg-max-height: 20rem;
+
+$card-body-padding: (
+  small: 2,
+  medium: 5,
+  min-width: 23.4375,
+  mid-width: 60,
+);
+$card-base-width: 16rem;
+
+$container-padding-inline: (
+  small: 1.5,
+  medium: 2.5,
+  min-width: 23.4375,
+  mid-width: 60,
+);
+$container-max-width: 60rem;
+$container-max-width-small: 50rem;
+$container-max-width-large: 75rem;
+$container-max-width-full-bleed: 100%;
+
+$grid-gap: 1.5rem;
+$flex-group-gap: 1rem;
+
+$padding-hero: (
+  small: 15,
+  medium: 20,
+  min-width: 23.4375,
+  mid-width: 60,
+);
+
+$padding-section: (
+  small: 3,
+  medium: 4.5,
+  large: 7,
+  min-width: 23.4375,
+  mid-width: 48,
+  max-width: 60,
+);
