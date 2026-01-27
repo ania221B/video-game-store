@@ -4,6 +4,10 @@ import { Error, Landing } from './pages'
 import Products from './pages/Products'
 import SingleProduct from './pages/SingleProduct'
 
+// loaders
+import { loader as productsLoader } from './pages/Products'
+// actions
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -16,7 +20,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'products',
-        element: <Products></Products>
+        element: <Products></Products>,
+        loader: productsLoader
       },
       {
         path: 'products/:id',

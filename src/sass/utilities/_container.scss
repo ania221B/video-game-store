@@ -1,10 +1,19 @@
 @use '../abstracts/' as *;
 
 .container {
-  @include fluid-clamp($container-padding-inline, true, 'padding-inline');
+  // --padding-inline: #{$container-padding-inline};
   --max-width: #{$container-max-width};
-  width: min(calc(100% - (var(--padding-inline) * 2)), var(--max-width));
-  margin-inline: auto;
+  @include fluid-clamp($container-padding-inline, true, 'padding-inline');
+  display: grid;
+  grid-template-columns:
+    minmax(var(--padding-inline), 1fr)
+    min(calc(100% - (var(--padding-inline) * 2)), var(--max-width))
+    minmax(var(--padding-inline), 1fr);
+  justify-content: center;
+
+  & > * {
+    grid-column: 2;
+  }
 }
 
 .container[data-container='small'] {

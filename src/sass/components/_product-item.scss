@@ -1,0 +1,42 @@
+@use '../abstracts/' as *;
+
+.product-item {
+  --_container-padding: #{$card-padding};
+  --_container-radius: #{$card-radius};
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: $grid-gap;
+  block-size: 100%;
+  padding-inline: var(--_container-padding);
+  padding-block: var(--_container-padding);
+  border-radius: var(--_container-radius);
+  border: 2px solid clr(primary, 400);
+
+  & > a {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: $grid-gap;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 0.25em;
+  }
+}
+
+.product-item__img,
+.product-item__img > img {
+  border-radius: calc(var(--_container-padding) - var(--_container-radius));
+}
+
+.product-item__rating {
+  dd {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    line-height: 1;
+  }
+}

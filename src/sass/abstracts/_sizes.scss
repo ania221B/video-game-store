@@ -20,6 +20,8 @@ $card-body-padding: (
   mid-width: 60,
 );
 $card-base-width: 16rem;
+$card-padding: 0.75em;
+$card-radius: 0.5em;
 
 $container-padding-inline: (
   small: 1.5,
@@ -27,6 +29,7 @@ $container-padding-inline: (
   min-width: 23.4375,
   mid-width: 60,
 );
+// $container-padding-inline: 1.5rem;
 $container-max-width: 60rem;
 $container-max-width-small: 50rem;
 $container-max-width-large: 75rem;

@@ -27,9 +27,11 @@ h4 {
 }
 
 /* Removes default list styling on ul, ol elements with a list role */
-ul[role='list'],
-ol[role='list'] {
+ul:not(.bulletlist),
+ol:not(.bulletlist) {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* Sets core root defaults */

@@ -12,4 +12,30 @@
   padding: 0.5em 1em;
   font-size: 1rem;
   cursor: pointer;
+
+  &[data-button='primary'] {
+    position: relative;
+    isolation: isolate;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: clr(primary, 500);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 400ms ease-in-out;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  &--card {
+    gap: calc($grid-gap / 2);
+    border-radius: calc($card-padding - $card-radius);
+    text-transform: uppercase;
+  }
 }
