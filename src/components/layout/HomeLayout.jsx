@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 function HomeLayout () {
   return (
@@ -8,10 +8,10 @@ function HomeLayout () {
           <nav>
             <ul>
               <li>
-                <Link to='/'>Home</Link>
+                <NavLink to='/'>Home</NavLink>
               </li>
               <li>
-                <Link to='/products'>Products</Link>
+                <NavLink to='/products'>Products</NavLink>
               </li>
             </ul>
           </nav>
