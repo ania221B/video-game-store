@@ -5,7 +5,6 @@ export const gamesApi = axios.create({
   baseURL: url,
   params: {
     key: `${import.meta.env.VITE_RAWG_KEY}`,
-    page: 1,
     page_size: 20
   }
 })

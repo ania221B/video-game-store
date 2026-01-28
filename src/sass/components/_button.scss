@@ -9,13 +9,14 @@
   border: none;
   background: clr(primary, 400);
   color: clr(neutral, 100);
-  padding: 0.5em 1em;
+
   font-size: 1rem;
   cursor: pointer;
 
   &[data-button='primary'] {
     position: relative;
     isolation: isolate;
+    padding: 0.5em 1em;
 
     &::after {
       content: '';
@@ -37,5 +38,45 @@
     gap: calc($grid-gap / 2);
     border-radius: calc($card-padding - $card-radius);
     text-transform: uppercase;
+  }
+
+  &--navigation {
+    background-color: transparent;
+    padding: 0;
+    block-size: 3rem;
+    inline-size: 3rem;
+    aspect-ratio: 1;
+  }
+
+  &--page {
+    padding-inline: 1em;
+    background-color: transparent;
+    border: 1px solid rgba(clr(primary, 400), 0.5);
+    border-radius: size(4);
+    position: relative;
+    isolation: isolate;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(clr(primary, 400), 0.2);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 450ms ease-in-out;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &.active {
+      border-color: rgba(clr(primary, 400), 0.5);
+
+      &::after {
+        opacity: 1;
+        background-color: clr(primary, 400);
+      }
+    }
   }
 }

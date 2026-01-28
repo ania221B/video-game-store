@@ -2,7 +2,7 @@ import { ShoppingCart, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function ProductCard ({ item }) {
-  const { name, background_image: img, rating, rating_top: ratingMax } = item
+  const { name, background_image: img, rating } = item
   const price = (0).toFixed(2)
   return (
     <article className='product-item'>
@@ -15,12 +15,8 @@ function ProductCard ({ item }) {
           <dl className='product-item__rating'>
             <dt className='sr-only'>Rating:</dt>
             <dd>
-              <span className='sr-only'>
-                Rated {rating} out of {ratingMax} stars.
-              </span>
-              <span aria-hidden='true'>
-                {rating} / {ratingMax}
-              </span>
+              <span className='sr-only'>Rated {rating} out of 5 stars.</span>
+              <span aria-hidden='true'>{rating} / 5</span>
               <span className='product-item__star'>
                 <Star size={18}></Star>
               </span>

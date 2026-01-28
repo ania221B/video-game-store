@@ -1,0 +1,83 @@
+@use '../abstracts/' as *;
+
+.catalog-grid {
+  grid-column: 2 / -2;
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  /* 
+  Defines row sizes for consistent layout structure:
+  - auto: header adjusts naturally
+  - min-content: filtering/search area takes only needed space
+  - 1fr: product list fills remaining space, preventing layout shift
+*/
+  grid-template-rows: auto min-content 1fr;
+
+  & > header,
+  & aside,
+  & .breadcrumb,
+  & .search-menu,
+  & .item-area,
+  & .pagination {
+    grid-column: 1 / -1;
+  }
+
+  & aside,
+  & .search-menu,
+  & .pagination {
+    padding-block-start: 2em;
+  }
+
+  @media (min-width: 45em) {
+    & > header {
+      grid-column: 1 / -1;
+      grid-row: 1;
+    }
+
+    aside {
+      grid-column: 1;
+      grid-row: 2 / 4;
+    }
+
+    .search-menu,
+    .item-area {
+      grid-column: 2;
+    }
+
+    .search-menu {
+      margin-inline-start: 2em;
+    }
+
+    .breadcrumb {
+      padding-block-start: 0;
+      grid-row: 1;
+    }
+    .search-menu {
+      grid-row: 2;
+    }
+
+    .item-area {
+      grid-row: 3;
+      margin-block-start: $grid-gap;
+      margin-inline-start: $grid-gap;
+
+      display: grid;
+      grid-auto-flow: row;
+      grid-auto-rows: min-content;
+    }
+
+    .pagination {
+      grid-row: 4;
+      justify-self: center;
+    }
+  }
+}
+
+.item-area {
+  &__list {
+    @include mq(large) {
+      li:only-child {
+        max-width: calc($card-base-width * 1.5);
+      }
+    }
+  }
+}

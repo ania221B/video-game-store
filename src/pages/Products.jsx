@@ -1,14 +1,27 @@
 import { useLoaderData } from 'react-router-dom'
 import { gamesApi } from '../api'
-import { ProductCard } from '../components/ui'
+import { Pagination, ProductCard } from '../components/ui'
 
-export async function loader () {
-  const { data } = await gamesApi.get('')
-  return data.results
+export async function loader ({ request }) {
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries()
+  ])
+  const page = Number(params.page ?? 1)
+
+  const { data } = await gamesApi.get('', {
+    params: {
+      ...params,
+      page
+    }
+  })
+  console.log(data)
+
+  return data
 }
 
 function Products () {
-  const products = useLoaderData()
+  const data = useLoaderData()
+  const products = data.results
   return (
     <section className='section'>
       <div className='container'>
@@ -17,15 +30,19 @@ function Products () {
           <p>some text</p>
         </header>
         <div className='catalog-grid'>
-          <ul className='item-area__list grid-auto-fit'>
-            {products.map(product => {
-              return (
-                <li key={product.id}>
-                  <ProductCard item={product}></ProductCard>
-                </li>
-              )
-            })}
-          </ul>
+          <div className='item-area'>
+            <ul className='item-area__list grid-auto-fit'>
+              {products.map(product => {
+                return (
+                  <li key={product.id}>
+                    <ProductCard item={product}></ProductCard>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+
+          <Pagination></Pagination>
         </div>
       </div>
     </section>
