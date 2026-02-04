@@ -1,6 +1,8 @@
 import { useLoaderData } from 'react-router-dom'
 import { gamesApi } from '../api'
-import { Pagination, ProductCard } from '../components/ui'
+import { Pagination } from '../components/ui'
+import { ProductList } from '../components/lists'
+import { Loader } from '../components/common'
 
 export async function loader ({ request }) {
   const params = Object.fromEntries([
@@ -22,6 +24,7 @@ export async function loader ({ request }) {
 function Products () {
   const data = useLoaderData()
   const products = data.results
+
   return (
     <section className='section'>
       <div className='container'>
@@ -31,17 +34,8 @@ function Products () {
         </header>
         <div className='catalog-grid'>
           <div className='item-area'>
-            <ul className='item-area__list grid-auto-fit'>
-              {products.map(product => {
-                return (
-                  <li key={product.id}>
-                    <ProductCard item={product}></ProductCard>
-                  </li>
-                )
-              })}
-            </ul>
+            <ProductList products={products}></ProductList>
           </div>
-
           <Pagination></Pagination>
         </div>
       </div>
