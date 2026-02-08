@@ -2,13 +2,13 @@ import { ShoppingCart, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function ProductCard ({ item }) {
-  const { name, background_image: img, rating } = item
+  const { name, background_image: img, rating, genres } = item
   const price = (0).toFixed(2)
   return (
     <article className='product-item'>
       <Link>
         <div className='product-item__img'>
-          <img src={img} alt={name} width='400' height='250' />
+          <img src={img} alt={name} width='300' height='250' />
         </div>
         <header>
           <h3>{name}</h3>
@@ -30,6 +30,13 @@ function ProductCard ({ item }) {
             <span aria-hidden='true'>$ {price}</span>
           </dd>
         </dl>
+
+        <h4 className='sr-only'>Genres:</h4>
+        <ul className='product-item__genre-list'>
+          {genres.map(genre => {
+            return <li key={genre.id}>{genre.name}</li>
+          })}
+        </ul>
       </Link>
       <button type='button' className='btn btn--card' data-button='primary'>
         <ShoppingCart></ShoppingCart>

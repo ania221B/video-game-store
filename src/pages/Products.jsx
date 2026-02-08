@@ -2,7 +2,7 @@ import { useLoaderData } from 'react-router-dom'
 import { gamesApi } from '../api'
 import { Pagination } from '../components/ui'
 import { ProductList } from '../components/lists'
-import { Loader } from '../components/common'
+import FilterMenu from '../components/common/FilterMenu'
 
 export async function loader ({ request }) {
   const params = Object.fromEntries([
@@ -10,13 +10,13 @@ export async function loader ({ request }) {
   ])
   const page = Number(params.page ?? 1)
 
-  const { data } = await gamesApi.get('', {
+  const { data } = await gamesApi.get('/games', {
     params: {
+      page_size: 20,
       ...params,
       page
     }
   })
-  console.log(data)
 
   return data
 }
@@ -33,6 +33,7 @@ function Products () {
           <p>some text</p>
         </header>
         <div className='catalog-grid'>
+          <FilterMenu></FilterMenu>
           <div className='item-area'>
             <ProductList products={products}></ProductList>
           </div>

@@ -6,13 +6,16 @@ import SingleProduct from './pages/SingleProduct'
 
 // loaders
 import { loader as productsLoader } from './pages/Products'
+import { loader as metadataLoader } from './components/layout/HomeLayout'
 // actions
 
 const router = createBrowserRouter([
   {
     path: '/',
+    id: 'home',
     element: <HomeLayout></HomeLayout>,
     errorElement: <Error></Error>,
+    loader: metadataLoader,
     children: [
       {
         index: true,

@@ -1,4 +1,12 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import { gamesApi } from '../../api'
+
+export const loader = async function () {
+  const { data: genresData } = await gamesApi.get('/genres')
+  const { data: platformsData } = await gamesApi.get('/platforms')
+
+  return { genresData, platformsData }
+}
 
 function HomeLayout () {
   return (

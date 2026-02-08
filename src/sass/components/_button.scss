@@ -37,6 +37,7 @@
   &--card {
     gap: calc($grid-gap / 2);
     border-radius: calc($card-padding - $card-radius);
+    border-radius: 0.125em;
     text-transform: uppercase;
   }
 
@@ -79,4 +80,12 @@
       }
     }
   }
+}
+// TEMPORARY!
+.custom-select__toggle.highlighted {
+  background-color: darkslateblue;
+}
+.custom-select__toggle:hover,
+.custom-select__toggle:focus {
+  background-color: rgb(77, 55, 216);
 }
