@@ -1,8 +1,7 @@
-import { Link, useRouteLoaderData, useSearchParams } from 'react-router-dom'
+import { Link, useRouteLoaderData } from 'react-router-dom'
 import { AccordionPanel } from '../ui'
 import CustomSelect from '../ui/CustomSelect'
 
-// make the menu an accordion?
 function FilterMenu () {
   const { genresData, platformsData } = useRouteLoaderData('home')
   const genres = genresData.results
@@ -23,6 +22,10 @@ function FilterMenu () {
       </div>
 
       <CustomSelect></CustomSelect>
+
+      <Link to='/products' className='btn' style={{textDecoration: 'none', paddingBlock: '8px', paddingInline: '24px', marginBlock: '16px'}}>
+        Reset
+      </Link>
     </aside>
   )
 }
