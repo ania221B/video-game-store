@@ -3,6 +3,7 @@ import { gamesApi } from '../api'
 import { Pagination } from '../components/ui'
 import { ProductList } from '../components/lists'
 import FilterMenu from '../components/common/FilterMenu'
+import SearchBar from '../components/ui/SearchBar'
 
 export async function loader ({ request }) {
   const params = Object.fromEntries([
@@ -34,6 +35,7 @@ function Products () {
         </header>
         <div className='catalog-grid'>
           <FilterMenu></FilterMenu>
+          <SearchBar></SearchBar>
           <div className='item-area'>
             <ProductList products={products}></ProductList>
           </div>
