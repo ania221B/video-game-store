@@ -1,14 +1,35 @@
-$ff-primary: 'Lato', sans-serif;
-$ff-secondary: 'Abril Fatface', serif;
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Regular.woff2) format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url(/src/assets/fonts/SourceSans3-Regular.woff2) format('woff2'),
+    url(/src/assets/fonts/SourceSans3-Regular.woff) format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url(/src/assets/fonts/SourceSans3-Bold.woff2) format('woff2'),
+    url(/src/assets/fonts/SourceSans3-Bold.woff) format('woff');
+  font-weight: 700;
+}
+
+$ff-primary: 'JetBrainsMono', sans-serif;
+
 
 $font-sizes: (
-  900: clamp(2.5rem, 0.5rem + 10vw, 5rem),
-  800: clamp(2.5rem, 0.5rem + 7vw, 3.75rem),
-  700: clamp(1.5rem, 0.5rem + 5vw, 2rem),
-  600: clamp(1.4rem, 0.5rem + 3vw, 1.6875rem),
-  500: 1.3125rem,
-  400: 1.125rem,
-  300: 1rem,
+  1000: clamp(2.5rem, 0.5rem + 10vw, 5rem),
+  900: clamp(2.5rem, 0.5rem + 7vw, 3.75rem),
+  800: clamp(1.5rem, 0.5rem + 5vw, 2rem),
+  700: clamp(1.4rem, 0.5rem + 3vw, 1.6875rem),
+  600: 1.4rem,
+  500: 1rem,
+  400: 0.8125rem,
+  300: 0.75rem,
 );
 
 $fw-400: 400;
