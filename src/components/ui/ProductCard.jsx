@@ -45,7 +45,7 @@ function ProductCard ({ item }) {
 
           
         </div>
-      <Link to={`/products/${slug}`} className='btn btn--shuffle' data-button='primary'>
+      <Link to={`/products/${slug}`} className='btn' data-button='primary'>
         <span>See details</span>
         <span>See details</span>
       </Link>

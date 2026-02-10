@@ -26,7 +26,7 @@ function Pagination () {
         onClick={() => handlePageChange(pageNumber)}
         className={`pagination__page btn btn--page ${
           activeClass ? 'active' : undefined
-        }`}
+        }`} data-button='secondary'
       >
         {pageNumber}
       </button>
@@ -41,7 +41,7 @@ function Pagination () {
     // dots
     if (page > 2) {
       pageButtons.push(
-        <button className='pagination__page btn btn--page' key='dots-1'>
+        <button className='pagination__page btn btn--page' key='dots-1' data-button='secondary'>
           ...
         </button>
       )
@@ -53,7 +53,7 @@ function Pagination () {
     // dots
     if (page < lastPage - 1) {
       pageButtons.push(
-        <button className='pagination__page btn btn--page' key='dots-2'>
+        <button className='pagination__page btn btn--page' key='dots-2' data-button='secondary'>
           ...
         </button>
       )
@@ -76,7 +76,7 @@ function Pagination () {
 
           handlePageChange(previousPage)
         }}
-        className='pagination__nav btn btn--navigation'
+        className='pagination__nav btn' data-button='page-nav'
       >
         <ChevronLeft></ChevronLeft>
         <span className='sr-only'>Previous page</span>
@@ -92,7 +92,7 @@ function Pagination () {
 
           handlePageChange(nextPage)
         }}
-        className='pagination__nav btn btn--navigation '
+        className='pagination__nav btn' data-button='page-nav'
       >
         <ChevronRight></ChevronRight>
         <span className='sr-only'>Next page</span>

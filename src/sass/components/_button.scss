@@ -1,98 +1,62 @@
+@use 'sass:color';
 @use '../abstracts/' as *;
+
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
+  font-size: fs(400);
   text-align: center;
   border: none;
   background-color: var(--btn-bg, white);
   color: var(--btn-fg, black);
-
-  font-size: 1rem;
+  padding-block: 1em;
+  padding-inline: 1.75em;
   cursor: pointer;
+  position: relative;
+  isolation: isolate;
 
-  &[data-button='primary'] {
-    --btn-bg: #{clr(primary, 400)};
-    --btn-fg: #{clr(base, 800)};
-    --btn-hover-bg: #{clr(secondary, 700)};
-    position: relative;
-    isolation: isolate;
-    padding-block: 1em;
-    padding-inline: 1.75em;   
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: var(--btn-hover-bg);      
-      border-radius: inherit;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 400ms ease-in-out;
-    }
-
-    &:hover::after {
-      opacity: 1;
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--btn-hover-bg, black);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
   }
 
-  &--card {
-    gap: $grid-gap;
-    text-transform: capitalize;
+  &:hover,
+  &:focus {
+    color: var(--btn-hover-fg, white);
   }
 
-  &--navigation {
-    background-color: transparent;
-    padding: 0;
-    block-size: 3rem;
-    inline-size: 3rem;
-    aspect-ratio: 1;
-  }
-
-  &--page {
-    --btn-fg: #{clr(primary, 400)};
-    padding-inline: 1em;
-    background-color: transparent;
-    color: var(--btn-fg);
-    border: 1px solid;
-    border-radius: size(4);
-    position: relative;
-    isolation: isolate;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: rgba(clr(primary, 400), 0.2);
-      border-radius: inherit;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 450ms ease-in-out;
-    }
-
-    &:hover::after {
-      opacity: 1;
-    }
-
-    &.active {
-      color: clr(base, 800);
-
-      &::after {
-        opacity: 1;
-        background-color: clr(primary, 400);
-      }
-    }
+  &:hover::after,
+  &:focus::after {
+    opacity: 1;
   }
 }
 
-.btn--shuffle {
-  padding-inline: 0 !important;
-  padding-block: 0 !important;
+.btn[data-button='primary'],
+.btn[data-button='secondary'] {
+  font-weight: $fw-700;
+}
+
+
+.btn[data-button='primary'] {
+  --btn-bg: #{clr(primary, 400)};
+  --btn-fg: #{clr(base, 800)};
+  --btn-hover-bg: #{clr(primary, 700)};
+  --btn-hover-fg: #{clr(base, 800)};
+  padding-inline: 0;
+  padding-block: 0;
   display: grid;
   grid-auto-rows: 100%;
-  color: clr(base, 800) !important;
+  color: clr(base, 800);
+  font-size: fs(500);
   overflow: hidden;
 
   & > * {
@@ -100,8 +64,8 @@
     align-items: center;
     justify-content: center;
     padding-block: 0.25em;
-    padding-inline: 1.75em;
-   
+    padding-inline: 0.75em;
+
     inline-size: 100%;
     block-size: 100%;
     transition: transform 450ms ease-in-out;
@@ -115,26 +79,56 @@
     }
   }
 
-  &:hover > * {   
-    transform: translateY(-100%); 
-    &:first-child {      
+  &:hover > * {
+    transform: translateY(-100%);
+    &:first-child {
       opacity: 0;
       transition: opacity 300ms ease-in-out, transform 450ms ease-in-out 100ms;
     }
-    &:last-child {    
+    &:last-child {
       opacity: 1;
       transition: opacity 300ms ease-in-out, transform 450ms ease-in-out;
     }
-    
+  }
+}
+
+.btn[data-button='secondary'] {
+  $color: clr(primary, 400);
+  --btn-bg: transparent;
+  --btn-fg: #{$color};
+  --btn-hover-bg: #{rgba($color, 0.1)};
+  --btn-hover-fg: #{$color};
+  border: 1px solid;
+  border-radius: size(4);
+
+  &.active {
+    color: clr(base, 800);
+
+    &::after {
+      opacity: 1;
+      background-color: $color;
+    }
+  }
+}
+
+.btn[data-button='page-nav'] {
+  --btn-bg: transparent;
+  --btn-fg: #{clr(primary, 400)};
+  --btn-hover-fg:#{clr(primary, 400)};
+  --btn-hover-bg: transparent;
+  padding: 0;
+  border-radius: size(4);
+  border-radius: 50%;
+  block-size: 3rem;
+  inline-size: 3rem;
+  aspect-ratio: 1;
+
+  &::after {
+     box-shadow: 0px 0px 0px 1px clr(primary, 400);
   }
 }
 
 // TEMPORARY!
 .custom-select__toggle.highlighted {
-  background-color: darkslateblue;
+  background-color: clr(primary, 400);
 }
-.custom-select__toggle:hover,
-.custom-select__toggle:focus {
-  background-color: rgb(77, 55, 216);
-}
-
