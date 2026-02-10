@@ -28,7 +28,7 @@ function Products () {
 
   return (
     <section className='section'>
-      <div className='container'>
+      <div className='container' data-container='large'>
         <header>
           <h1>All Games</h1>
           <p>some text</p>
