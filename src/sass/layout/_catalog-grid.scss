@@ -58,7 +58,7 @@
     .item-area {
       grid-row: 3;
       margin-block-start: $grid-gap;
-      margin-inline-start: $grid-gap;
+      margin-inline-start: $grid-gap * 3;
 
       display: grid;
       grid-auto-flow: row;
