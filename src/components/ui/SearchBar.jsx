@@ -19,9 +19,9 @@ function SearchBar () {
 
 
   return (
-    <search onSubmit={e => e.preventDefault()}>
-      <form>
-        <div>
+    <search onSubmit={e => e.preventDefault()} className='search-menu'>
+      <form className='search-form'>
+        <div className='form__wrapper'>
           <label htmlFor='search-input'>Search for games</label>
           <input
             type='text'
@@ -31,10 +31,11 @@ function SearchBar () {
             placeholder='Search a game e.g. Hollow Knight'
             onChange={e => handleInput(e.target.value)}
           />
-        </div>
-        <button type='submit' className='btn'>
-          submit
+        <button type='submit' className='btn' data-button='primary'>
+            <span>submit</span>
+            <span>submit</span>
         </button>
+        </div>
       </form>
     </search>
   )
