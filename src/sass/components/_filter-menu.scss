@@ -1,0 +1,7 @@
+@use '../abstracts/' as *;
+
+.filter-menu {
+    display: grid;
+    gap: size(8); 
+    align-content: start;
+}

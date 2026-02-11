@@ -1,0 +1,60 @@
+@use '../abstracts/' as *;
+
+.accordion {
+    display: grid;
+    gap: 8px;
+  &__list {
+    padding: 0;
+    margin: 0;
+    margin-block-start: $grid-gap;
+  }
+  &__panel {
+    display: grid;
+    grid-auto-flow: row;
+    position: relative;
+  }
+
+
+  &__toggle {
+    flex-shrink: 0;
+    transform: rotate(0deg);
+    transition: transform 500ms ease-in-out;
+  }
+
+  &__panel[data-state='opened'] &__toggle {
+    transform: rotate(180deg);
+  }
+
+  &__btn:hover &__toggle,
+  &__btn:focus &__toggle {
+    color: clr(primary, 400);
+  }
+
+  &__content {
+    overflow: hidden;
+    max-height: var(--accordion-max-height, 0);
+    transition: max-height 500ms ease;
+  }
+
+  @supports (transition: grid-template-rows) {
+    &__content {
+      all: unset;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 500ms ease;
+
+      &[aria-hidden='false'] {
+        grid-template-rows: 1fr;
+      }
+
+      & > div {
+        overflow: hidden;
+      }
+    }
+  }
+
+  &__inner-content {
+    padding-block: 2rem;
+    padding-inline: 1rem;
+  }
+}

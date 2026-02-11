@@ -97,7 +97,7 @@ function CustomSelect () {
     <div
       className='custom-select'
       data-state={isDropdownOpen ? 'open' : 'closed'}
-      ref={dropDownContainerRef}
+      ref={dropDownContainerRef}      
     >
       <button
         type='button'
@@ -108,9 +108,10 @@ function CustomSelect () {
         aria-activedescendant={
           isDropdownOpen ? `option-${highlightedIndex}` : undefined
         }
-        className='btn custom-select__button'
+        className='btn custom-select__btn filter-menu__btn'
         onClick={toggleDropdown}
         onKeyDown={handleKeyDown}
+        data-button='secondary'
       >
         <span className='custom-select__selected-value'>
           {' '}

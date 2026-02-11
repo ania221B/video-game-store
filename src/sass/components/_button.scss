@@ -5,10 +5,10 @@
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   line-height: 1;
   font-size: fs(400);
   text-align: center;
+  text-decoration: none;
   border: none;
   background-color: var(--btn-bg, white);
   color: var(--btn-fg, black);
@@ -17,6 +17,10 @@
   cursor: pointer;
   position: relative;
   isolation: isolate;
+
+  &:not(.filter-menu__btn) {
+    justify-content: center;
+  }
 
   &::after {
     content: '';
@@ -53,18 +57,20 @@
   --btn-hover-fg: #{clr(base, 800)};
   padding-inline: 0;
   padding-block: 0;
-  display: grid;
-  grid-auto-rows: 100%;
+  display: block; 
   color: clr(base, 800);
-  font-size: fs(500);
+  font-size: fs(500);  
   overflow: hidden;
 
   & > * {
+   
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: $grid-gap;
     padding-block: 0.25em;
     padding-inline: 0.75em;
+   
 
     inline-size: 100%;
     block-size: 100%;
@@ -124,11 +130,26 @@
   aspect-ratio: 1;
 
   &::after {
-     box-shadow: 0px 0px 0px 1px clr(primary, 400);
+    box-shadow: 0px 0px 0px 1px clr(primary, 400);
   }
 }
 
-// TEMPORARY!
-.custom-select__toggle.highlighted {
-  background-color: clr(primary, 400);
+.filter-menu__btn {
+  gap: $grid-gap;
+  inline-size: 100%; 
+  min-height: 50px;
+  border-radius: size(4);
+  font-size: fs(400) !important;
+  font-weight: $fw-700;
+  text-transform: uppercase;
+  justify-content: space-between;
 }
+
+.accordion__btn {
+    &:focus {
+      outline: none;
+    }
+    &:focus-visible {
+      outline: 2px solid clr(primary, 400);
+    }
+  }

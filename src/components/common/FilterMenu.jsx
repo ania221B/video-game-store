@@ -8,7 +8,7 @@ function FilterMenu () {
   const platforms = platformsData.results
 
   return (
-    <aside>
+    <aside className='filter-menu'>
       <div className='accordion'>
         <AccordionPanel
           title='genres'
@@ -23,8 +23,9 @@ function FilterMenu () {
 
       <CustomSelect></CustomSelect>
 
-      <Link to='/products' className='btn' style={{textDecoration: 'none', paddingBlock: '8px', paddingInline: '24px', marginBlock: '16px'}}>
-        Reset
+      <Link to='/products' className='btn filter-menu__btn' data-button='primary'>       
+        <span>Reset</span>
+        <span>Reset</span>      
       </Link>
     </aside>
   )
