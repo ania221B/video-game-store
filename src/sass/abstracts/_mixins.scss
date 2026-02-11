@@ -48,26 +48,6 @@
   }
 }
 
-@mixin mq($size) {
-  @if (map.has-key($breakpoints, $size)) {
-    $breakpoint: map.get($breakpoints, $size);
-    @media screen and (min-width: $breakpoint) {
-      @content;
-    }
-  } @else if (meta.type-of($size) == number) {
-    @if (math.is-unitless($size)) {
-      @error 'Provided value of #{$size} has no unit';
-    } @else {
-      $breakpoint: $size;
-      @media screen and (min-width: $breakpoint) {
-        @content;
-      }
-    }
-  } @else {
-    @error 'Provided value of #{$size} is not in the $breakponts map. Use a value from $breakpoints map or a number with a unit';
-  }
-}
-
 @function get-required($map, $key) {
   @if (map.has-key($map, $key)) {
     @return map.get($map, $key);
