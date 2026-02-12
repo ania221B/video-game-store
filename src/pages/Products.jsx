@@ -34,12 +34,13 @@ function Products () {
           <p>some text</p>
         </header>
         <div className='catalog-grid'>
+          
           <FilterMenu></FilterMenu>
           <SearchBar></SearchBar>
           <div className='item-area'>
             <ProductList products={products}></ProductList>
+            <Pagination></Pagination>
           </div>
-          <Pagination></Pagination>
         </div>
       </div>
     </section>

@@ -41,8 +41,8 @@
   }
 
   @include mq(50em) {
-    grid-template-columns: auto 1fr max-content;
-    gap: 0 0.5em;
+    grid-template-columns: 1fr max-content;
+    gap: 0;
 
     padding-inline-start: 1em;
     outline: 1px solid clr(primary, 400);
@@ -50,6 +50,18 @@
 
     &:focus-within {
       outline: 2px solid clr(primary, 700);
+    }
+
+    label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
     }
 
     input {

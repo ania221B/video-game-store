@@ -1,6 +1,7 @@
 @use '../abstracts/' as *;
 
 .catalog-grid {
+  --_catalog-gap: #{calc($grid-gap * 3)}; 
   grid-column: 2 / -2;
   display: grid;
   grid-template-columns: 15rem 1fr;
@@ -11,6 +12,7 @@
   - 1fr: product list fills remaining space, preventing layout shift
 */
   grid-template-rows: auto min-content 1fr;
+  gap: var(--_catalog-gap);
 
   & > header,
   & aside,
@@ -19,12 +21,6 @@
   & .item-area,
   & .pagination {
     grid-column: 1 / -1;
-  }
-
-  & aside,
-  & .search-menu,
-  & .pagination {
-    padding-block-start: 2em;
   }
 
   @media (min-width: 45em) {
@@ -43,10 +39,6 @@
       grid-column: 2;
     }
 
-    .search-menu {
-      margin-inline-start: 2em;
-    }
-
     .breadcrumb {
       padding-block-start: 0;
       grid-row: 1;
@@ -57,22 +49,23 @@
 
     .item-area {
       grid-row: 3;
-      margin-block-start: $grid-gap;
-      margin-inline-start: $grid-gap * 3;
-
       display: grid;
       grid-auto-flow: row;
       grid-auto-rows: min-content;
     }
 
     .pagination {
-      grid-row: 4;
-      justify-self: center;
+      grid-row: 3;
+      justify-self: end;
+      align-self: end;
     }
   }
 }
 
 .item-area {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  gap: var(--_catalog-gap) 0;
   &__list {
     @include mq(large) {
       li:only-child {
