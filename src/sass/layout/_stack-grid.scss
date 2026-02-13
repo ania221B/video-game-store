@@ -10,22 +10,29 @@
       var(--max-width)
     )
     minmax(var(--padding-inline), 1fr);
-  grid-template-rows: clamp(7.5rem, 7.5rem + 5vw, 11.47rem) 1fr;
+  justify-items: center;
 
-  & > picture {
-    grid-column: 1 / -1;
+  & > * {
+    grid-row: 1 / -1;
   }
 }
 
 .bg-img {
-  width: 100%;
-  height: $bg-min-height;
+  grid-column: 1 / -1;
+  z-index: -1;
+  inline-size: 100%;
+  block-size: $bg-min-height;
   @include mq(medium) {
-    height: $bg-max-height;
+    block-size: $bg-max-height;
+  }
+
+  img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
   }
 }
 
 .main-content {
   grid-column: 2 / -2;
-  grid-row: 2;
 }

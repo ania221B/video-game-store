@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+
+.page-header {
+  grid-column: 1 / -1;
+
+  .bg-img {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        to bottom,
+        clr(base, 800),
+        rgba(clr(base, 400), 0.3),
+        clr(base, 800)
+      );
+    }
+  }
+
+  .main-content {
+    align-self: end;
+    font-size: fs(800);
+    text-align: center;
+
+    padding-block-end: var(--padding-block-end);
+    @include fluid-clamp($padding-hero, true, 'padding-block-end');
+
+    h1 {
+      text-shadow: 1px 1px 1px clr(base, 800);
+    }
+
+    @include mq(50em, min-width) {
+      max-inline-size: 35ch;
+      margin-inline: auto;
+    }
+  }
+}

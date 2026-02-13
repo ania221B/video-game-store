@@ -1,7 +1,6 @@
 @use '../abstracts/' as *;
 
 .container {
-  // --padding-inline: #{$container-padding-inline};
   --max-width: #{$container-max-width};
   @include fluid-clamp($container-padding-inline, true, 'padding-inline');
   display: grid;
@@ -11,8 +10,8 @@
     minmax(var(--padding-inline), 1fr);
   justify-content: center;
 
-  & > * {
-    grid-column: 2;
+  & > *:not(.primary-header, .page-header) {
+    grid-column: 2 / -2;
   }
 }
 

@@ -13,8 +13,8 @@ $sizes: (
 $accordion-panel-padding: 2rem;
 $accordion-panel-deco-thickness: 0.0625rem;
 
-$bg-min-height: 14.5rem;
-$bg-max-height: 20rem;
+$bg-min-height: 65dvh;
+$bg-max-height: 75dvh;
 
 $card-body-padding: (
   small: 2,
@@ -43,8 +43,8 @@ $grid-gap: 1rem;
 $flex-group-gap: 1rem;
 
 $padding-hero: (
-  small: 15,
-  medium: 20,
+  small: 5,
+  medium: 8,
   min-width: 23.4375,
   mid-width: 60,
 );

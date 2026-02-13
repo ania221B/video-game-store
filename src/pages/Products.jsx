@@ -1,9 +1,10 @@
 import { useLoaderData } from 'react-router-dom'
 import { gamesApi } from '../api'
-import { Pagination } from '../components/ui'
+import { HeroImage, Pagination } from '../components/ui'
 import { ProductList } from '../components/lists'
 import FilterMenu from '../components/common/FilterMenu'
 import SearchBar from '../components/ui/SearchBar'
+import { heroImages } from '../data'
 
 export async function loader ({ request }) {
   const params = Object.fromEntries([
@@ -27,14 +28,17 @@ function Products () {
   const products = data.results
 
   return (
-    <section className='section'>
+    <section>
       <div className='container' data-container='large'>
-        <header>
-          <h1>All Games</h1>
-          <p>some text</p>
+        <header className='page-header stack-grid'>
+          <div className='main-content'>
+            <h1>
+              Which game will be your <span>next</span>?
+            </h1>
+          </div>
+          <HeroImage image={heroImages.products} imgClass='bg-img'></HeroImage>
         </header>
         <div className='catalog-grid'>
-          
           <FilterMenu></FilterMenu>
           <SearchBar></SearchBar>
           <div className='item-area'>
