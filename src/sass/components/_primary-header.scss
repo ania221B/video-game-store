@@ -1,0 +1,9 @@
+@use '../abstracts/' as *;
+
+.primary-header {
+  position: fixed;
+  top: 0;
+  inline-size: 100%;
+  background-color: clr(base, 800);
+  z-index: 1000;
+}

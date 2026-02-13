@@ -1,0 +1,11 @@
+@use '../abstracts/' as *;
+
+.line-decoration {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    background-color: rgba(clr(neutral, 100), 0.3);
+    height: 1px;
+  }
+}

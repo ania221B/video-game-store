@@ -11,15 +11,19 @@ export const loader = async function () {
 function HomeLayout () {
   return (
     <>
-      <header className='section'>
+      <header className='primary-header line-decoration'>
         <div className='container'>
-          <nav>
-            <ul>
-              <li>
-                <NavLink to='/'>Home</NavLink>
+          <nav className='primary-nav'>
+            <ul className='primary-nav__list'>
+              <li className='primary-nav__item'>
+                <NavLink to='/' className='primary-nav__link'>
+                  Home
+                </NavLink>
               </li>
-              <li>
-                <NavLink to='/products'>Products</NavLink>
+              <li className='primary-nav__item'>
+                <NavLink to='/products' className='primary-nav__link'>
+                  Products
+                </NavLink>
               </li>
             </ul>
           </nav>

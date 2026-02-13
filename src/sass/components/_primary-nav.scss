@@ -1,0 +1,39 @@
+@use '../abstracts/' as *;
+
+.primary-nav {
+  grid-column: 1 / -1;
+  padding-block: 1.5rem;
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__link {
+    display: inline-block;
+    padding-block: 0.25em;
+    padding-inline: 1em;
+    color: currentColor;
+    will-change: color;
+
+    font-weight: $fw-700;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    transition: color 250ms ease-in-out;
+
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    &:hover,
+    &:focus {
+      color: clr(accent, 400);
+    }
+  }
+}
