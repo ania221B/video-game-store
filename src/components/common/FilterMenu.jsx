@@ -1,6 +1,5 @@
 import { Link, useRouteLoaderData } from 'react-router-dom'
-import { AccordionPanel } from '../ui'
-import CustomSelect from '../ui/CustomSelect'
+import { AccordionPanel, CustomSelect } from '../ui'
 
 function FilterMenu () {
   const { genresData, platformsData } = useRouteLoaderData('home')
@@ -23,9 +22,13 @@ function FilterMenu () {
 
       <CustomSelect></CustomSelect>
 
-      <Link to='/products' className='btn filter-menu__btn' data-button='primary'>       
+      <Link
+        to='/products'
+        className='btn filter-menu__btn'
+        data-button='primary'
+      >
         <span>Reset</span>
-        <span>Reset</span>      
+        <span>Reset</span>
       </Link>
     </aside>
   )
