@@ -4,7 +4,12 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.5rem;
+
+  @include mq(small) {
+    gap: 1rem;
+  }
 
   &__nav:last-of-type {
     justify-self: end;

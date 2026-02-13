@@ -1,7 +1,6 @@
 @use 'sass:color';
 @use '../abstracts/' as *;
 
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -12,8 +11,8 @@
   border: none;
   background-color: var(--btn-bg, white);
   color: var(--btn-fg, black);
-  padding-block: 1em;
-  padding-inline: 1.75em;
+  padding-block: clamp(0.5em, 0.5em + 1vw, 1em);
+  padding-inline: clamp(0.75em, 0.75em + 1vw, 1.75em);
   cursor: pointer;
   position: relative;
   isolation: isolate;
@@ -49,7 +48,6 @@
   font-weight: $fw-700;
 }
 
-
 .btn[data-button='primary'] {
   --btn-bg: #{clr(primary, 400)};
   --btn-fg: #{clr(base, 800)};
@@ -57,31 +55,33 @@
   --btn-hover-fg: #{clr(base, 800)};
   padding-inline: 0;
   padding-block: 0;
-  display: block; 
+  display: block;
   color: clr(base, 800);
-  font-size: fs(500);  
+  font-size: fs(500);
   overflow: hidden;
 
   & > * {
-   
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: $grid-gap;
     padding-block: 0.25em;
     padding-inline: 0.75em;
-   
 
     inline-size: 100%;
     block-size: 100%;
     transition: transform 450ms ease-in-out;
 
     &:first-child {
-      transition: opacity 300ms ease-in-out, transform 450ms ease-in-out;
+      transition:
+        opacity 300ms ease-in-out,
+        transform 450ms ease-in-out;
     }
     &:last-child {
       opacity: 0;
-      transition: opacity 400ms ease-in-out, transform 450ms ease-in-out 100ms;
+      transition:
+        opacity 400ms ease-in-out,
+        transform 450ms ease-in-out 100ms;
     }
   }
 
@@ -89,11 +89,15 @@
     transform: translateY(-100%);
     &:first-child {
       opacity: 0;
-      transition: opacity 300ms ease-in-out, transform 450ms ease-in-out 100ms;
+      transition:
+        opacity 300ms ease-in-out,
+        transform 450ms ease-in-out 100ms;
     }
     &:last-child {
       opacity: 1;
-      transition: opacity 300ms ease-in-out, transform 450ms ease-in-out;
+      transition:
+        opacity 300ms ease-in-out,
+        transform 450ms ease-in-out;
     }
   }
 }
@@ -120,13 +124,12 @@
 .btn[data-button='page-nav'] {
   --btn-bg: transparent;
   --btn-fg: #{clr(primary, 400)};
-  --btn-hover-fg:#{clr(primary, 400)};
+  --btn-hover-fg: #{clr(primary, 400)};
   --btn-hover-bg: transparent;
-  padding: 0;
+  padding: 0.5em;
   border-radius: size(4);
   border-radius: 50%;
-  block-size: 3rem;
-  inline-size: 3rem;
+  inline-size: fit-content;
   aspect-ratio: 1;
 
   &::after {
@@ -136,7 +139,7 @@
 
 .filter-menu__btn {
   gap: $grid-gap;
-  inline-size: 100%; 
+  inline-size: 100%;
   min-height: 50px;
   border-radius: size(4);
   font-size: fs(400) !important;
@@ -146,10 +149,10 @@
 }
 
 .accordion__btn {
-    &:focus {
-      outline: none;
-    }
-    &:focus-visible {
-      outline: 2px solid clr(primary, 400);
-    }
+  &:focus {
+    outline: none;
   }
+  &:focus-visible {
+    outline: 2px solid clr(primary, 400);
+  }
+}

@@ -1,7 +1,7 @@
 @use '../abstracts/' as *;
 
 .catalog-grid {
-  --_catalog-gap: #{calc($grid-gap * 3)}; 
+  --_catalog-gap: #{calc($grid-gap * 3)};
   grid-column: 2 / -2;
   display: grid;
   grid-template-columns: 15rem 1fr;
@@ -12,7 +12,7 @@
   - 1fr: product list fills remaining space, preventing layout shift
 */
   grid-template-rows: auto min-content 1fr;
-  gap: var(--_catalog-gap);
+  gap: var(--_catalog-gap) 0;
 
   & > header,
   & aside,
@@ -24,6 +24,7 @@
   }
 
   @media (min-width: 45em) {
+    gap: var(--_catalog-gap);
     & > header {
       grid-column: 1 / -1;
       grid-row: 1;
@@ -49,9 +50,6 @@
 
     .item-area {
       grid-row: 3;
-      display: grid;
-      grid-auto-flow: row;
-      grid-auto-rows: min-content;
     }
 
     .pagination {
