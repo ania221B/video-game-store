@@ -1,0 +1,72 @@
+@use '../abstracts/' as *;
+
+.card {
+  --_container-padding: #{$card-padding};
+  block-size: 100%;
+  margin-inline: $grid-gap;
+  display: grid;
+  grid-auto-rows: 1fr max-content;
+  box-shadow: 0px 0px 0px 1px rgba(clr(primary, 400), 0.3);
+
+  position: relative;
+  isolation: isolate;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0px;
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  [data-selected='selected'] &::before {
+    box-shadow: 0px 0px 0px 4px clr(primary, 400);
+  }
+
+  &::after {
+    box-shadow: 0px 0px 0px 1px clr(primary, 400);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    opacity: 1;
+  }
+
+  & > header {
+    align-self: center;
+    padding-block: var(--_container-padding);
+    padding-inline: calc(var(--_container-padding) * 1.25);
+  }
+
+  & > h2 {
+    font-weight: $fw-700;
+    text-transform: capitalize;
+  }
+
+  h2 + p {
+    text-transform: capitalize;
+    color: rgba(clr(neutral, 100), 0.7);
+  }
+  a {
+    font-size: fs(500);
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    isolation: isolate;
+  }
+}
+
+.card__img {
+  overflow: hidden;
+  img {
+    inline-size: 100%;
+    block-size: 100%;
+    // aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: center;
+  }
+}

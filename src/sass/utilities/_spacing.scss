@@ -1,10 +1,5 @@
 @use '../abstracts' as *;
 
-.section {
-  padding-block: var(--padding-block);
-  @include fluid-clamp($padding-section);
-}
-
 .mx-auto {
   margin-inline: auto;
 }

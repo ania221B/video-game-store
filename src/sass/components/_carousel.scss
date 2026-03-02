@@ -1,0 +1,54 @@
+@use '../abstracts/' as *;
+
+.carousel {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-template-rows: 40dvh;
+  gap: 2rem;
+
+  &__btn {
+    grid-row: 1;
+    align-self: center;
+    z-index: 1;
+
+    &:first-of-type {
+      grid-column: 1;
+      margin-inline-start: calc($grid-gap * -1);
+    }
+
+    &:last-of-type {
+      grid-column: 3;
+      margin-inline-end: calc($grid-gap * -1);
+    }
+  }
+
+  &__content {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-block: 1rem;
+    overflow: hidden;
+  }
+
+  &__slides {
+    inline-size: 25%;
+    block-size: 100%;
+    margin-inline: auto;
+    position: relative;
+
+    @include mq(55em, max-width) {
+      inline-size: 33.33%;
+    }
+    @include mq(medium, max-width) {
+      inline-size: 50%;
+    }
+    @include mq(small, max-width) {
+      inline-size: 100%;
+    }
+  }
+
+  &__slide {
+    position: absolute;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+}

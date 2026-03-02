@@ -1,0 +1,11 @@
+@use '../abstracts/' as *;
+
+.section {
+  padding-block: var(--padding-block);
+  @include fluid-clamp($padding-section);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

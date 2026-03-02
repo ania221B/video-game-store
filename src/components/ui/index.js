@@ -1,5 +1,8 @@
 export { default as AccordionPanel } from './AccordionPanel'
+export { default as Carousel } from './Carousel'
 export { default as CustomSelect } from './CustomSelect'
 export { default as HeroImage } from './HeroImage'
 export { default as Pagination } from './Pagination'
 export { default as ProductCard } from './ProductCard'
+export { default as Scroller } from './Scroller'
+export { default as SearchBar } from './SearchBar'
