@@ -11,3 +11,7 @@ body {
   background-color: clr(base, 800);
   color: clr(neutral, 100);
 }
+
+main {
+  padding-block-start: var(--header-height);
+}

@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { gamesApi } from '../../api'
+import { useEffect, useRef, useState } from 'react'
 
 export const loader = async function () {
   const { data: genresData } = await gamesApi.get('/genres')
@@ -9,9 +10,28 @@ export const loader = async function () {
 }
 
 function HomeLayout () {
+  const headerRef = useRef(null)
+  const [headerHeight, setHeaderHeight] = useState(0)
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      if (headerRef.current) {
+        const height = headerRef.current.getBoundingClientRect().height
+        setHeaderHeight(height)
+      }
+    })
+
+    if (headerRef.current) {
+      resizeObserver.observe(headerRef.current)
+    }
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [headerHeight])
   return (
     <>
-      <header className='primary-header line-decoration'>
+      <header className='primary-header line-decoration' ref={headerRef}>
         <div className='container'>
           <nav className='primary-nav'>
             <ul className='primary-nav__list'>
@@ -29,7 +49,7 @@ function HomeLayout () {
           </nav>
         </div>
       </header>
-      <main>
+      <main style={{ '--header-height': `${headerHeight}px` }}>
         <Outlet></Outlet>
       </main>
       <footer className='section'>
