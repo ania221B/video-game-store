@@ -1,9 +1,8 @@
 import { useLoaderData } from 'react-router-dom'
 import { gamesApi } from '../api'
-import { HeroImage, Pagination } from '../components/ui'
+import { HeroImage, Pagination, SearchBar } from '../components/ui'
 import { ProductList } from '../components/lists'
 import FilterMenu from '../components/common/FilterMenu'
-import SearchBar from '../components/ui/SearchBar'
 import { heroImages } from '../data'
 
 export async function loader ({ request }) {
