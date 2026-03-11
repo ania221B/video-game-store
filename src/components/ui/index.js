@@ -1,4 +1,5 @@
 export { default as AccordionPanel } from './AccordionPanel'
+export { default as Card } from './Card'
 export { default as Carousel } from './Carousel'
 export { default as CustomSelect } from './CustomSelect'
 export { default as HeroImage } from './HeroImage'

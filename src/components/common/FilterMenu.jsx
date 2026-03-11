@@ -1,8 +1,9 @@
-import { Link, useRouteLoaderData } from 'react-router-dom'
+import { Link, useLoaderData, useRouteLoaderData } from 'react-router-dom'
 import { AccordionPanel, CustomSelect } from '../ui'
 
 function FilterMenu () {
-  const { genresData, platformsData } = useRouteLoaderData('home')
+  const { genresData } = useRouteLoaderData('root')
+  const { platformsData } = useLoaderData()
   const genres = genresData.results
   const platforms = platformsData.results
 

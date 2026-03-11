@@ -1,20 +1,22 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { nanoid } from 'nanoid'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Card from './Card'
 
-function Carousel ({ slideList }) {
-  const VISIBLE_SLIDES = 5
+function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
+  const VISIBLE_SLIDES = type === 'hero' ? 1 : 5
   const TRANSITION_DURATION = 700
   const [slideIndex, setSlideIndex] = useState(VISIBLE_SLIDES)
   const [slideWidth, setSlideWidth] = useState(0)
   const [isTransitionEnabled, setIsTransitionEnabled] = useState(false)
-  const slideRef = useRef(null)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const carouselRef = useRef(null)
+  const slideRefs = useRef([])
+  const buttonRef = useRef(null)
 
   function makeArrayWithClones (array) {
-    const clonesBefore = array.slice(-VISIBLE_SLIDES).map(slide => ({
+    const clonesBefore = array.slice(-VISIBLE_SLIDES).map((slide, index) => ({
       ...slide,
-      renderId: nanoid(),
+      renderId: `${slide.id}-clone-${index}`,
       isClone: true
     }))
     const originals = array.map(slide => ({
@@ -22,9 +24,9 @@ function Carousel ({ slideList }) {
       renderId: slide.id,
       isClone: false
     }))
-    const clonesAfter = array.slice(0, VISIBLE_SLIDES).map(slide => ({
+    const clonesAfter = array.slice(0, VISIBLE_SLIDES).map((slide, index) => ({
       ...slide,
-      renderId: nanoid(),
+      renderId: `${slide.id}-clone-${index}`,
       isClone: true
     }))
 
@@ -33,18 +35,19 @@ function Carousel ({ slideList }) {
 
   const slidesWithClones = useMemo(
     () => makeArrayWithClones(slideList),
-    [slideList, VISIBLE_SLIDES]
+    [slideList]
   )
 
   function handleTransition (index) {
+    setIsAnimating(false)
     let jumped = false
-    if (index === VISIBLE_SLIDES - 1) {
+    if (index < VISIBLE_SLIDES) {
       setIsTransitionEnabled(false)
       setSlideIndex(slidesWithClones.length - VISIBLE_SLIDES - 1)
       jumped = true
     }
 
-    if (index === slidesWithClones.length - VISIBLE_SLIDES) {
+    if (index > slidesWithClones.length - VISIBLE_SLIDES - 1) {
       setIsTransitionEnabled(false)
       setSlideIndex(VISIBLE_SLIDES)
       jumped = true
@@ -58,6 +61,8 @@ function Carousel ({ slideList }) {
   }
 
   function displayPreviousSlide () {
+    if (isAnimating) return
+    setIsAnimating(true)
     setSlideIndex(displayedSlide => {
       const newIndex = displayedSlide - 1
       return newIndex
@@ -65,31 +70,49 @@ function Carousel ({ slideList }) {
   }
 
   function displayNextSlide () {
+    if (isAnimating) return
+    setIsAnimating(true)
     setSlideIndex(displayedSlide => {
       const newIndex = displayedSlide + 1
       return newIndex
     })
   }
 
-  function handleKyeboard (event) {
+  function handleKeyboard (event) {
     if (event.key === 'ArrowLeft') {
+      event.preventDefault()
       displayPreviousSlide()
-    } else if (event.key === 'ArrowRight') {
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault()
       displayNextSlide()
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault()
+      displaySelectedSlide(VISIBLE_SLIDES)
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault()
+      displaySelectedSlide(slidesWithClones.length - VISIBLE_SLIDES - 1)
     }
   }
 
+  function displaySelectedSlide (index) {
+    setSlideIndex(index)
+  }
+
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(() => {
-      if (slideRef.current) {
-        const width = slideRef.current.getBoundingClientRect().width
-        setSlideWidth(width)
-      }
+    const slide = slideRefs.current[0]
+    if (!slide) return
+
+    const resizeObserver = new ResizeObserver(entires => {
+      const width = entires[0].contentRect.width
+      setSlideWidth(width)
     })
 
-    if (slideRef.current) {
-      resizeObserver.observe(slideRef.current)
-    }
+    resizeObserver.observe(slide)
 
     return () => {
       resizeObserver.disconnect()
@@ -103,20 +126,25 @@ function Carousel ({ slideList }) {
   }, [slideWidth])
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKyeboard)
-
-    return () => {
-      window.removeEventListener('keydown', handleKyeboard)
+    const slide = slideRefs.current[slideIndex]
+    const link = slide?.querySelector('a')
+    if (!slidesWithClones[slideIndex]?.isClone) {
+      link?.focus({ preventScroll: true })
     }
-  }, [])
+  }, [slideIndex])
 
   if (slideList.length === 0) return null
 
   return (
     <div
       className='carousel'
+      tabIndex='0'
       aria-roledescription='carousel'
-      aria-label='all game genres'
+      aria-labelledby={label}
+      data-type={type === 'hero' ? 'hero' : null}
+      ref={carouselRef}
+      onKeyDown={handleKeyboard}
+      role='group'
     >
       <button
         type='button'
@@ -125,15 +153,22 @@ function Carousel ({ slideList }) {
         className='carousel__btn btn'
         data-button='carousel-control'
         onClick={displayPreviousSlide}
+        ref={buttonRef}
       >
         <ArrowLeft></ArrowLeft>
       </button>
 
-      <div className='carousel__content'>
+      <div
+        className='carousel__content'
+        style={{
+          '--button-width': `${
+            buttonRef?.current?.getBoundingClientRect()?.width
+          }px`
+        }}
+      >
         <ul
           id='slides-list'
           className='carousel__slides'
-          aria-live='polite'
           style={{
             transition: `${
               isTransitionEnabled
@@ -142,41 +177,42 @@ function Carousel ({ slideList }) {
             }`,
             transform: `translateX(-${slideWidth * slideIndex}px)`
           }}
-          onTransitionEnd={() => handleTransition(slideIndex)}
+          onTransitionEnd={e => {
+            if (e.propertyName === 'transform') {
+              handleTransition(slideIndex)
+            }
+          }}
         >
-          {slidesWithClones.map((genre, index) => {
-            const {
-              id,
-              name,
-              slug,
-              games_count,
-              image_background,
-              renderId,
-              isClone
-            } = genre
+          {slidesWithClones.map((item, index) => {
             return (
               <li
-                ref={index === VISIBLE_SLIDES ? slideRef : null}
-                key={renderId}
+                ref={item => (slideRefs.current[index] = item)}
+                key={item.renderId}
+                id={item.renderId}
                 className={`${
-                  isClone ? 'carousel__slide clone' : 'carousel__slide'
+                  item.isClone ? 'carousel__slide clone' : 'carousel__slide'
                 }`}
                 style={{ left: `${slideWidth * index}px` }}
                 data-selected={index === slideIndex ? 'selected' : undefined}
-                aria-roledescription='slide'
-                aria-label={`${index + 1} of ${slideList.length}`}
+                aria-labelledby={`game-label-${item.renderId}`}
+                aria-roledescription={type !== 'hero' ? 'slide' : null}
+                role={type === 'hero' ? 'tabpanel' : 'group'}
+                tabIndex='-1'
               >
-                <article className='card'>
-                  <div className='card__img'>
-                    <img src={image_background} alt={name} />
-                  </div>
-                  <header>
-                    <h2>
-                      <Link to={`/genres/${slug}`}>{name}</Link>
-                    </h2>
-                    <p>games: {games_count}</p>
-                  </header>
-                </article>
+                {type === 'games' || type === 'hero' ? (
+                  <Card
+                    item={item}
+                    type={type}
+                    tabIndex={!item.isClone && index === slideIndex ? 0 : -1}
+                  ></Card>
+                ) : (
+                  <Card
+                    item={item}
+                    route={route}
+                    type={type}
+                    tabIndex={!item.isClone && index === slideIndex ? 0 : -1}
+                  ></Card>
+                )}
               </li>
             )
           })}
@@ -193,6 +229,34 @@ function Carousel ({ slideList }) {
       >
         <ArrowRight></ArrowRight>
       </button>
+
+      {type === 'hero' ? (
+        <div
+          className='carousel__indicators'
+          role='tablist'
+          aria-label='Choose slide to display'
+        >
+          {slideList.map((slide, index) => {
+            return (
+              <button
+                type='button'
+                className={
+                  index === slideIndex - VISIBLE_SLIDES
+                    ? `carousel__indicator btn is-selected`
+                    : `carousel__indicator btn`
+                }
+                onClick={() => displaySelectedSlide(index + VISIBLE_SLIDES)}
+                aria-controls={slide.id}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-selected={
+                  index === slideIndex - VISIBLE_SLIDES ? true : false
+                }
+                role='tab'
+              ></button>
+            )
+          })}
+        </div>
+      ) : null}
     </div>
   )
 }

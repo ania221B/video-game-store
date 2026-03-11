@@ -6,25 +6,43 @@ import FilterMenu from '../components/common/FilterMenu'
 import { heroImages } from '../data'
 
 export async function loader ({ request }) {
-  const params = Object.fromEntries([
-    ...new URL(request.url).searchParams.entries()
-  ])
-  const page = Number(params.page ?? 1)
+  try {
+    const params = Object.fromEntries([
+      ...new URL(request.url).searchParams.entries()
+    ])
+    const page = Number(params.page ?? 1)
 
-  const { data } = await gamesApi.get('/games', {
-    params: {
-      page_size: 20,
-      ...params,
-      page
-    }
-  })
+    const { data: gamesData } = await gamesApi.get('/games', {
+      params: {
+        page_size: 20,
+        ...params,
+        page
+      }
+    })
 
-  return data
+    const { data: platformsData } = await gamesApi.get('/platforms')
+
+    return { gamesData, platformsData }
+  } catch (error) {
+    console.error('products loader error', error)
+    throw error
+  }
 }
 
 function Products () {
-  const data = useLoaderData()
-  const products = data.results
+  const { gamesData } = useLoaderData()
+  const products = gamesData.results
+  const count = gamesData?.count ? gamesData.count : 0
+  const isPreviousPage = gamesData.previous?.length
+    ? gamesData.previous.length
+    : null
+  const isNextPage = gamesData.next?.length ? gamesData.next.length : null
+
+  const metaData = {
+    count,
+    isPreviousPage,
+    isNextPage
+  }
 
   return (
     <section>
@@ -42,7 +60,7 @@ function Products () {
           <SearchBar></SearchBar>
           <div className='item-area'>
             <ProductList products={products}></ProductList>
-            <Pagination></Pagination>
+            <Pagination data={metaData}></Pagination>
           </div>
         </div>
       </div>

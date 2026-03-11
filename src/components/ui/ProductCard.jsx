@@ -1,13 +1,19 @@
 import { Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import HeroImage from './HeroImage'
+import { placeholderImages } from '../../data'
 
 function ProductCard ({ item }) {
-  const { slug, name, background_image: img, rating, genres } = item
+  const { slug, name, background_image: img, rating } = item
   const price = (0).toFixed(2)
   return (
     <article className='product-item'>
       <div className='product-item__img'>
-        <img src={img} alt={name} width='300' height='250' />
+        {img ? (
+          <img src={img} alt={name} width='300' height='250' />
+        ) : (
+          <HeroImage image={placeholderImages.placeholder}></HeroImage>
+        )}
       </div>
 
       <div className='product-item__content'>
@@ -31,7 +37,7 @@ function ProductCard ({ item }) {
               </span>
             </dd>
           </dl>
-          <h4 className='sr-only'>Genres:</h4>
+          {/* <h4 className='sr-only'>Genres:</h4>
           <ul className='product-item__genre-list'>
             {genres.slice(0, 2).map(genre => {
               return (
@@ -45,7 +51,7 @@ function ProductCard ({ item }) {
                 <Link to={`/products/${slug}`}>+{genres.length - 2} more</Link>
               </li>
             )}
-          </ul>
+          </ul> */}
         </div>
       </div>
       <Link to={`/products/${slug}`} className='btn' data-button='primary'>

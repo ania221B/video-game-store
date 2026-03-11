@@ -1,14 +1,11 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-function Pagination () {
+function Pagination ({ data }) {
   const PAGE_SIZE = 20
-  const data = useLoaderData()
-  const count = data?.count ? data.count : 0
+  const { count, isNextPage, isPreviousPage } = data
   const { pathname, search } = useLocation()
   let page = Number(new URLSearchParams(search).get('page') ?? 1)
-  const isPreviousPage = data.previous?.length ? data.previous.length : null
-  const isNextPage = data.next?.length ? data.next.length : null
   const lastPage = Math.ceil(count / PAGE_SIZE)
   const navigate = useNavigate()
 
@@ -26,7 +23,8 @@ function Pagination () {
         onClick={() => handlePageChange(pageNumber)}
         className={`pagination__page btn btn--page ${
           activeClass ? 'active' : undefined
-        }`} data-button='secondary'
+        }`}
+        data-button='secondary'
       >
         {pageNumber}
       </button>
@@ -41,7 +39,11 @@ function Pagination () {
     // dots
     if (page > 2) {
       pageButtons.push(
-        <button className='pagination__page btn btn--page' key='dots-1' data-button='secondary'>
+        <button
+          className='pagination__page btn btn--page'
+          key='dots-1'
+          data-button='secondary'
+        >
           ...
         </button>
       )
@@ -53,7 +55,11 @@ function Pagination () {
     // dots
     if (page < lastPage - 1) {
       pageButtons.push(
-        <button className='pagination__page btn btn--page' key='dots-2' data-button='secondary'>
+        <button
+          className='pagination__page btn btn--page'
+          key='dots-2'
+          data-button='secondary'
+        >
           ...
         </button>
       )
@@ -67,7 +73,7 @@ function Pagination () {
   }
 
   return (
-    <div className='pagination '>
+    <div className='pagination'>
       <button
         type='button'
         onClick={() => {
@@ -76,7 +82,8 @@ function Pagination () {
 
           handlePageChange(previousPage)
         }}
-        className='pagination__nav btn' data-button='page-nav'
+        className='pagination__nav btn'
+        data-button='page-nav'
       >
         <ChevronLeft></ChevronLeft>
         <span className='sr-only'>Previous page</span>
@@ -92,7 +99,8 @@ function Pagination () {
 
           handlePageChange(nextPage)
         }}
-        className='pagination__nav btn' data-button='page-nav'
+        className='pagination__nav btn'
+        data-button='page-nav'
       >
         <ChevronRight></ChevronRight>
         <span className='sr-only'>Next page</span>
