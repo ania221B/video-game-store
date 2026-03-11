@@ -1,6 +1,7 @@
 @use '../abstracts/' as *;
 
 .carousel {
+  padding-block-start: $grid-gap;
   display: grid;
   grid-template-columns: max-content 1fr max-content;
   grid-template-rows: 40dvh;
@@ -13,19 +14,18 @@
 
     &:first-of-type {
       grid-column: 1;
-      margin-inline-start: calc($grid-gap * -1);
     }
 
     &:last-of-type {
       grid-column: 3;
-      margin-inline-end: calc($grid-gap * -1);
     }
   }
 
   &__content {
     grid-column: 1 / -1;
     grid-row: 1;
-    padding-block: 1rem;
+    padding-block: $grid-gap;
+    padding-inline: calc(var(--button-width) / 2 - $grid-gap - 4px);
     overflow: hidden;
   }
 
@@ -35,14 +35,14 @@
     margin-inline: auto;
     position: relative;
 
-    @include mq(55em, max-width) {
-      inline-size: 33.33%;
+    @include mq(47em, max-width) {
+      inline-size: 100%;
     }
-    @include mq(medium, max-width) {
+    @include mq(47em, between, 75em) {
       inline-size: 50%;
     }
-    @include mq(small, max-width) {
-      inline-size: 100%;
+    @include mq(75em, between, 100em) {
+      inline-size: 33.33%;
     }
   }
 
@@ -50,5 +50,44 @@
     position: absolute;
     inline-size: 100%;
     block-size: 100%;
+  }
+}
+
+.carousel[data-type='hero'] {
+  grid-column: 1 / -1;
+  padding-block: 0;
+  grid-template-rows: 65dvh;
+
+  @include mq(large) {
+    grid-template-rows: 70dvh;
+  }
+
+  .carousel__content {
+    padding-block: 0;
+    padding-inline: 0;
+  }
+  .carousel__slides {
+    inline-size: 100%;
+  }
+
+  .carousel__indicators {
+    grid-column: 2 / -2;
+    display: flex;
+    justify-content: center;
+    gap: $grid-gap;
+  }
+
+  .carousel__indicator {
+    --btn-hover-bg: #{clr(accent, 400)};
+    inline-size: 1em;
+    padding-block: 0;
+    padding-inline: 0;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+
+  .carousel__indicator.is-selected {
+    --btn-bg: #{clr(primary, 400)};
+    --btn-hover-bg: #{clr(primary, 400)};
   }
 }
