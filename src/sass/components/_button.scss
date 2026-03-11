@@ -137,6 +137,66 @@
   }
 }
 
+.btn[data-button='outline'] {
+  --btn-bg: transparent;
+  --btn-fg: currentColor;
+  --btn-hover-fg: #{clr(primary, 400)};
+  --btn-hover-bg: transparent;
+  padding-block: 0.25em;
+  padding-inline-end: 0;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+  will-change: color;
+  transition: color 300ms ease-in-out;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 auto;
+    width: 100%;
+    height: 0.125rem;
+    background-color: var(--btn-hover-fg);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition:
+      opacity 300ms ease-in-out,
+      transform 300ms ease;
+  }
+
+  &:focus,
+  &:hover {
+    color: clr(primary, 400);
+
+    &::after {
+      transform: scaleX(1);
+      transform-origin: left;
+      opacity: 100%;
+    }
+  }
+
+  & > * + * {
+    margin-left: 1.5rem;
+  }
+
+  & > *:last-child {
+    transform: translateX(-0.75rem);
+    transition: transform 300ms ease-in-out;
+  }
+
+  &:focus > *:last-child,
+  &:hover > *:last-child {
+    transform: translateX(0);
+  }
+
+  &:disabled:focus > *:last-child,
+  &:disabled:hover > *:last-child {
+    transform: translateX(-0.75rem);
+  }
+}
+
 .filter-menu__btn {
   gap: $grid-gap;
   inline-size: 100%;
