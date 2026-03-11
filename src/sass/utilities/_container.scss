@@ -8,7 +8,6 @@
     minmax(var(--padding-inline), 1fr)
     min(calc(100% - (var(--padding-inline) * 2)), var(--max-width))
     minmax(var(--padding-inline), 1fr);
-  justify-content: center;
 
   & > *:not(.primary-header, .page-header) {
     grid-column: 2 / -2;
@@ -23,4 +22,5 @@
 }
 .container[data-container='full-bleed'] {
   --max-width: #{$container-max-width-full-bleed};
+  --padding-inline: 0;
 }
