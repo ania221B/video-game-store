@@ -30,10 +30,12 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
       isClone: true
     }))
 
-    return [...clonesBefore, ...originals, ...clonesAfter]
+    const slidesWithClones = [...clonesBefore, ...originals, ...clonesAfter]
+
+    return { slidesWithClones, originals }
   }
 
-  const slidesWithClones = useMemo(
+  const { slidesWithClones, originals } = useMemo(
     () => makeArrayWithClones(slideList),
     [slideList]
   )
@@ -78,6 +80,10 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
     })
   }
 
+  function displaySelectedSlide (index) {
+    setSlideIndex(index)
+  }
+
   function handleKeyboard (event) {
     if (event.key === 'ArrowLeft') {
       event.preventDefault()
@@ -97,10 +103,6 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
       event.preventDefault()
       displaySelectedSlide(slidesWithClones.length - VISIBLE_SLIDES - 1)
     }
-  }
-
-  function displaySelectedSlide (index) {
-    setSlideIndex(index)
   }
 
   useEffect(() => {
@@ -175,7 +177,7 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
                 ? `transform ${TRANSITION_DURATION}ms ease-in-out`
                 : 'none'
             }`,
-            transform: `translateX(-${slideWidth * slideIndex}px)`
+            transform: `translateX(-${slideIndex * 100}%)`
           }}
           onTransitionEnd={e => {
             if (e.propertyName === 'transform') {
@@ -236,9 +238,10 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
           role='tablist'
           aria-label='Choose slide to display'
         >
-          {slideList.map((slide, index) => {
+          {originals.map((slide, index) => {
             return (
               <button
+                key={slide.renderId}
                 type='button'
                 className={
                   index === slideIndex - VISIBLE_SLIDES
@@ -246,7 +249,7 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
                     : `carousel__indicator btn`
                 }
                 onClick={() => displaySelectedSlide(index + VISIBLE_SLIDES)}
-                aria-controls={slide.id}
+                aria-controls={slide.renderId}
                 aria-label={`Go to slide ${index + 1}`}
                 aria-selected={
                   index === slideIndex - VISIBLE_SLIDES ? true : false
