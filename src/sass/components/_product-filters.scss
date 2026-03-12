@@ -11,7 +11,7 @@
     align-items: center;
   }
 
-  @include mq(small, min-width) {
+  @include mq(medium, max-width) {
     grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
     grid-auto-flow: dense;
 
