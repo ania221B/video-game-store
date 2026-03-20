@@ -1,0 +1,33 @@
+@use '../abstracts/' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-align: center;
+  padding-block: var(--badge-padding-block, 0.35em);
+  padding-inline: var(--badge-padding-inline, 1.05em);
+  color: clr(primary, 400);
+  border: 1px solid clr(primary, 400);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: clr(primary, 400);
+    z-index: -1;
+    isolation: isolate;
+    opacity: 0;
+    transition: opacity 450ms ease-in-out;
+  }
+
+  &:hover {
+    color: clr(base, 800);
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}

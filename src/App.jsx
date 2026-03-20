@@ -8,6 +8,7 @@ import SingleProduct from './pages/SingleProduct'
 import { loader as genresLoader } from './components/layout/HomeLayout'
 import { loader as landingLoader } from './pages/Landing'
 import { loader as productsLoader } from './pages/Products'
+import { loader as singleProductLoader } from './pages/SingleProduct'
 
 // actions
 
@@ -31,8 +32,9 @@ const router = createBrowserRouter([
         loader: productsLoader
       },
       {
-        path: 'products/:slug',
-        element: <SingleProduct></SingleProduct>
+        path: 'products/:id/:slug',
+        element: <SingleProduct></SingleProduct>,
+        loader: singleProductLoader
       }
     ]
   }

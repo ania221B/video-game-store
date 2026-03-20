@@ -56,7 +56,7 @@
   padding-inline: 0;
   padding-block: 0;
   display: block;
-  color: clr(base, 800);
+  color: var(--btn-fg);
   font-size: fs(500);
   overflow: hidden;
 
@@ -108,8 +108,8 @@
   --btn-fg: #{$color};
   --btn-hover-bg: #{rgba($color, 0.1)};
   --btn-hover-fg: #{$color};
-  border: 1px solid;
   border-radius: size(4);
+  box-shadow: 0 0 0 1px var(--btn-fg);
 
   &.active {
     color: clr(base, 800);

@@ -1,36 +1,60 @@
 @font-face {
   font-family: 'JetBrainsMono';
-  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Regular.woff2) format('woff2');
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Thin.woff2) format('woff2');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-ExtraLight.woff2)
+    format('woff2');
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Light.woff2)
+    format('woff2');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Regular.woff2)
+    format('woff2');
   font-weight: 400;
 }
-
 @font-face {
-  font-family: 'Source Sans 3';
-  src: url(/src/assets/fonts/SourceSans3-Regular.woff2) format('woff2'),
-    url(/src/assets/fonts/SourceSans3-Regular.woff) format('woff');
-  font-weight: 400;
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Medium.woff2)
+    format('woff2');
+  font-weight: 500;
 }
-
 @font-face {
-  font-family: 'Source Sans 3';
-  src: url(/src/assets/fonts/SourceSans3-Bold.woff2) format('woff2'),
-    url(/src/assets/fonts/SourceSans3-Bold.woff) format('woff');
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-Bold.woff2) format('woff2');
   font-weight: 700;
+}
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: url(/src/assets/fonts/jetbrains/JetBrainsMono-ExtraBold.woff2)
+    format('woff2');
+  font-weight: 800;
 }
 
 $ff-primary: 'JetBrainsMono', sans-serif;
 
-
 $font-sizes: (
   1000: clamp(2.5rem, 0.5rem + 10vw, 5rem),
   900: clamp(2.5rem, 0.5rem + 7vw, 3.75rem),
-  800: clamp(1.5rem, 0.5rem + 5vw, 2rem),
+  800: clamp(1.5rem, 0.5rem + 5vw, 2.75rem),
   700: clamp(1.4rem, 0.5rem + 3vw, 1.6875rem),
   600: 1.4rem,
   500: 1rem,
   400: 0.8125rem,
   300: 0.75rem,
 );
-
+$fw-100: 100;
+$fw-200: 200;
+$fw-300: 300;
 $fw-400: 400;
+$fw-500: 500;
 $fw-700: 700;
+$fw-800: 800;

@@ -24,7 +24,11 @@ function Card ({ item, route = 'products', type = 'games', tabIndex = -1 }) {
     )
   }
   return (
-    <Link to={`/${route}/${item.slug}`} className='card' tabIndex={tabIndex}>
+    <Link
+      to={`/${route}/${item.id}/${item.slug}`}
+      className='card'
+      tabIndex={tabIndex}
+    >
       <article className='card__content'>
         <div className='card__img'>
           {item?.background_image ? (

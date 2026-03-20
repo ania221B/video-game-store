@@ -1,0 +1,25 @@
+@use '../abstracts/' as *;
+
+.cart-controls input {
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+.cart-controls {
+  display: grid;
+  grid-auto-rows: minmax(3rem, 1fr);
+  gap: $grid-gap 0.5rem;
+
+  @include mq(small) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

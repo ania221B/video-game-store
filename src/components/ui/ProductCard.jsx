@@ -4,7 +4,7 @@ import HeroImage from './HeroImage'
 import { placeholderImages } from '../../data'
 
 function ProductCard ({ item }) {
-  const { slug, name, background_image: img, rating } = item
+  const { id, slug, name, background_image: img, rating } = item
   const price = (0).toFixed(2)
   return (
     <article className='product-item'>
@@ -54,9 +54,13 @@ function ProductCard ({ item }) {
           </ul> */}
         </div>
       </div>
-      <Link to={`/products/${slug}`} className='btn' data-button='primary'>
+      <Link
+        to={`/products/${id}/${slug}`}
+        className='btn'
+        data-button='primary'
+      >
         <span>See details</span>
-        <span>See details</span>
+        <span aria-hidden='true'>See details</span>
       </Link>
     </article>
   )
