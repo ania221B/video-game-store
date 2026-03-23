@@ -1,0 +1,13 @@
+@use '../abstracts/' as *;
+
+.footer {
+  a {
+    color: currentColor;
+    text-decoration: none;
+    will-change: color;
+
+    &:hover {
+      color: clr(accent, 400);
+    }
+  }
+}
