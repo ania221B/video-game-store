@@ -1,42 +1,49 @@
 import { useLoaderData } from 'react-router-dom'
-import { gamesApi } from '../api'
+import { gamesQuery } from '../api'
 import { HeroImage, Pagination, SearchBar } from '../components/ui'
 import { ProductList } from '../components/lists'
 import FilterMenu from '../components/common/FilterMenu'
 import { heroImages } from '../data'
+import { platformsQuery } from '../api/queries'
+import { useQuery } from '@tanstack/react-query'
+import { Loader } from '../components/common'
 
-export async function loader ({ request }) {
-  try {
+export const loader =
+  queryClient =>
+  async ({ request }) => {
     const params = Object.fromEntries([
       ...new URL(request.url).searchParams.entries()
     ])
-    const page = Number(params.page ?? 1)
 
-    const { data: gamesData } = await gamesApi.get('/games', {
-      params: {
-        page_size: 20,
-        ...params,
-        page
-      }
-    })
+    await Promise.all([
+      queryClient.ensureQueryData(gamesQuery(params)),
+      queryClient.ensureQueryData(platformsQuery())
+    ])
 
-    const { data: platformsData } = await gamesApi.get('/platforms')
-
-    return { gamesData, platformsData }
-  } catch (error) {
-    console.error('products loader error', error)
-    throw error
+    return params
   }
-}
 
 function Products () {
-  const { gamesData } = useLoaderData()
-  const products = gamesData.results
+  const params = useLoaderData()
+  const {
+    data: gamesData,
+    isLoading,
+    isError,
+    error
+  } = useQuery(gamesQuery(params))
+
+  if (isLoading) return <Loader></Loader>
+  if (isError) {
+    console.log(error)
+    return <p>Error!</p>
+  }
+
+  const products = gamesData?.results || []
   const count = gamesData?.count ? gamesData.count : 0
-  const isPreviousPage = gamesData.previous?.length
+  const isPreviousPage = gamesData?.previous?.length
     ? gamesData.previous.length
     : null
-  const isNextPage = gamesData.next?.length ? gamesData.next.length : null
+  const isNextPage = gamesData?.next?.length ? gamesData.next.length : null
 
   const metaData = {
     count,

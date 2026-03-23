@@ -1,16 +1,10 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
-import { gamesApi } from '../../api'
+import { genresQuery } from '../../api'
 
-export const loader = async function () {
-  try {
-    const { data: genresData } = await gamesApi.get('/genres')
-
-    return { genresData }
-  } catch (error) {
-    console.log('genres loader error', error)
-    throw error
-  }
+export const loader = queryClient => async () => {
+  await queryClient.ensureQueryData(genresQuery())
+  return null
 }
 
 function HomeLayout () {

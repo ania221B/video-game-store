@@ -1,11 +1,14 @@
 import { Link, useLoaderData, useRouteLoaderData } from 'react-router-dom'
 import { AccordionPanel, CustomSelect } from '../ui'
+import { useQuery } from '@tanstack/react-query'
+import { genresQuery } from '../../api'
+import { platformsQuery } from '../../api/queries'
 
 function FilterMenu () {
-  const { genresData } = useRouteLoaderData('root')
-  const { platformsData } = useLoaderData()
-  const genres = genresData.results
-  const platforms = platformsData.results
+  const { data: genresData } = useQuery(genresQuery())
+  const { data: platformsData } = useQuery(platformsQuery())
+  const genres = genresData?.results || []
+  const platforms = platformsData?.results || []
 
   return (
     <aside className='filter-menu'>

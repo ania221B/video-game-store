@@ -9,8 +9,11 @@ import { loader as genresLoader } from './components/layout/HomeLayout'
 import { loader as landingLoader } from './pages/Landing'
 import { loader as productsLoader } from './pages/Products'
 import { loader as singleProductLoader } from './pages/SingleProduct'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // actions
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -18,13 +21,13 @@ const router = createBrowserRouter([
     id: 'root',
     element: <HomeLayout></HomeLayout>,
     errorElement: <Error></Error>,
-    loader: genresLoader,
+    loader: genresLoader(queryClient),
 
     children: [
       {
         index: true,
         element: <Landing></Landing>,
-        loader: landingLoader
+        loader: landingLoader(queryClient)
       },
       {
         path: 'products',
@@ -34,14 +37,18 @@ const router = createBrowserRouter([
       {
         path: 'products/:id/:slug',
         element: <SingleProduct></SingleProduct>,
-        loader: singleProductLoader
+        loader: singleProductLoader(queryClient)
       }
     ]
   }
 ])
 
 function App () {
-  return <RouterProvider router={router}></RouterProvider>
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}></RouterProvider>
+    </QueryClientProvider>
+  )
 }
 
 export default App

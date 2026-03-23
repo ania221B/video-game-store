@@ -6,6 +6,7 @@ import { placeholderImages } from '../../data'
 function ProductCard ({ item }) {
   const { id, slug, name, background_image: img, rating } = item
   const price = (0).toFixed(2)
+
   return (
     <article className='product-item'>
       <div className='product-item__img'>

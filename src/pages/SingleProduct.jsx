@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom'
-import { gamesApi } from '../api'
+import { gamesApi, screenshotsQuery, singleGameQuery } from '../api'
 import { getFormatedDate } from '../utils/getFormattedDate'
 import {
   ProductCart,
@@ -8,23 +8,45 @@ import {
   ProductRatings,
   ProductRequirements
 } from '../components/ui'
+import { useQuery } from '@tanstack/react-query'
+import { Loader } from '../components/common'
 
-export const loader = async function ({ params }) {
-  const { id } = params
-  try {
-    const { data } = await gamesApi.get(`/games/${id}`)
-    const response = await gamesApi.get(`/games/${id}/screenshots`)
-    const screenshots = response.data.results || []
+export const loader = queryClient =>
+  async function ({ params }) {
+    const { id } = params
+    // try {
+    //   const { data } = await gamesApi.get(`/games/${id}`)
+    //   const response = await gamesApi.get(`/games/${id}/screenshots`)
+    //   const screenshots = response.data.results || []
 
-    return { ...data, screenshots }
-  } catch (error) {
-    console.log('error from single game loader', error)
-    throw Error(error)
+    //   return { ...data, screenshots }
+    // } catch (error) {
+    //   console.log('error from single game loader', error)
+    //   throw Error(error)
+    // }
+
+    await Promise.all([
+      queryClient.ensureQueryData(singleGameQuery(id)),
+      queryClient.ensureQueryData(screenshotsQuery(id))
+    ])
+
+    return id
   }
-}
 
 function SingleProduct () {
-  const game = useLoaderData()
+  const id = useLoaderData()
+
+  const gameQuery = useQuery(singleGameQuery(id))
+  const gameScreenshotsQuery = useQuery(screenshotsQuery(id))
+
+  const isLoading = gameQuery.isLoading || gameScreenshotsQuery.isLoading
+  const isError = gameQuery.isError || gameScreenshotsQuery.isError
+
+  if (isLoading) return <Loader></Loader>
+  if (isError) return <p>Error!</p>
+
+  const game = gameQuery.data || {}
+  const screenshots = gameScreenshotsQuery.data?.results || []
 
   const {
     name,
@@ -33,8 +55,7 @@ function SingleProduct () {
     background_image,
     metacritic,
     rating,
-    platforms,
-    screenshots
+    platforms
   } = game
 
   return (

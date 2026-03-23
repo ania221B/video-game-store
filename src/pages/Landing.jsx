@@ -1,63 +1,51 @@
-import { Link, useLoaderData, useRouteLoaderData } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Carousel } from '../components/ui'
 import { ArrowRight } from 'lucide-react'
-import { gamesApi } from '../api'
+import {
+  criticallyAcclaimedGamesQuery,
+  genresQuery,
+  newestGamesQuery,
+  trendingGamesQuery
+} from '../api'
+import { useQuery } from '@tanstack/react-query'
+import { Loader } from '../components/common'
 
-export async function loader () {
-  try {
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = today.getMonth()
-    const day = today.getDate()
-    const timestampForOneDay = 86400000
-    const lastWeek = new Date(today.getTime() - timestampForOneDay * 7)
-    const sixMonthsAgo = new Date(year, month - 6, day)
-
-    function formatDate (date) {
-      return date.toISOString().split('T')[0]
-    }
-    const { data: newestGamesData } = await gamesApi.get('/games', {
-      params: {
-        dates: `${formatDate(lastWeek)},${formatDate(today)}`,
-        ordering: '-released',
-        page_size: 20
-      }
-    })
-
-    const { data: trendingData } = await gamesApi.get('/games', {
-      params: {
-        dates: `${formatDate(sixMonthsAgo)},${formatDate(today)}`,
-        ordering: '-added',
-        page_size: 20
-      }
-    })
-
-    const { data: criticallyAcclaimedData } = await gamesApi.get('/games', {
-      params: {
-        ordering: '-metacritic',
-        metacritic: '80,100',
-        page_size: 20
-      }
-    })
-
-    return { newestGamesData, trendingData, criticallyAcclaimedData }
-  } catch (error) {
-    console.error('landing loader error', error)
-    throw error
-  }
+export const loader = queryClient => async () => {
+  await Promise.all([
+    queryClient.ensureQueryData(newestGamesQuery()),
+    queryClient.ensureQueryData(trendingGamesQuery()),
+    queryClient.ensureQueryData(criticallyAcclaimedGamesQuery())
+  ])
+  return null
 }
 
 function Landing () {
-  const { genresData } = useRouteLoaderData('root')
-  const { newestGamesData, trendingData, criticallyAcclaimedData } =
-    useLoaderData()
-  const rawGenres = genresData.results
+  const genreQuery = useQuery(genresQuery())
+  const newestQuery = useQuery(newestGamesQuery())
+  const trendingQuery = useQuery(trendingGamesQuery())
+  const criticallyAcclaimedQuery = useQuery(criticallyAcclaimedGamesQuery())
+
+  const isLoading =
+    genreQuery.isLoading ||
+    newestQuery.isLoading ||
+    trendingQuery.isLoading ||
+    criticallyAcclaimedQuery.isLoading
+  const isError =
+    genreQuery.isError ||
+    newestQuery.isError ||
+    trendingQuery.isError ||
+    criticallyAcclaimedQuery.isError
+
+  if (isLoading) return <Loader></Loader>
+  if (isError) return <p>Error!</p>
+
+  const rawGenres = genreQuery.data?.results || []
   const genres = rawGenres.toSorted((a, b) => a.name.localeCompare(b.name))
 
-  const featuredGames = trendingData.results.slice(0, 5)
-  const newestGames = newestGamesData.results
-  const trendingGames = trendingData.results
-  const criticallyAcclaimedGames = criticallyAcclaimedData.results
+  const featuredGames = trendingQuery.data?.results.slice(0, 5) || []
+  const newestGames = newestQuery.data?.results || []
+  const trendingGames = trendingQuery.data?.results || []
+  const criticallyAcclaimedGames = criticallyAcclaimedQuery.data?.results || []
 
   const featuredId = 'featured'
   const genresId = 'genres'
