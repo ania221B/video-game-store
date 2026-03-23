@@ -27,16 +27,19 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing></Landing>,
+        errorElement: <Error></Error>,
         loader: landingLoader(queryClient)
       },
       {
         path: 'products',
         element: <Products></Products>,
-        loader: productsLoader
+        errorElement: <Error></Error>,
+        loader: productsLoader(queryClient)
       },
       {
         path: 'products/:id/:slug',
         element: <SingleProduct></SingleProduct>,
+        errorElement: <Error></Error>,
         loader: singleProductLoader(queryClient)
       }
     ]

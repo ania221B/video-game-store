@@ -25,18 +25,9 @@ export const loader =
 
 function Products () {
   const params = useLoaderData()
-  const {
-    data: gamesData,
-    isLoading,
-    isError,
-    error
-  } = useQuery(gamesQuery(params))
+  const { data: gamesData, isLoading } = useQuery(gamesQuery(params))
 
   if (isLoading) return <Loader></Loader>
-  if (isError) {
-    console.log(error)
-    return <p>Error!</p>
-  }
 
   const products = gamesData?.results || []
   const count = gamesData?.count ? gamesData.count : 0

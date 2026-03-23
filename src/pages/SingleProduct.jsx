@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom'
-import { gamesApi, screenshotsQuery, singleGameQuery } from '../api'
+import { screenshotsQuery, singleGameQuery } from '../api'
 import { getFormatedDate } from '../utils/getFormattedDate'
 import {
   ProductCart,
@@ -14,16 +14,6 @@ import { Loader } from '../components/common'
 export const loader = queryClient =>
   async function ({ params }) {
     const { id } = params
-    // try {
-    //   const { data } = await gamesApi.get(`/games/${id}`)
-    //   const response = await gamesApi.get(`/games/${id}/screenshots`)
-    //   const screenshots = response.data.results || []
-
-    //   return { ...data, screenshots }
-    // } catch (error) {
-    //   console.log('error from single game loader', error)
-    //   throw Error(error)
-    // }
 
     await Promise.all([
       queryClient.ensureQueryData(singleGameQuery(id)),
@@ -40,10 +30,8 @@ function SingleProduct () {
   const gameScreenshotsQuery = useQuery(screenshotsQuery(id))
 
   const isLoading = gameQuery.isLoading || gameScreenshotsQuery.isLoading
-  const isError = gameQuery.isError || gameScreenshotsQuery.isError
 
   if (isLoading) return <Loader></Loader>
-  if (isError) return <p>Error!</p>
 
   const game = gameQuery.data || {}
   const screenshots = gameScreenshotsQuery.data?.results || []

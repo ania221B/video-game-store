@@ -1,0 +1,40 @@
+@use '../abstracts/' as *;
+
+.error-page {
+  display: grid;
+
+  align-items: center;
+  & > * {
+    display: grid;
+    gap: $grid-gap 0;
+  }
+
+  &__img {
+    & > * {
+      inline-size: 100%;
+      block-size: 100%;
+    }
+    @include mq(medium) {
+      max-block-size: 50dvh;
+    }
+  }
+
+  &__text-content {
+    display: grid;
+    max-inline-size: 45ch;
+    margin-inline: auto;
+  }
+
+  &__title {
+    font-size: fs(800);
+    font-weight: $fw-800;
+    line-height: 1.2;
+    color: currentColor;
+    position: relative;
+  }
+
+  .btn {
+    margin-block-start: 2rem;
+    justify-self: center;
+  }
+}
