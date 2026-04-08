@@ -111,7 +111,7 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
 
     const resizeObserver = new ResizeObserver(entires => {
       const width = entires[0].contentRect.width
-      setSlideWidth(width)
+      if (width > 0) setSlideWidth(width)
     })
 
     resizeObserver.observe(slide)
@@ -142,7 +142,7 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
       className='carousel'
       tabIndex='0'
       aria-roledescription='carousel'
-      aria-labelledby={label}
+      aria-label={label}
       data-type={type === 'hero' ? 'hero' : null}
       ref={carouselRef}
       onKeyDown={handleKeyboard}
