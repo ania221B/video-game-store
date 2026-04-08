@@ -1,11 +1,15 @@
-import { useState } from 'react'
-
-function ProductPlatforms ({ platforms }) {
-  const [selectedPlatform, setSelectedPlatform] = useState('')
-
+function ProductPlatforms ({
+  platforms,
+  selectedPlatform,
+  setSelectedPlatform
+}) {
   const handlePlatformChange = e => {
-    setSelectedPlatform(e.target.value)
+    const slug = e.target.value
+    const name = platforms.find(item => item.platform.slug === slug).platform
+      .name
+    setSelectedPlatform({ slug, name })
   }
+
   return (
     <div className='product__platform-picker flow'>
       <p>Select the platform:</p>
@@ -19,7 +23,7 @@ function ProductPlatforms ({ platforms }) {
                 type='radio'
                 name='platform'
                 value={platform.slug}
-                checked={selectedPlatform === platform.slug}
+                checked={selectedPlatform.slug === platform.slug}
                 onChange={handlePlatformChange}
               />
               <label htmlFor={platform.slug} className='badge'>

@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { genresQuery } from '../../api'
+import { ShoppingCart } from 'lucide-react'
 
 export const loader = queryClient => async () => {
   await queryClient.ensureQueryData(genresQuery())
@@ -41,6 +42,12 @@ function HomeLayout () {
               <li className='primary-nav__item'>
                 <NavLink to='/products' className='primary-nav__link'>
                   Products
+                </NavLink>
+              </li>
+              {/* CART LINK */}
+              <li className='primary-nav__item'>
+                <NavLink to='/cart' className='primary-nav__link'>
+                  <ShoppingCart></ShoppingCart>
                 </NavLink>
               </li>
             </ul>

@@ -1,7 +1,16 @@
 import ProductCartControls from './ProductCartControls'
 import ProductPlatforms from './ProductPlatforms'
 
-function ProductCart ({ platforms }) {
+function ProductCart ({
+  platforms,
+  selectedPlatform,
+  setSelectedPlatform,
+  quantity,
+  onChange,
+  onDecrease,
+  onIncrease,
+  addToCart
+}) {
   return (
     <section className='product__cart'>
       {/* PRICE */}
@@ -15,9 +24,19 @@ function ProductCart ({ platforms }) {
         </dd>
       </dl>
       {/* PLATFORMS */}
-      <ProductPlatforms platforms={platforms}></ProductPlatforms>
+      <ProductPlatforms
+        platforms={platforms}
+        selectedPlatform={selectedPlatform}
+        setSelectedPlatform={setSelectedPlatform}
+      ></ProductPlatforms>
       {/* CART CONTROLS */}
-      <ProductCartControls></ProductCartControls>
+      <ProductCartControls
+        quantity={quantity}
+        onChange={onChange}
+        onDecrease={onDecrease}
+        onIncrease={onIncrease}
+        addToCart={addToCart}
+      ></ProductCartControls>
     </section>
   )
 }

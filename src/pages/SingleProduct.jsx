@@ -10,6 +10,10 @@ import {
 } from '../components/ui'
 import { useQuery } from '@tanstack/react-query'
 import { Loader } from '../components/common'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../features/cart'
+import { checkAmount } from '../utils'
 
 export const loader = queryClient =>
   async function ({ params }) {
@@ -23,19 +27,24 @@ export const loader = queryClient =>
     return id
   }
 
-function SingleProduct () {
-  const id = useLoaderData()
+function SingleProduct ({ min = 0, max = 100 }) {
+  const dispatch = useDispatch()
+  const { cartItems } = useSelector(store => store.cart)
 
+  const [selectedPlatform, setSelectedPlatform] = useState({
+    name: '',
+    slug: ''
+  })
+  const [quantity, setQuantity] = useState(1)
+  const id = useLoaderData()
   const gameQuery = useQuery(singleGameQuery(id))
   const gameScreenshotsQuery = useQuery(screenshotsQuery(id))
-
   const isLoading = gameQuery.isLoading || gameScreenshotsQuery.isLoading
 
   if (isLoading) return <Loader></Loader>
 
   const game = gameQuery.data || {}
   const screenshots = gameScreenshotsQuery.data?.results || []
-
   const {
     name,
     released,
@@ -45,6 +54,44 @@ function SingleProduct () {
     rating,
     platforms
   } = game
+  const productPlatforms = platforms.toSorted((a, b) =>
+    a.platform.name.localeCompare(b.platform.name)
+  )
+  const itemInCart = cartItems.find(
+    item => item.cartId === game.id + selectedPlatform.slug
+  )
+
+  useEffect(() => {
+    if (!selectedPlatform.slug && productPlatforms.length > 0) {
+      const firstPlatform = productPlatforms[0]?.platform
+
+      const name = firstPlatform?.name
+      const slug = firstPlatform?.slug
+
+      setSelectedPlatform({ name, slug })
+    }
+  }, [productPlatforms.slug, selectedPlatform])
+
+  useEffect(() => {
+    if (itemInCart) {
+      setQuantity(itemInCart.quantity)
+    }
+  }, [itemInCart])
+
+  const cartProduct = {
+    cartId: game.id + selectedPlatform.slug,
+    productId: game.id,
+    slug: game.slug,
+    image: background_image,
+    name,
+    price: 0,
+    platform: selectedPlatform,
+    quantity
+  }
+
+  function addToCart () {
+    dispatch(addItem({ product: cartProduct }))
+  }
 
   return (
     <section>
@@ -56,6 +103,7 @@ function SingleProduct () {
         <div className='product__content'>
           <header>
             <div className='flow'>
+              {/* long text spills - fix it */}
               <h1 className='product__name fs-900'>{name}</h1>
               <p className='uppercase letter-spacing-1'>
                 release date: {getFormatedDate(released, true)}
@@ -67,7 +115,22 @@ function SingleProduct () {
             ></ProductRatings>
           </header>
           {/* PRODUCT CART */}
-          <ProductCart platforms={platforms}></ProductCart>
+          <ProductCart
+            platforms={productPlatforms}
+            selectedPlatform={selectedPlatform}
+            setSelectedPlatform={setSelectedPlatform}
+            quantity={quantity}
+            onIncrease={() =>
+              setQuantity(currentQty => checkAmount(currentQty + 1, min, max))
+            }
+            onDecrease={() =>
+              setQuantity(currentQty => checkAmount(currentQty - 1, min, max))
+            }
+            onChange={currentQty =>
+              setQuantity(checkAmount(currentQty, min, max))
+            }
+            addToCart={addToCart}
+          ></ProductCart>
           {/* PRODUCT DESCRIPTION */}
           <ProductDescription description={description}></ProductDescription>
           {/* PRODUCT GALLERY */}
@@ -76,7 +139,9 @@ function SingleProduct () {
             gameScreenshots={screenshots}
           ></ProductGallery>
           {/* PRODUCT REQUIREMENTS */}
-          <ProductRequirements platformList={platforms}></ProductRequirements>
+          <ProductRequirements
+            platformList={productPlatforms}
+          ></ProductRequirements>
         </div>
       </article>
     </section>

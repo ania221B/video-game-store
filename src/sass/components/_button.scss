@@ -57,14 +57,12 @@
   padding-block: 0;
   display: block;
   color: var(--btn-fg);
-  font-size: fs(500);
   overflow: hidden;
 
   & > * {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: $grid-gap;
     padding-block: 0.25em;
     padding-inline: 0.75em;
 
@@ -214,5 +212,20 @@
   }
   &:focus-visible {
     outline: 2px solid clr(primary, 400);
+  }
+}
+
+.cart__item__remove-btn {
+  position: absolute;
+  right: 0;
+  transform: translate(-1.25em, 1.25em);
+  aspect-ratio: 1;
+  padding-block: 0;
+  padding-inline: 0;
+  font-size: 12px;
+
+  & > * {
+    padding-block: -1rem !important;
+    padding-inline: -1rem !important;
   }
 }

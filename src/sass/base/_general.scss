@@ -12,6 +12,24 @@ body {
   color: clr(neutral, 100);
 }
 
+#root {
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  min-height: 100dvh;
+
+  & > *:first-child {
+    grid-row: 1;
+  }
+
+  & > *:nth-child(2) {
+    grid-row: 2;
+  }
+
+  & > *:last-child {
+    grid-row: 3;
+  }
+}
+
 main {
   padding-block-start: var(--header-height);
 }

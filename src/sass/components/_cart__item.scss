@@ -1,0 +1,107 @@
+@use '../abstracts/' as *;
+
+.cart__item {
+  padding-inline: 1.25em;
+  padding-block: 1.25em;
+  border: 1px solid clr(primary, 400);
+  border-radius: size(4);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+
+  position: relative;
+
+  &__thumbnail {
+    grid-row: 1 / span 3;
+    inline-size: 100%;
+    min-block-size: 100%;
+    img {
+      border-radius: size(4);
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    gap: 0.25rem;
+  }
+
+  &__name {
+    grid-column: 1 / -1;
+    a {
+      text-decoration: none;
+      color: currentColor;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__platform {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  &__price {
+    grid-row: 3;
+  }
+
+  &__price-value {
+    justify-self: end;
+  }
+
+  .quantity-form-control {
+    grid-column: 1 / -1;
+  }
+
+  .btn[data-button='primary'] > * {
+    padding-inline: 0;
+    padding-block: 0;
+  }
+
+  &__remove-btn {
+    position: absolute;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &__total-price {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0 0.5em;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @include mq(small) {
+    grid-template-columns: 12rem 1fr;
+    &__thumbnail {
+      inline-size: 12rem;
+    }
+
+    &__details {
+      grid-template-columns: minmax(0, 17rem) 1fr;
+    }
+
+    &__name {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .quantity-form-control {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: center;
+    }
+
+    &__total-price {
+      grid-column: 2;
+      grid-row: 3;
+      justify-content: end;
+    }
+  }
+}
