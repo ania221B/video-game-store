@@ -32,20 +32,26 @@
   header {
     display: grid;
     gap: var(--grid-gap, $grid-gap);
-    justify-items: space-between;
-    @include mq(medium) {
+    text-align: center;
+
+    @include mq(large) {
       grid-auto-flow: column;
-      grid-auto-columns: 1fr max-content;
+      grid-auto-columns: min-content 1fr;
     }
   }
 
   &__ratings {
     display: flex;
     gap: $grid-gap;
+    justify-self: center;
 
-    @include mq(60em) {
+    @include mq(40em) {
       justify-content: end;
       align-self: start;
+    }
+
+    @include mq(large) {
+      justify-self: end;
     }
   }
   &__rating {
