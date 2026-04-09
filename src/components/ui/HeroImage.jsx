@@ -32,7 +32,13 @@ function HeroImage ({ image, imgClass = undefined }) {
         type='image/webp'
         media='(max-width: 767px)'
       />
-      <img src={image.fallback} alt={image.alt} title={image.title} />
+      <img
+        src={image.fallback}
+        alt={image.alt}
+        width='300'
+        height='250'
+        loading='lazy'
+      />
     </picture>
   )
 }

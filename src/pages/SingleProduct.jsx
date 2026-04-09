@@ -2,6 +2,7 @@ import { useLoaderData } from 'react-router-dom'
 import { screenshotsQuery, singleGameQuery } from '../api'
 import { getFormatedDate } from '../utils/getFormattedDate'
 import {
+  HeroImage,
   ProductCart,
   ProductDescription,
   ProductGallery,
@@ -14,6 +15,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../features/cart'
 import { checkAmount } from '../utils'
+import { placeholderImages } from '../data'
 
 export const loader = queryClient =>
   async function ({ params }) {
@@ -98,12 +100,15 @@ function SingleProduct ({ min = 0, max = 100 }) {
       <article className='product container'>
         {/* PRODUCT HERO */}
         <div className='product__img'>
-          <img src={background_image} alt={name} />
+          {background_image ? (
+            <img src={background_image} alt={name} loading='lazy' />
+          ) : (
+            <HeroImage image={placeholderImages.placeholder}></HeroImage>
+          )}
         </div>
         <div className='product__content'>
           <header>
             <div className='flow'>
-              {/* long text spills - fix it */}
               <h1 className='product__name fs-900'>{name}</h1>
               <p className='uppercase letter-spacing-1'>
                 release date: {getFormatedDate(released, true)}

@@ -6,7 +6,11 @@ function ProductGallery ({ gameName, gameScreenshots }) {
         {gameScreenshots.map((screenshot, index) => {
           return (
             <li key={`screenhot-${index}`}>
-              <img src={screenshot.image} alt={`image from ${gameName}`}></img>
+              <img
+                src={screenshot.image}
+                alt={`image from ${gameName}`}
+                loading='lazy'
+              ></img>
             </li>
           )
         })}
