@@ -2,7 +2,14 @@ function ProductDescription ({ description }) {
   const paragraphs = description
     .replace(/<br\s*\/?>/gi, '\n')
     .split('\n')
-    .map(item => item.replace(/<[^>]+>/g, '').trim())
+    .map(item =>
+      item
+        .replace(/<[^>]+>/g, '')
+        .replace('&#39;', "'")
+        .replace('&quot;', '"')
+        .replace('&amp;', '&')
+        .trim()
+    )
     .filter(Boolean)
 
   function isHeading (text) {
@@ -11,7 +18,7 @@ function ProductDescription ({ description }) {
   return (
     <section className='product__description flow'>
       <h2 className='product__title fs-700'>About the game</h2>
-      <div className='product__description-text'>
+      <div className='product__description-text flow'>
         {paragraphs.map((paragraph, index) =>
           isHeading(paragraph) ? (
             <h3 key={`heading-${index}`}>{paragraph.slice(1).trim()}</h3>
