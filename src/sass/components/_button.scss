@@ -5,7 +5,7 @@
   display: inline-flex;
   align-items: center;
   line-height: 1;
-  font-size: fs(400);
+  font-size: var(--btn-fs, #{fs(400)});
   text-align: center;
   text-decoration: none;
   border: none;
@@ -192,6 +192,24 @@
   &:disabled:focus > *:last-child,
   &:disabled:hover > *:last-child {
     transform: translateX(-0.75rem);
+  }
+}
+
+.btn[data-button='badge'] {
+  --btn-bg: transparent;
+  --btn-fg: #{clr(primary, 400)};
+  --btn-hover-fg: #{clr(base, 800)};
+  --btn-hover-bg: #{clr(primary, 400)};
+  --btn-fs: #{fs(300)};
+  justify-content: center;
+  padding-block: var(--badge-padding-block, 0.35em);
+  padding-inline: var(--badge-padding-inline, 1.05em);
+  text-transform: uppercase;
+  border: 1px solid clr(primary, 400);
+  position: relative;
+
+  &::after {
+    transition: opacity 450ms ease-in-out;
   }
 }
 
