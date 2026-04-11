@@ -2,16 +2,22 @@ import { Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import HeroImage from './HeroImage'
 import { placeholderImages } from '../../data'
+import { useState } from 'react'
 
 function ProductCard ({ item }) {
-  const { id, slug, name, background_image: img, rating } = item
+  const { id, slug, name, background_image: img, rating, genres } = item
   const price = (0).toFixed(2)
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
+
+  function togglePopup () {
+    setIsPopupVisible(!isPopupVisible)
+  }
 
   return (
     <article className='product-item'>
       <div className='product-item__img'>
         {img ? (
-          <img src={img} alt={name} width='300' height='250' />
+          <img src={img} alt={name} width='300' height='250' loading='lazy' />
         ) : (
           <HeroImage image={placeholderImages.placeholder}></HeroImage>
         )}
@@ -38,26 +44,50 @@ function ProductCard ({ item }) {
               </span>
             </dd>
           </dl>
-          {/* <h4 className='sr-only'>Genres:</h4>
-          <ul className='product-item__genre-list'>
-            {genres.slice(0, 2).map(genre => {
-              return (
-                <li key={genre.id}>
-                  <Link>{genre.name}</Link>
-                </li>
-              )
-            })}
+          <h4 className='sr-only'>Genres:</h4>
+
+          <div className='product-item__genre-wrapper'>
+            <ul className='product-item__genre-list'>
+              {genres.slice(0, 2).map(genre => {
+                return (
+                  <li key={genre.id}>
+                    <Link to={`/products?genres=${genre.slug}`}>
+                      {genre.name}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
             {genres.length > 2 && (
-              <li>
-                <Link to={`/products/${slug}`}>+{genres.length - 2} more</Link>
-              </li>
+              <div className='product-item__genre-popup-wrapper'>
+                <button
+                  className='btn'
+                  data-button='badge'
+                  onClick={() => togglePopup()}
+                >
+                  +{genres.length - 2} more
+                </button>
+                {isPopupVisible && (
+                  <ul className='product-item__genre-popup'>
+                    {genres.slice(2).map(genre => {
+                      return (
+                        <li key={genre.id} className='badge'>
+                          <Link to={`/products?genres=${genre.slug}`}>
+                            {genre.name}
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )}
+              </div>
             )}
-          </ul> */}
+          </div>
         </div>
       </div>
       <Link
         to={`/products/${id}/${slug}`}
-        className='btn'
+        className='btn details-btn'
         data-button='primary'
       >
         <span>See details</span>
