@@ -5,6 +5,7 @@
     grid-column: 1 / -1 !important;
     min-block-size: 40dvh;
     max-block-size: 55dvh;
+    overflow: hidden;
 
     position: relative;
 
@@ -36,7 +37,8 @@
 
     @include mq(large) {
       grid-auto-flow: column;
-      grid-auto-columns: min-content 1fr;
+      grid-template-columns: minmax(75%, 1fr) 1fr;
+      text-align: left;
     }
   }
 
