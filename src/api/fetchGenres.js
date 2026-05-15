@@ -5,3 +5,9 @@ export async function fetchGenres () {
 
   return data
 }
+
+export async function fetchSingleGenre (id) {
+  const { data } = await gamesApi.get(`/genres/${id}`)
+
+  return data
+}

@@ -3,7 +3,7 @@
  * @param {Date} date Current date
  * @returns {String} String with formatted date
  */
-export function getFormatedDate (dateToFormat, longName = false) {
+function getFormatedDate (dateToFormat, longName = false) {
   const date = new Date(dateToFormat)
   const monthsInAYear = [
     { longName: 'January', shortName: 'Jan' },
@@ -26,3 +26,5 @@ export function getFormatedDate (dateToFormat, longName = false) {
   const day = date.getDate()
   return `${month} ${day}, ${year}`
 }
+
+export default getFormatedDate

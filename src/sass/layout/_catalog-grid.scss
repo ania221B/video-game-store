@@ -23,6 +23,10 @@
     grid-column: 1 / -1;
   }
 
+  .pagination {
+    justify-self: center;
+  }
+
   @media (min-width: 45em) {
     gap: var(--_catalog-gap);
     & > header {
@@ -57,6 +61,22 @@
       justify-self: end;
       align-self: end;
     }
+  }
+}
+
+.catalog-grid--no-filters {
+  --_catalog-gap: #{calc($grid-gap * 3)};
+  display: grid;
+  gap: var(--_catalog-gap) 0;
+
+  .search-menu {
+    justify-self: center;
+    min-inline-size: calc($card-base-width * 2);
+  }
+
+  .pagination {
+    justify-self: end;
+    align-self: end;
   }
 }
 

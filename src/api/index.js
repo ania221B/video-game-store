@@ -7,6 +7,7 @@ export {
   trendingGamesQuery,
   criticallyAcclaimedGamesQuery,
   singleGameQuery,
-  screenshotsQuery
+  screenshotsQuery,
+  singleGenreQuery
 } from './queries'
 export { fetchPlatforms } from './fetchPlatforms'

@@ -10,10 +10,11 @@
       content: '';
       position: absolute;
       inset: 0;
+
       background-image: linear-gradient(
         to bottom,
         clr(base, 800),
-        rgba(clr(base, 400), 0.3),
+        rgba(clr(base, 400), 0.7),
         clr(base, 800)
       );
     }
@@ -21,16 +22,27 @@
 
   .main-content {
     align-self: end;
-    font-size: fs(800);
     text-align: center;
-
+    font-size: fs(800);
     padding-block-end: var(--padding-block-end);
     @include fluid-clamp($padding-hero, true, 'padding-block-end');
 
     h1 {
+      display: inline-block;
       text-shadow: 1px 1px 1px clr(base, 800);
+      @include mq(50em, min-width);
     }
 
+    &__subtitle {
+      font-size: fs(600);
+    }
+
+    &__description {
+      font-size: fs(500);
+      @include mq(50em, min-width) {
+        text-align: left;
+      }
+    }
     @include mq(50em, min-width) {
       max-inline-size: 35ch;
       margin-inline: auto;

@@ -1,5 +1,7 @@
 export { default as Cart } from './Cart'
 export { default as Error } from './Error'
+export { default as Genres } from './Genres'
 export { default as Landing } from './Landing'
 export { default as Products } from './Products'
+export { default as SingleGenre } from './SingleGenre'
 export { default as SingleProduct } from './SingleProduct'

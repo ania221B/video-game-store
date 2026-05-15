@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { screenshotsQuery, singleGameQuery } from '../api'
-import { getFormatedDate } from '../utils/getFormattedDate'
+import getFormatedDate from '../utils/getFormattedDate'
 import {
   HeroImage,
   ProductCart,

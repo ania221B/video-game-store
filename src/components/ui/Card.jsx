@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom'
-import { getFormatedDate } from '../../utils/getFormattedDate'
+import getFormatedDate from '../../utils/getFormattedDate'
 import HeroImage from './HeroImage'
 import { placeholderImages } from '../../data'
 
 function Card ({ item, route = 'products', type = 'games', tabIndex = -1 }) {
   if (type === 'genres') {
     return (
-      <Link to={`/${route}/${item.slug}`} className='card' tabIndex={tabIndex}>
+      <Link
+        to={`/${route}/${item.id}/${item.slug}`}
+        className='card'
+        tabIndex={tabIndex}
+      >
         <article className='card__content'>
           <div className='card__img'>
             {item?.image_background ? (
