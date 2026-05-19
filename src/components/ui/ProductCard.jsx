@@ -5,8 +5,7 @@ import { placeholderImages } from '../../data'
 import { useState } from 'react'
 
 function ProductCard ({ item }) {
-  const { id, slug, name, background_image: img, rating, genres } = item
-  const price = (0).toFixed(2)
+  const { id, slug, name, background_image: img, rating, genres, price } = item
   const [isPopupVisible, setIsPopupVisible] = useState(false)
 
   function togglePopup () {

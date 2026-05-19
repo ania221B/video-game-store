@@ -54,7 +54,8 @@ function SingleProduct ({ min = 0, max = 100 }) {
     background_image,
     metacritic,
     rating,
-    platforms
+    platforms,
+    price
   } = game
   const productPlatforms = platforms.toSorted((a, b) =>
     a.platform.name.localeCompare(b.platform.name)
@@ -86,7 +87,7 @@ function SingleProduct ({ min = 0, max = 100 }) {
     slug: game.slug,
     image: background_image,
     name,
-    price: 0,
+    price: game.price,
     platform: selectedPlatform,
     quantity
   }
@@ -122,6 +123,7 @@ function SingleProduct ({ min = 0, max = 100 }) {
           {/* PRODUCT CART */}
           <ProductCart
             platforms={productPlatforms}
+            price={price}
             selectedPlatform={selectedPlatform}
             setSelectedPlatform={setSelectedPlatform}
             quantity={quantity}

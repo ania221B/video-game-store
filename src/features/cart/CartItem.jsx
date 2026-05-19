@@ -31,7 +31,7 @@ function CartItem ({ item }) {
 
           <dt className='cart__item__price '>Price:</dt>
           <dd className='cart__item__price cart__item__price-value fs-500 fw-extra-bold'>
-            ${price.toFixed(2)}
+            ${price}
           </dd>
         </dl>
 

@@ -1,3 +1,4 @@
+import { generatePrice, transformGameData } from '../utils'
 import {
   fetchCriticallyAcclaimedGames,
   fetchGames,
@@ -26,7 +27,8 @@ export function singleGenreQuery (id) {
 export function gamesQuery (params) {
   return {
     queryKey: ['games', params],
-    queryFn: () => fetchGames(params)
+    queryFn: () => fetchGames(params),
+    select: transformGameData
   }
 }
 
@@ -53,7 +55,11 @@ export function criticallyAcclaimedGamesQuery () {
 export function singleGameQuery (id) {
   return {
     queryKey: ['game', id],
-    queryFn: () => fetchSingleGame(id)
+    queryFn: () => fetchSingleGame(id),
+    select: data => ({
+      ...data,
+      price: generatePrice(id)
+    })
   }
 }
 

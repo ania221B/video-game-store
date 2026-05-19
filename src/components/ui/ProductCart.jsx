@@ -3,6 +3,7 @@ import ProductPlatforms from './ProductPlatforms'
 
 function ProductCart ({
   platforms,
+  price,
   selectedPlatform,
   setSelectedPlatform,
   quantity,
@@ -17,9 +18,9 @@ function ProductCart ({
       <dl className={'product__price'}>
         <dt className='sr-only'>Price:</dt>
         <dd>
-          <span className='sr-only'>Price is $0.00.</span>
+          <span className='sr-only'>Price is ${price}.</span>
           <span className='fs-900 fw-extra-bold' aria-hidden='true'>
-            $0.00
+            ${price}
           </span>
         </dd>
       </dl>
