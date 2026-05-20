@@ -15,7 +15,7 @@ function Cart () {
   }
   return (
     <section className='section'>
-      <div className='container'>
+      <div className='container' data-container='x-small'>
         {isEmpty ? (
           <article className='cart cart--empty'>
             <h2 className='cart__title fs-800'>Your cart ({cartItemsCount})</h2>
