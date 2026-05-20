@@ -124,11 +124,18 @@
   --btn-fg: #{clr(primary, 400)};
   --btn-hover-fg: #{clr(primary, 400)};
   --btn-hover-bg: transparent;
-  padding: 0.5em;
+  padding: clamp(0.125em, 0.125em + 0.25vw, 0.5em);
   border-radius: size(4);
   border-radius: 50%;
   inline-size: fit-content;
   aspect-ratio: 1;
+
+  &:first-of-type > * {
+    transform: translateX(-2px);
+  }
+  &:last-of-type > * {
+    transform: translateX(2px);
+  }
 
   &::after {
     box-shadow: 0px 0px 0px 1px clr(primary, 400);
@@ -211,6 +218,10 @@
   &::after {
     transition: opacity 450ms ease-in-out;
   }
+}
+.btn--page {
+  padding-block: clamp(0.25em, 0.25em + 0.5vw, 2em);
+  padding-inline: clamp(0.15em, 0.25em + 0.5vw, 2em);
 }
 
 .filter-menu__btn {

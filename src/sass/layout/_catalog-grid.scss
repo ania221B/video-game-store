@@ -18,12 +18,12 @@
   & aside,
   & .breadcrumb,
   & .search-menu,
-  & .item-area,
-  & .pagination {
+  & .item-area {
     grid-column: 1 / -1;
   }
 
   .pagination {
+    grid-column: 1 / -1;
     justify-self: center;
   }
 
@@ -57,7 +57,7 @@
     }
 
     .pagination {
-      grid-row: 3;
+      grid-row: 2;
       justify-self: end;
       align-self: end;
     }
