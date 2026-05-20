@@ -10,7 +10,7 @@ function ProductList ({ products }) {
   }
   if (!products.length) {
     return (
-      <div className='item-area__list grid-auto-fit'>
+      <div className='item-area__list item-area__list--empty flow'>
         <h2>Sorry... Nothing to display here.</h2>
         <p>Try searching for something else or refreshing the page.</p>
       </div>

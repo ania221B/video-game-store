@@ -91,4 +91,8 @@
       }
     }
   }
+  &__list--empty {
+    text-align: center;
+    padding-block: var(--_catalog-gap);
+  }
 }
