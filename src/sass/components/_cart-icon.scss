@@ -1,0 +1,21 @@
+@use '../abstracts/' as *;
+
+.cart-icon {
+  display: inline-block;
+  position: relative;
+}
+
+.cart-icon__item-counter {
+  position: absolute;
+  inset: -50% -50% auto auto;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  text-align: center;
+  background-color: clr(base, 400);
+  inline-size: fit-content;
+  min-inline-size: 21px;
+  padding: 0.25em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}

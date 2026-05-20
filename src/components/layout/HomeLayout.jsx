@@ -2,6 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { genresQuery } from '../../api'
 import { ShoppingCart } from 'lucide-react'
+import { useSelector } from 'react-redux'
 
 export const loader = queryClient => async () => {
   await queryClient.ensureQueryData(genresQuery())
@@ -11,6 +12,7 @@ export const loader = queryClient => async () => {
 function HomeLayout () {
   const headerRef = useRef(null)
   const [headerHeight, setHeaderHeight] = useState(0)
+  const { cartItemsCount } = useSelector(store => store.cart)
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
@@ -47,7 +49,12 @@ function HomeLayout () {
               {/* CART LINK */}
               <li className='primary-nav__item'>
                 <NavLink to='/cart' className='primary-nav__link'>
-                  <ShoppingCart></ShoppingCart>
+                  <span className='cart-icon'>
+                    <span className='cart-icon__item-counter'>
+                      {cartItemsCount}
+                    </span>
+                    <ShoppingCart className='cart-icon__img'></ShoppingCart>
+                  </span>
                 </NavLink>
               </li>
             </ul>
