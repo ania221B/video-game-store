@@ -6,8 +6,9 @@ function transformGameData (data) {
   return {
     ...data,
     results: data.results
-      .filter(game => excludeTags(game.tags))
+      .filter(game => !matchWords(game.slug))
       .filter(game => !matchWords(game.name))
+      .filter(game => excludeTags(game.tags))
       .map(game => ({
         ...game,
         price: generatePrice(game.id)

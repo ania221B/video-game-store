@@ -76,3 +76,10 @@ export function screenshotsQuery (id) {
     queryFn: () => fetchScreenshots(id)
   }
 }
+
+function tagsQuery (page) {
+  return {
+    queryKey: ['tags'],
+    queryFn: () => fetchTags(page)
+  }
+}
