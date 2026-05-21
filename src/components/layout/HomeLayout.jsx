@@ -1,8 +1,7 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { genresQuery } from '../../api'
-import { ShoppingCart } from 'lucide-react'
-import { useSelector } from 'react-redux'
+import Navigation from './Navigation'
 
 export const loader = queryClient => async () => {
   await queryClient.ensureQueryData(genresQuery())
@@ -12,7 +11,6 @@ export const loader = queryClient => async () => {
 function HomeLayout () {
   const headerRef = useRef(null)
   const [headerHeight, setHeaderHeight] = useState(0)
-  const { cartItemsCount } = useSelector(store => store.cart)
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
@@ -34,31 +32,7 @@ function HomeLayout () {
     <>
       <header className='primary-header line-decoration' ref={headerRef}>
         <div className='container'>
-          <nav className='primary-nav'>
-            <ul className='primary-nav__list'>
-              <li className='primary-nav__item'>
-                <NavLink to='/' className='primary-nav__link'>
-                  Home
-                </NavLink>
-              </li>
-              <li className='primary-nav__item'>
-                <NavLink to='/products' className='primary-nav__link'>
-                  Products
-                </NavLink>
-              </li>
-              {/* CART LINK */}
-              <li className='primary-nav__item'>
-                <NavLink to='/cart' className='primary-nav__link'>
-                  <span className='cart-icon'>
-                    <span className='cart-icon__item-counter'>
-                      {cartItemsCount}
-                    </span>
-                    <ShoppingCart className='cart-icon__img'></ShoppingCart>
-                  </span>
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
+          <Navigation></Navigation>
         </div>
       </header>
       <main style={{ '--header-height': `${headerHeight}px` }}>
