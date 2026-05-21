@@ -7,6 +7,7 @@ function matchWords (text) {
     'flirt',
     'harem',
     'hentai',
+    'horny',
     'hot-champions',
     'hot-gym',
     'hottie',
@@ -15,12 +16,19 @@ function matchWords (text) {
     'hot-steamy-knights',
     'intimate-vreisuke',
     'intimate-winter',
+    'love-death-realtime-lovers',
+    'love-death-2-realtime-lovers',
     'maid-mansion',
     'personality-excretion-hero-silvys',
+    'pimp-my-youtuber',
     'pussy-2',
     'sex',
     'steamy-hot-springs',
     'steamy-conversation',
+    'tentacle-invasion',
+    'tentacle-locker',
+    'tentacles-of-submission',
+    'tentacle-beach-party',
     'tit'
   ]
   return words.some(
