@@ -10,6 +10,7 @@ function ProductGallery ({ gameName, gameScreenshots }) {
                 src={screenshot.image}
                 alt={`image from ${gameName}`}
                 loading='lazy'
+                style={{ blockSize: '100%' }}
               ></img>
             </li>
           )
