@@ -37,7 +37,6 @@
 
     @include mq(large) {
       grid-auto-flow: column;
-      grid-template-columns: minmax(75%, 1fr) 1fr;
       text-align: left;
     }
   }
