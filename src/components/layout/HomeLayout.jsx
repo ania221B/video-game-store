@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { genresQuery } from '../../api'
-import Navigation from './Navigation'
+import Header from './Header'
 
 export const loader = queryClient => async () => {
   await queryClient.ensureQueryData(genresQuery())
@@ -28,13 +28,10 @@ function HomeLayout () {
       resizeObserver.disconnect()
     }
   }, [headerHeight])
+
   return (
     <>
-      <header className='primary-header line-decoration' ref={headerRef}>
-        <div className='container'>
-          <Navigation></Navigation>
-        </div>
-      </header>
+      <Header headerRef={headerRef}></Header>
       <main style={{ '--header-height': `${headerHeight}px` }}>
         <Outlet></Outlet>
       </main>
