@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Loader } from '../components/common'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../features/cart'
+import { addItem } from '../features'
 import { checkAmount } from '../utils'
 import { placeholderImages } from '../data'
 

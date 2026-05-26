@@ -1,0 +1,19 @@
+@use '../abstracts/' as *;
+
+.login {
+  align-items: center;
+  justify-items: unset !important;
+  block-size: 100%;
+
+  picture {
+    block-size: inherit;
+    background-color: clr(base, 400);
+    mix-blend-mode: lighten;
+    opacity: 0.5;
+    z-index: -1;
+  }
+
+  .home-link {
+    justify-self: end;
+  }
+}

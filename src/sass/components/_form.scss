@@ -1,0 +1,104 @@
+@use '../abstracts/' as *;
+
+.form {
+  &-wrapper {
+    inline-size: min(30rem, 100%);
+    margin-inline: auto;
+    padding-block: 3.5em;
+    padding-inline: 3.5em;
+    backdrop-filter: blur(20px);
+
+    position: relative;
+
+    & > * {
+      display: grid;
+      grid-auto-flow: row;
+      gap: $grid-gap;
+    }
+
+    & > &__confirmation {
+      align-items: center;
+      block-size: 100%;
+      text-align: center;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0px;
+      z-index: -1;
+      border-radius: inherit;
+    }
+
+    &::before {
+      box-shadow: 0px 0px 0px 1px clr(primary, 400);
+    }
+
+    h1 {
+      font-size: fs(800);
+    }
+
+    h1 + p {
+      font-size: fs(500);
+    }
+  }
+
+  &__control-wrapper {
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    gap: 0.5rem;
+
+    input {
+      border: 0.0625rem solid clr(primary, 400);
+      background-color: transparent;
+      font-weight: $fw-700;
+      color: clr(primary, 400);
+
+      padding-block: 0.5rem;
+      padding-inline: 1rem;
+      display: block;
+      &:focus,
+      &:hover {
+        outline: none;
+        outline: 0.125rem solid clr(primary, 400);
+      }
+      &:disabled {
+        cursor: not-allowed;
+        &:hover,
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.form-fade-in {
+  animation-name: fadeIn;
+  animation-duration: 500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+.form-fade-out {
+  animation-name: fadeOut;
+  animation-duration: 500ms;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

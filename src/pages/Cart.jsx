@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { CartItem, clearCart } from '../features/cart'
+import { CartItem, clearCart } from '../features'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 

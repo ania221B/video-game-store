@@ -1,75 +1,30 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { HomeLayout } from './components/layout'
-import {
-  Cart,
-  Error,
-  Genres,
-  Landing,
-  Products,
-  SingleGenre,
-  SingleProduct
-} from './pages'
-
-// loaders
-import { loader as genresLoader } from './components/layout/HomeLayout'
-import { loader as landingLoader } from './pages/Landing'
-import { loader as productsLoader } from './pages/Products'
-import { loader as singleProductLoader } from './pages/SingleProduct'
-import { loader as singleGenreLoader } from './pages/SingleGenre'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-// actions
-
-const queryClient = new QueryClient()
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    id: 'root',
-    element: <HomeLayout></HomeLayout>,
-    errorElement: <Error></Error>,
-    loader: genresLoader(queryClient),
-
-    children: [
-      {
-        index: true,
-        element: <Landing></Landing>,
-        errorElement: <Error></Error>,
-        loader: landingLoader(queryClient)
-      },
-      {
-        path: 'products',
-        element: <Products></Products>,
-        errorElement: <Error></Error>,
-        loader: productsLoader(queryClient)
-      },
-      {
-        path: 'products/:id/:slug',
-        element: <SingleProduct></SingleProduct>,
-        errorElement: <Error></Error>,
-        loader: singleProductLoader(queryClient)
-      },
-      {
-        path: 'cart',
-        element: <Cart></Cart>,
-        errorElement: <Error></Error>
-      },
-      {
-        path: 'genres',
-        element: <Genres></Genres>,
-        errorElement: <Error></Error>
-      },
-      {
-        path: 'genres/:id/:slug',
-        element: <SingleGenre></SingleGenre>,
-        errorElement: <Error></Error>,
-        loader: singleGenreLoader(queryClient)
-      }
-    ]
-  }
-])
+import { RouterProvider } from 'react-router-dom'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient, supabase } from './lib'
+import { router } from './router'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { setUser, clearUser } from './features/auth/authSlice'
 
 function App () {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    supabase.auth.getClaims().then(({ data }) => {
+      if (data?.claims) dispatch(setUser(data.claims))
+    })
+
+    const {
+      data: { subscription }
+    } = supabase.auth.onAuthStateChange(() => {
+      supabase.auth.getClaims().then(({ data }) => {
+        data?.claims ? dispatch(setUser(data.claims)) : dispatch(clearUser())
+      })
+    })
+
+    return () => subscription.unsubscribe()
+  }, [dispatch])
+
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}></RouterProvider>

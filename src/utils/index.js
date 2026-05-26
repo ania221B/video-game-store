@@ -1,5 +1,5 @@
-export { default as checkIndex } from './checkIndex'
 export { default as checkAmount } from './checkAmount'
+export { default as checkIndex } from './checkIndex'
 export { default as excludeTags } from './excludeTags'
 export { default as generatePrice } from './generatePrice'
 export { default as getFormattedDate } from './getFormattedDate'
