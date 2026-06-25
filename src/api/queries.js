@@ -9,6 +9,7 @@ import {
 } from './fetchGames'
 import { fetchGenres, fetchSingleGenre } from './fetchGenres'
 import { fetchPlatforms } from './fetchPlatforms'
+import { fetchWishlist } from './fetchwishlist'
 
 export function genresQuery () {
   return {
@@ -77,9 +78,16 @@ export function screenshotsQuery (id) {
   }
 }
 
-function tagsQuery (page) {
+export function tagsQuery (page) {
   return {
     queryKey: ['tags'],
     queryFn: () => fetchTags(page)
+  }
+}
+
+export function wishlistQuery () {
+  return {
+    queryKey: ['wishlist'],
+    queryFn: fetchWishlist
   }
 }

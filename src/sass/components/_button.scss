@@ -243,6 +243,14 @@
   }
 }
 
+.btn[data-button='icon'] {
+  --btn-bg: transparent;
+  --btn-fg: #{clr(neutral, 100)};
+  --btn-hover-fg: #{clr(primary, 700)};
+  --btn-hover-bg: transparent;
+  // position: absolute;
+}
+
 button[data-button='nav-link'] {
   background: none;
   border: none;

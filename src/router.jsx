@@ -12,15 +12,17 @@ import {
   Products,
   SingleGenre,
   SingleProduct,
-  WishList
+  Wishlist
 } from './pages'
+import { ProtectedRoute } from './components/common'
+
 // loaders
 import { loader as genresLoader } from './components/layout/HomeLayout'
 import { loader as landingLoader } from './pages/Landing'
 import { loader as productsLoader } from './pages/Products'
 import { loader as singleProductLoader } from './pages/SingleProduct'
 import { loader as singleGenreLoader } from './pages/SingleGenre'
-import ProtectedRoute from './components/common/ProtectedRoute'
+import { loader as wishlistLoader } from './pages/Wishlist'
 // actions
 
 export const router = createBrowserRouter([
@@ -88,10 +90,11 @@ export const router = createBrowserRouter([
         path: 'wishlist',
         element: (
           <ProtectedRoute>
-            <WishList></WishList>
+            <Wishlist></Wishlist>
           </ProtectedRoute>
         ),
-        errorElement: <Error></Error>
+        errorElement: <Error></Error>,
+        loader: wishlistLoader(queryClient)
       }
     ]
   },

@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom'
 import HeroImage from './HeroImage'
 import { placeholderImages } from '../../data'
 import { useState } from 'react'
+import { WishlistButton } from '../../features'
+import { useSelector } from 'react-redux'
 
 function ProductCard ({ item }) {
   const { id, slug, name, background_image: img, rating, genres, price } = item
   const [isPopupVisible, setIsPopupVisible] = useState(false)
+  const { user } = useSelector(store => store.auth)
 
   function togglePopup () {
     setIsPopupVisible(!isPopupVisible)
@@ -23,7 +26,10 @@ function ProductCard ({ item }) {
       </div>
 
       <div className='product-item__content'>
-        <h3 className='product-item__name'>{name}</h3>
+        <div className='product-item__title'>
+          <h3 className='product-item__name'>{name}</h3>
+          {user && <WishlistButton game={item} size={28}></WishlistButton>}
+        </div>
 
         <div className='product-item__info'>
           <dl>

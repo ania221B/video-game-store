@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Loader } from '../components/common'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../features'
+import { addItem, WishlistButton } from '../features'
 import { checkAmount } from '../utils'
 import { placeholderImages } from '../data'
 
@@ -32,6 +32,7 @@ export const loader = queryClient =>
 function SingleProduct ({ min = 0, max = 100 }) {
   const dispatch = useDispatch()
   const { cartItems } = useSelector(store => store.cart)
+  const { user } = useSelector(store => store.auth)
 
   const [selectedPlatform, setSelectedPlatform] = useState({
     name: '',
@@ -109,12 +110,15 @@ function SingleProduct ({ min = 0, max = 100 }) {
         </div>
         <div className='product__content'>
           <header>
+            {/* {user && <WishlistButton game={game}></WishlistButton>} */}
+            <WishlistButton game={game}></WishlistButton>
             <div className='flow'>
               <h1 className='product__name fs-900'>{name}</h1>
               <p className='uppercase letter-spacing-1'>
                 release date: {getFormatedDate(released, true)}
               </p>
             </div>
+
             <ProductRatings
               rating={rating}
               metacritic={metacritic}

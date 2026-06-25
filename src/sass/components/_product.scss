@@ -32,12 +32,25 @@
 
   header {
     display: grid;
+
     gap: var(--grid-gap, $grid-gap);
     text-align: center;
 
     @include mq(large) {
       grid-auto-flow: column;
       text-align: left;
+
+      & > *:not(.tooltip) {
+        grid-row: 2;
+      }
+    }
+  }
+
+  .tooltip {
+    @include mq(large) {
+      justify-self: end;
+      grid-column: 2;
+      grid-row: 1;
     }
   }
 

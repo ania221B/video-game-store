@@ -18,3 +18,4 @@ export { default as ProductRequirementsButtons } from './ProductRequirementsButt
 export { default as ProductRequirementsPanels } from './ProductRequirementsPanels'
 export { default as Scroller } from './Scroller'
 export { default as SearchBar } from './SearchBar'
+export { default as Tooltip } from './Tooltip'

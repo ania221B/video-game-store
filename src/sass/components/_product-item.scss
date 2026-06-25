@@ -57,6 +57,13 @@
   padding-block: $grid-gap;
 }
 
+.product-item__title {
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .product-item__info {
   display: grid;
   grid-template-columns: 1fr max-content;
@@ -169,4 +176,8 @@
 .product-item .details-btn {
   --btn-fs: #{fs(500)};
   border-radius: 0 0 var(--_container-radius) var(--_container-radius);
+}
+
+.product-item .btn[data-button='icon'] {
+  padding: 0;
 }
