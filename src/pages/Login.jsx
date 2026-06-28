@@ -5,10 +5,11 @@ import { supabase } from '../lib'
 
 import background from '../assets/images/placeholder/placeholder-1200.webp'
 import { Loader } from '../components/common'
-import { ArrowRight, LoaderCircle } from 'lucide-react'
+import { ArrowRight, CircleAlert, LoaderCircle } from 'lucide-react'
 
 function Login () {
   const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
   const navigate = useNavigate()
@@ -46,8 +47,19 @@ function Login () {
     }
   })
 
+  function validateEmail (email) {
+    return /^[a-zA-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+      ? ''
+      : 'Invalid email'
+  }
+
   async function handleLogin (e) {
     e.preventDefault()
+    const emailCheck = validateEmail(email)
+    if (emailCheck) {
+      setEmailError(emailCheck)
+      return
+    }
     setLoading(true)
     const { data, error } = await supabase.auth.signInWithOtp({
       email,
@@ -61,6 +73,7 @@ function Login () {
   }
 
   function handleChange (e) {
+    setEmailError('')
     setEmail(e.target.value)
   }
 
@@ -124,7 +137,14 @@ function Login () {
                   onChange={handleChange}
                   required
                 />
-                <div className='form__error'>{/* error go here */}</div>
+                <div className='form__error'>
+                  {emailError && (
+                    <>
+                      <CircleAlert size={18}></CircleAlert>
+                      <p className='fs-300'>{emailError}</p>
+                    </>
+                  )}
+                </div>
               </div>
               {email === '' ? (
                 <button
