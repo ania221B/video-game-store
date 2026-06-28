@@ -11,4 +11,5 @@ export {
   singleGenreQuery
 } from './queries'
 export { fetchPlatforms } from './fetchPlatforms'
-export { fetchWishlist, saveWishlist } from './fetchwishlist'
+export { fetchOrders, fetchSingleOrder, saveOrder } from './fetchOrders'
+export { fetchWishlist, saveWishlist } from './fetchWishlist'

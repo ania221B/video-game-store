@@ -1,6 +1,7 @@
 export { default as AccordionPanel } from './AccordionPanel'
 export { default as Card } from './Card'
 export { default as Carousel } from './Carousel'
+export { default as CheckoutItem } from './CheckoutItem'
 export { default as CustomSelect } from './CustomSelect'
 export { default as HeroImage } from './HeroImage'
 export { default as GenreCard } from './GenreCard'

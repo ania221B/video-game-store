@@ -8,8 +8,9 @@ import {
   fetchTrendingGames
 } from './fetchGames'
 import { fetchGenres, fetchSingleGenre } from './fetchGenres'
+import { fetchOrders, fetchSingleOrder } from './fetchOrders'
 import { fetchPlatforms } from './fetchPlatforms'
-import { fetchWishlist } from './fetchwishlist'
+import { fetchWishlist } from './fetchWishlist'
 
 export function genresQuery () {
   return {
@@ -89,5 +90,19 @@ export function wishlistQuery () {
   return {
     queryKey: ['wishlist'],
     queryFn: fetchWishlist
+  }
+}
+
+export function ordersQuery () {
+  return {
+    queryKey: ['orders'],
+    queryFn: fetchOrders
+  }
+}
+
+export function singleOrderQuery (id) {
+  return {
+    queryKey: ['order', id],
+    queryFn: () => fetchSingleOrder(id)
   }
 }

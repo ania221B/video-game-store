@@ -26,7 +26,12 @@ function Cart () {
               </p>
               <p>Any added items will appear here.</p>
             </div>
-            <Link to='/products' className='btn' data-button='primary'>
+            <Link
+              to='/products'
+              className='btn'
+              data-button='primary'
+              aria-label='go back to store to start shopping'
+            >
               <span>Start shopping</span>
               <span>Start shopping</span>
             </Link>
@@ -42,7 +47,7 @@ function Cart () {
                 to='/products'
                 className='btn'
                 data-button='outline'
-                aria-label='go back to store to start shopping'
+                aria-label='go back to store to continue shopping'
               >
                 <span>Continue shopping</span>
                 <span>
@@ -57,13 +62,16 @@ function Cart () {
                 })}
               </ul>
               <p className='cart__total'>
-                <span>Order total</span>
-                <span className='fs-700'>${cartTotal.toFixed(2)}</span>
+                <span className='fs-500'>Order total:</span>
+                <span className='fs-700 fw-extra-bold'>
+                  ${cartTotal.toFixed(2)}
+                </span>
               </p>
             </div>
-            <button type='button' className='btn' data-button='secondary'>
+            <Link to='/checkout' className='btn' data-button='secondary'>
               Place order
-            </button>
+            </Link>
+
             <button
               type='button'
               className='btn'

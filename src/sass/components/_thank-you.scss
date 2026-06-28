@@ -1,0 +1,11 @@
+@use '../abstracts/' as *;
+
+.thank-you {
+  height: 100%;
+  display: grid;
+  align-items: center;
+
+  .closing {
+    font-style: italic;
+  }
+}

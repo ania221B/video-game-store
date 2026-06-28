@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { loadWishlist } from '../features/wishlist/wishlistSlice'
 
 export const loader = queryClient => async () => {
-  await queryClient.ensureQueryData(wishlistQuery)
+  await queryClient.ensureQueryData(wishlistQuery())
   return null
 }
 
@@ -20,24 +20,28 @@ function Wishlist () {
 
   useEffect(() => {
     if (data) dispatch(loadWishlist(data))
-  })
+  }, [data])
 
   return (
-    <article>
-      <header>
-        <h1>Your Wishlist ({wishlistItemCount})</h1>
-      </header>
+    <section className='section'>
+      <div className='container'>
+        <article>
+          <header>
+            <h1>Your Wishlist ({wishlistItemCount})</h1>
+          </header>
 
-      <div className='padding-block-start-48'>
-        <ProductList
-          products={wishlistItems}
-          emptyMsg={{
-            heading: 'Your wishlist is currently empty!',
-            text: `You can add here any games you'd like to purchase one day`
-          }}
-        ></ProductList>
+          <div className='padding-block-start-48'>
+            <ProductList
+              products={wishlistItems}
+              emptyMsg={{
+                heading: 'Your wishlist is currently empty!',
+                text: `You can add here any games you'd like to purchase one day`
+              }}
+            ></ProductList>
+          </div>
+        </article>
       </div>
-    </article>
+    </section>
   )
 }
 

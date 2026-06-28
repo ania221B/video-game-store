@@ -1,4 +1,5 @@
 @forward './accordion';
+@forward './account';
 @forward './badge';
 @forward './button';
 @forward './carousel';
@@ -14,6 +15,9 @@
 @forward './genre-card';
 @forward './login';
 @forward './login-link';
+@forward './order';
+@forward './order__item';
+@forward './orders-table';
 @forward './page-header';
 @forward './pagination';
 @forward './primary-header';
@@ -26,4 +30,5 @@
 @forward './search-bar';
 @forward './slide-card';
 @forward './spinner';
+@forward './thank-you';
 @forward './tooltip';

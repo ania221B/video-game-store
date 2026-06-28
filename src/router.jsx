@@ -5,6 +5,7 @@ import {
   Account,
   Cart,
   Checkout,
+  CheckoutThankYou,
   Error,
   Genres,
   Landing,
@@ -23,6 +24,8 @@ import { loader as productsLoader } from './pages/Products'
 import { loader as singleProductLoader } from './pages/SingleProduct'
 import { loader as singleGenreLoader } from './pages/SingleGenre'
 import { loader as wishlistLoader } from './pages/Wishlist'
+import Orders, { loader as ordersLoader } from './pages/Orders'
+import SingleOrder from './pages/SingleOrder'
 // actions
 
 export const router = createBrowserRouter([
@@ -78,6 +81,15 @@ export const router = createBrowserRouter([
         errorElement: <Error></Error>
       },
       {
+        path: 'checkout/thank-you',
+        element: (
+          <ProtectedRoute>
+            <CheckoutThankYou></CheckoutThankYou>
+          </ProtectedRoute>
+        ),
+        errorElement: <Error></Error>
+      },
+      {
         path: 'account',
         element: (
           <ProtectedRoute>
@@ -95,6 +107,24 @@ export const router = createBrowserRouter([
         ),
         errorElement: <Error></Error>,
         loader: wishlistLoader(queryClient)
+      },
+      {
+        path: 'orders',
+        element: (
+          <ProtectedRoute>
+            <Orders></Orders>
+          </ProtectedRoute>
+        ),
+        errorElement: <Error></Error>,
+        loader: ordersLoader(queryClient)
+      },
+      {
+        path: 'orders/:id',
+        element: (
+          <ProtectedRoute>
+            <SingleOrder></SingleOrder>
+          </ProtectedRoute>
+        )
       }
     ]
   },

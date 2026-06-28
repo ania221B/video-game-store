@@ -1,0 +1,23 @@
+@use '../abstracts/' as *;
+
+.orders-table {
+  inline-size: 100%;
+  font-size: fs(500);
+
+  thead {
+    font-size: fs(500);
+    font-style: italic;
+    font-variant: small-caps;
+    letter-spacing: 0.125em;
+  }
+  th,
+  td {
+    text-align: center;
+    padding-block: size(12);
+    padding-inline: size(20);
+  }
+
+  tbody > tr:nth-of-type(even) {
+    background-color: clr(base, 400);
+  }
+}
