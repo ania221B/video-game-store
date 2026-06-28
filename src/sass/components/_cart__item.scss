@@ -13,13 +13,17 @@
   position: relative;
 
   &__thumbnail {
-    grid-row: 1 / span 3;
+    grid-row: 1;
     inline-size: 100%;
     min-block-size: 100%;
-    img {
+    aspect-ratio: 1;
+
+    img,
+    picture {
       border-radius: size(4);
-      inline-size: 100%;
+      inline-size: inherit;
       block-size: 100%;
+      max-block-size: 100%;
     }
   }
 
@@ -30,7 +34,7 @@
   }
 
   &__name {
-    grid-column: 1 / -1;
+    grid-column: 1 / span 2;
     a {
       text-decoration: none;
       color: currentColor;
@@ -80,6 +84,7 @@
   @include mq(small) {
     grid-template-columns: 12rem 1fr;
     &__thumbnail {
+      grid-row: 1 / span 3;
       inline-size: 12rem;
     }
 

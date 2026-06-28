@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import { removeItem, updateItemQuantity } from './cartSlice'
 import { QuantityControls } from '../../components/common'
 import { Link } from 'react-router-dom'
+import { HeroImage } from '../../components/ui'
+import { placeholderImages } from '../../data'
 
 function CartItem ({ item }) {
   const { cartId, productId, image, name, price, platform, quantity, slug } =
@@ -17,7 +19,17 @@ function CartItem ({ item }) {
     <li>
       <article className='cart__item'>
         <div className='cart__item__thumbnail'>
-          <img src={image} alt={name} />
+          {image ? (
+            <img
+              src={image}
+              alt={name}
+              width='300'
+              height='250'
+              loading='lazy'
+            />
+          ) : (
+            <HeroImage image={placeholderImages.placeholder}></HeroImage>
+          )}
         </div>
 
         <dl className='cart__item__details'>
