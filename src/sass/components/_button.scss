@@ -171,7 +171,6 @@
   --btn-hover-fg: #{clr(primary, 400)};
   --btn-hover-bg: transparent;
   padding-block: 0.25em;
-  padding-inline-end: 0;
   justify-content: space-between;
   align-items: center;
   text-transform: capitalize;
@@ -209,19 +208,44 @@
     margin-left: 1.5rem;
   }
 
-  & > *:last-child {
+  &:not(:has(.arrow-right, .arrow-left)) {
+    padding-inline: 0;
+  }
+
+  &:has(.arrow-right) {
+    padding-inline: 0.15em;
+  }
+  &:has(.arrow-left) {
+    padding-inline: 0.75em;
+  }
+
+  & > .arrow-right {
     transform: translateX(-0.75rem);
     transition: transform 300ms ease-in-out;
   }
 
-  &:focus > *:last-child,
-  &:hover > *:last-child {
+  &:focus > .arrow-right,
+  &:hover > .arrow-right {
     transform: translateX(0);
   }
 
-  &:disabled:focus > *:last-child,
-  &:disabled:hover > *:last-child {
+  &:disabled:focus > .arrow-right,
+  &:disabled:hover > .arrow-right {
     transform: translateX(-0.75rem);
+  }
+  & > .arrow-left {
+    transform: translateX(0.75rem);
+    transition: transform 300ms ease-in-out;
+  }
+
+  &:focus > .arrow-left,
+  &:hover > .arrow-left {
+    transform: translateX(-0.75rem);
+  }
+
+  &:disabled:focus > .arrow-left,
+  &:disabled:hover > .arrow-left {
+    transform: translateX(0.75rem);
   }
 }
 

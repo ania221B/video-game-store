@@ -34,7 +34,7 @@ function Checkout () {
               data-button='outline'
               aria-label='Go back to cart so as to edit items'
             >
-              <span>
+              <span className='arrow-left'>
                 <ArrowLeft></ArrowLeft>
               </span>
               <span>Go back to edit cart</span>

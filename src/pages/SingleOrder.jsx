@@ -15,7 +15,7 @@ function SingleOrder () {
   return (
     <section className='section'>
       <div className='container'>
-        <article className='order'>
+        <article className='order order--single'>
           <header>
             <h1>Order #{formatId(id)}</h1>
 
@@ -25,7 +25,7 @@ function SingleOrder () {
               data-button='outline'
               aria-labels='Go back to all orders'
             >
-              <span>
+              <span className='arrow-left'>
                 <ArrowLeft></ArrowLeft>
               </span>
               <span>Back to orders</span>

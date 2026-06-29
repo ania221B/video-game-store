@@ -50,7 +50,7 @@ function Cart () {
                 aria-label='go back to store to continue shopping'
               >
                 <span>Continue shopping</span>
-                <span>
+                <span className='arrow-right'>
                   <ArrowRight></ArrowRight>
                 </span>
               </Link>
