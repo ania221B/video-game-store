@@ -12,6 +12,10 @@
   & > *:not(.primary-header, .page-header) {
     grid-column: 2 / -2;
   }
+
+  & > * {
+    min-inline-size: 0;
+  }
 }
 
 .container[data-container='x-small'] {

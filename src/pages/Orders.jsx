@@ -14,19 +14,14 @@ function Orders () {
   const ordersCount = orders?.length || 0
 
   return (
-    <section
-      className='section'
-      style={{
-        blockSize: '100%'
-      }}
-    >
+    <section className='section orders'>
       <div className='container' data-container='small'>
         <article>
           <header>
             <h1 className='fs-700'>Your Orders ({ordersCount})</h1>
           </header>
 
-          <div className='padding-block-start-48'>
+          <div className='table-wrapper padding-block-48'>
             <OrderTable orders={orders} ordersCount={ordersCount}></OrderTable>
           </div>
         </article>
