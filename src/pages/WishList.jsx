@@ -23,7 +23,7 @@ function Wishlist () {
   }, [data])
 
   return (
-    <section className='section'>
+    <section className='section wishlist'>
       <div className='container'>
         <article>
           <header>

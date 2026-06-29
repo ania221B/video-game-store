@@ -40,6 +40,12 @@ body {
   }
 }
 
+#root:has(.cart, .orders, .wishlist) {
+  & > *:nth-child(2) {
+    align-self: center;
+  }
+}
+
 main {
   padding-block-start: var(--header-height);
 }

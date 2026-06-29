@@ -14,10 +14,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.25rem 0.5rem;
+    gap: $grid-gap;
 
-    @include mq(medium) {
+    @include mq(41em) {
       justify-content: space-between;
+    }
+  }
+
+  &--single {
+    header {
+      @include mq(33.25em) {
+        justify-content: space-between;
+      }
     }
   }
 

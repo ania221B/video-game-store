@@ -1,11 +1,4 @@
 @use '../abstracts/' as *;
-
-#root:has(.cart) {
-  & > *:nth-child(2) {
-    align-self: center;
-  }
-}
-
 .cart {
   display: grid;
   gap: $grid-gap;
@@ -18,9 +11,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.25rem 0.5rem;
+    gap: $grid-gap;
 
-    @include mq(medium) {
+    @include mq(33.25em) {
       justify-content: space-between;
     }
   }
