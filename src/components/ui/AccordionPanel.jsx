@@ -11,7 +11,6 @@ function AccordionPanel ({ title, list }) {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const panelRef = useRef(null)
 
-
   function handleChange (e) {
     const newSearchParams = new URLSearchParams(searchParams)
     const filterList =
@@ -47,24 +46,34 @@ function AccordionPanel ({ title, list }) {
     setIsPanelOpen(!isPanelOpen)
   }
 
-
   return (
-    <div className='accordion__panel' data-state={isPanelOpen ? 'opened' : 'closed'}>
+    <div
+      className='accordion__panel'
+      data-state={isPanelOpen ? 'opened' : 'closed'}
+    >
       <h3 className='accordion__title'>
-        <button type='button'
+        <button
+          type='button'
           aria-label={`Show or hide 
             ${title} filter`}
           aria-controls={`accordion__content-${title}`}
           aria-expanded={isPanelOpen}
           className='btn accordion__btn filter-menu__btn'
-          onClick={togglePanel} data-button='secondary'>
+          onClick={togglePanel}
+          data-button='secondary'
+        >
           <span>{title}</span>
           <ChevronDown className='accordion__toggle'></ChevronDown>
         </button>
       </h3>
 
       <div
-        ref={panelRef} className='accordion__content' id={`accordion__content-${title}`} aria-hidden={isPanelOpen ? false : true}>
+        ref={panelRef}
+        className='accordion__content'
+        id={`accordion__content-${title}`}
+        aria-hidden={isPanelOpen ? false : true}
+        inert={!isPanelOpen}
+      >
         <div>
           <div className='accordion__inner-content product-filters'>
             {list?.map(item => {
