@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { genresQuery } from '../../api'
 import Header from './Header'
 import Footer from './Footer'
+import ScrollToTop from './ScrollToTop'
+import SkipToMain from './SkipToMain'
 
 export const loader = queryClient => async () => {
   await queryClient.ensureQueryData(genresQuery())
@@ -32,8 +34,13 @@ function HomeLayout () {
 
   return (
     <>
+      <SkipToMain></SkipToMain>
+      <ScrollToTop></ScrollToTop>
       <Header headerRef={headerRef}></Header>
-      <main style={{ '--header-height': `${headerHeight}px` }}>
+      <main
+        id='main-content'
+        style={{ '--header-height': `${headerHeight}px` }}
+      >
         <Outlet></Outlet>
       </main>
       <Footer></Footer>
