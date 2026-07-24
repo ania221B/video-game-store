@@ -1,21 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { queryClient } from './lib'
+import { lazy, Suspense } from 'react'
 import { HomeLayout } from './components/layout'
-import {
-  Account,
-  Cart,
-  Checkout,
-  CheckoutThankYou,
-  Error,
-  Genres,
-  Landing,
-  Login,
-  Products,
-  SingleGenre,
-  SingleProduct,
-  Wishlist
-} from './pages'
-import { ProtectedRoute } from './components/common'
+const Account = lazy(() => import('./pages/Account'))
+const Cart = lazy(() => import('./pages/Cart'))
+const Checkout = lazy(() => import('./pages/Checkout'))
+const CheckoutThankYou = lazy(() => import('./pages/CheckoutThankYou'))
+const Genres = lazy(() => import('./pages/Genres'))
+const Landing = lazy(() => import('./pages/Landing'))
+const Login = lazy(() => import('./pages/Login'))
+const Orders = lazy(() => import('./pages/Orders'))
+const Products = lazy(() => import('./pages/Products'))
+const SingleGenre = lazy(() => import('./pages/SingleGenre'))
+const SingleOrder = lazy(() => import('./pages/SingleOrder'))
+const SingleProduct = lazy(() => import('./pages/SingleProduct'))
+const Wishlist = lazy(() => import('./pages/Wishlist'))
+import { Error } from './pages'
+import { Loader, ProtectedRoute } from './components/common'
 
 // loaders
 import { loader as genresLoader } from './components/layout/HomeLayout'
@@ -24,8 +25,8 @@ import { loader as productsLoader } from './pages/Products'
 import { loader as singleProductLoader } from './pages/SingleProduct'
 import { loader as singleGenreLoader } from './pages/SingleGenre'
 import { loader as wishlistLoader } from './pages/Wishlist'
-import Orders, { loader as ordersLoader } from './pages/Orders'
-import SingleOrder from './pages/SingleOrder'
+import { loader as ordersLoader } from './pages/Orders'
+
 // actions
 
 export const router = createBrowserRouter([
@@ -39,35 +40,59 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Landing></Landing>,
+        element: (
+          <Suspense fallback={<Loader></Loader>}>
+            <Landing></Landing>
+          </Suspense>
+        ),
         errorElement: <Error></Error>,
         loader: landingLoader(queryClient)
       },
       {
         path: 'products',
-        element: <Products></Products>,
+        element: (
+          <Suspense fallback={<Loader></Loader>}>
+            <Products></Products>
+          </Suspense>
+        ),
         errorElement: <Error></Error>,
         loader: productsLoader(queryClient)
       },
       {
         path: 'products/:id/:slug',
-        element: <SingleProduct></SingleProduct>,
+        element: (
+          <Suspense fallback={<Loader></Loader>}>
+            <SingleProduct></SingleProduct>
+          </Suspense>
+        ),
         errorElement: <Error></Error>,
         loader: singleProductLoader(queryClient)
       },
       {
         path: 'cart',
-        element: <Cart></Cart>,
+        element: (
+          <Suspense fallback={<Loader></Loader>}>
+            <Cart></Cart>
+          </Suspense>
+        ),
         errorElement: <Error></Error>
       },
       {
         path: 'genres',
-        element: <Genres></Genres>,
+        element: (
+          <Suspense fallback={<Loader></Loader>}>
+            <Genres></Genres>
+          </Suspense>
+        ),
         errorElement: <Error></Error>
       },
       {
         path: 'genres/:id/:slug',
-        element: <SingleGenre></SingleGenre>,
+        element: (
+          <Suspense fallback={<Loader></Loader>}>
+            <SingleGenre></SingleGenre>
+          </Suspense>
+        ),
         errorElement: <Error></Error>,
         loader: singleGenreLoader(queryClient)
       },
@@ -75,7 +100,9 @@ export const router = createBrowserRouter([
         path: 'checkout',
         element: (
           <ProtectedRoute>
-            <Checkout></Checkout>
+            <Suspense fallback={<Loader></Loader>}>
+              <Checkout></Checkout>
+            </Suspense>
           </ProtectedRoute>
         ),
         errorElement: <Error></Error>
@@ -84,7 +111,9 @@ export const router = createBrowserRouter([
         path: 'checkout/thank-you',
         element: (
           <ProtectedRoute>
-            <CheckoutThankYou></CheckoutThankYou>
+            <Suspense fallback={<Loader></Loader>}>
+              <CheckoutThankYou></CheckoutThankYou>
+            </Suspense>
           </ProtectedRoute>
         ),
         errorElement: <Error></Error>
@@ -93,7 +122,9 @@ export const router = createBrowserRouter([
         path: 'account',
         element: (
           <ProtectedRoute>
-            <Account></Account>
+            <Suspense fallback={<Loader></Loader>}>
+              <Account></Account>
+            </Suspense>
           </ProtectedRoute>
         ),
         errorElement: <Error></Error>
@@ -102,7 +133,9 @@ export const router = createBrowserRouter([
         path: 'wishlist',
         element: (
           <ProtectedRoute>
-            <Wishlist></Wishlist>
+            <Suspense fallback={<Loader></Loader>}>
+              <Wishlist></Wishlist>
+            </Suspense>
           </ProtectedRoute>
         ),
         errorElement: <Error></Error>,
@@ -112,7 +145,9 @@ export const router = createBrowserRouter([
         path: 'orders',
         element: (
           <ProtectedRoute>
-            <Orders></Orders>
+            <Suspense fallback={<Loader></Loader>}>
+              <Orders></Orders>
+            </Suspense>
           </ProtectedRoute>
         ),
         errorElement: <Error></Error>,
@@ -122,7 +157,9 @@ export const router = createBrowserRouter([
         path: 'orders/:id',
         element: (
           <ProtectedRoute>
-            <SingleOrder></SingleOrder>
+            <Suspense fallback={<Loader></Loader>}>
+              <SingleOrder></SingleOrder>
+            </Suspense>
           </ProtectedRoute>
         )
       }
@@ -130,7 +167,11 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Login></Login>,
+    element: (
+      <Suspense fallback={<Loader></Loader>}>
+        <Login></Login>
+      </Suspense>
+    ),
     errorElement: <Error></Error>
   }
 ])
