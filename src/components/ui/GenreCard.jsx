@@ -44,8 +44,10 @@ function GenreCard ({ genre }) {
           data-button='primary'
           onClick={toggleDescription}
         >
-          <span>See Info</span>
-          <span aria-hidden='true'>See Info</span>
+          <span>{!showDescription ? 'See Info' : 'Hide Info'}</span>
+          <span aria-hidden='true'>
+            {!showDescription ? 'See Info' : 'Hide Info'}
+          </span>
         </button>
         <Link
           to={`/genres/${genre.id}/${genre.slug}`}
