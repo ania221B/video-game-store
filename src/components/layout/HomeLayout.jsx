@@ -5,6 +5,9 @@ import Header from './Header'
 import Footer from './Footer'
 import ScrollToTop from './ScrollToTop'
 import SkipToMain from './SkipToMain'
+import { Modal } from '../../features'
+import LightboxCarousel from '../ui/LightboxCarousel'
+import { useSelector } from 'react-redux'
 
 export const loader = queryClient => async () => {
   await queryClient.ensureQueryData(genresQuery())
@@ -14,6 +17,7 @@ export const loader = queryClient => async () => {
 function HomeLayout () {
   const headerRef = useRef(null)
   const [headerHeight, setHeaderHeight] = useState(0)
+  const { content } = useSelector(state => state.modal)
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
@@ -44,6 +48,14 @@ function HomeLayout () {
         <Outlet></Outlet>
       </main>
       <Footer></Footer>
+      {content && (
+        <Modal>
+          <LightboxCarousel
+            slideList={content.list}
+            currentSlide={content.index}
+          ></LightboxCarousel>
+        </Modal>
+      )}
     </>
   )
 }

@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addItem, WishlistButton } from '../features'
 import { checkAmount } from '../utils'
 import { placeholderImages } from '../data'
+import LightboxCarousel from '../components/ui/LightboxCarousel'
 
 export const loader = queryClient =>
   async function ({ params }) {

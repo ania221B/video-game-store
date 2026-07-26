@@ -1,6 +1,8 @@
 export { default as authReducer } from './auth/authSlice'
 export { default as CartItem } from './cart/CartItem'
 export { default as cartReducer } from './cart/cartSlice'
+export { default as Modal } from './modal/Modal'
+export { default as modalReducer } from './modal/modalSlice'
 export { default as WishlistButton } from './wishlist/WishlistButton'
 export { default as wishlistReducer } from './wishlist/wishlistSlice'
 export * from './cart/cartSlice'

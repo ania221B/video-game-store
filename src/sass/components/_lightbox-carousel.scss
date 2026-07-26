@@ -1,0 +1,47 @@
+@use '../abstracts/' as *;
+
+.lightbox-carousel {
+  display: grid;
+  gap: $grid-gap;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 65dvh auto;
+
+  &__preview {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+
+    img {
+      block-size: 100%;
+      inline-size: 100%;
+    }
+  }
+
+  &__list {
+    grid-column: 1 / span 3;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__btn {
+    grid-row: 1;
+    align-self: center;
+
+    &:first-of-type {
+      grid-column: 1;
+    }
+
+    &:last-of-type {
+      grid-column: 3;
+    }
+  }
+
+  .btn:not(.lightbox-carousel__btn) {
+    --btn-bg: transparent;
+    --btn-hover-bg: #{clr(primary, 400)};
+    padding: 0;
+
+    &::after {
+      inset: -2px;
+    }
+  }
+}
