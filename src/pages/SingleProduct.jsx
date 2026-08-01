@@ -104,7 +104,13 @@ function SingleProduct ({ min = 0, max = 100 }) {
         {/* PRODUCT HERO */}
         <div className='product__img'>
           {background_image ? (
-            <img src={background_image} alt={name} loading='lazy' />
+            <img
+              src={background_image}
+              alt={name}
+              width='300'
+              height='250'
+              loading='lazy'
+            />
           ) : (
             <HeroImage image={placeholderImages.placeholder}></HeroImage>
           )}

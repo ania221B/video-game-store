@@ -9,7 +9,7 @@ function CheckoutItem ({ item }) {
     <li>
       <article className='order__item'>
         <div className='order__item__thumbnail'>
-          <img src={image} alt={name} />
+          <img src={image} alt={name} width='300' height='250' loading='lazy' />
         </div>
 
         <dl className='order__item__details'>

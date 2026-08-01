@@ -14,7 +14,13 @@ function Card ({ item, route = 'products', type = 'games', tabIndex = -1 }) {
         <article className='card__content'>
           <div className='card__img'>
             {item?.image_background ? (
-              <img src={item.image_background} alt={item.name} />
+              <img
+                src={item.image_background}
+                alt={item.name}
+                width='300'
+                height='250'
+                loading='lazy'
+              />
             ) : (
               <HeroImage image={placeholderImages.placeholder}></HeroImage>
             )}
@@ -36,7 +42,13 @@ function Card ({ item, route = 'products', type = 'games', tabIndex = -1 }) {
       <article className='card__content'>
         <div className='card__img'>
           {item?.background_image ? (
-            <img src={item.background_image} alt={item.name} />
+            <img
+              src={item.background_image}
+              alt={item.name}
+              width='300'
+              height='250'
+              loading='lazy'
+            />
           ) : (
             <HeroImage image={placeholderImages.placeholder}></HeroImage>
           )}

@@ -25,7 +25,13 @@ function GenreCard ({ genre }) {
     >
       <div className='genre-card__img'>
         {genre?.image_background ? (
-          <img src={genre.image_background} alt={genre.name} />
+          <img
+            src={genre.image_background}
+            alt={genre.name}
+            width='300'
+            height='250'
+            loading='lazy'
+          />
         ) : (
           <HeroImage image={placeholderImages.placeholder}></HeroImage>
         )}

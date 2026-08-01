@@ -20,6 +20,8 @@ function ProductGallery ({ gameName, gameScreenshots }) {
                 <img
                   src={screenshot.image}
                   alt={`image from ${gameName}`}
+                  width='300'
+                  height='250'
                   loading='lazy'
                 ></img>
               </button>
