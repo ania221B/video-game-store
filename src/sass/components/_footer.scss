@@ -1,6 +1,10 @@
 @use '../abstracts/' as *;
 
 .footer {
+  .container {
+    justify-items: center;
+    gap: 0.5rem;
+  }
   a {
     color: currentColor;
     text-decoration: none;

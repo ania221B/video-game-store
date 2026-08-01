@@ -4,7 +4,6 @@ function Footer () {
   return (
     <footer className='footer section'>
       <div className='container'>
-        <h2>footer goes here</h2>
         <a
           href='https://rawg.io/apidocs'
           target='_blank'
