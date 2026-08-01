@@ -1,73 +1,54 @@
 # About
 
-- This template aims to speed up setting up and working on a project by providing basic code that you can reuse in your works
-- it uses Vite, React and Sass
-- The Sass files organization is based on [the 7-1 pattern](https://sass-guidelin.es/#the-7-1-pattern)
+This project is a video game store SPA. It fetches game data from RAWG API.
 
-## How to use
+## Table of Contents
 
-- Once you have the template in your repos, you can use it as a base for your project
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Links](#links)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Known Limitations]
+- [Useful Resources](#useful-resources)
+- [Getting Started](#getting-started)
+- [Credits](#credits)
 
-### With GitHub
+## Features
 
-1. Go to GitHub
-2. Find the repo with the template
-3. Click the **Use this template** button on the **Code** tab
-4. Enter the name for a new repo with the project you're going to work on
-5. Add the description if you want
-6. Choose if you want it to be public or private
-7. Click **Create repository from template** button
-8. A new repo based on the template will be created
+Users have access to the following features and functionalites:
 
-### With degit
+- **Home Page with Infinite Carousels** - featuring different categories of games; the carousels are accessible and support keyboard navigation
+- **Product Search** - search for games in the games catalog by entering a game name in the seach bar on the Products page
+- **Product Filtering** - filter game catalog
+- **Pagination** - navigate pages of games in the catalog
+- **Lightbox** - display the image gallery on product pages in a lightbox (modal with the gallery) for better viewing experience
+- **Login** - log in to access any created wishlists and placed orders
+- **Authentication** - via magic link powered by Supabase
+- **Wishlist Functionality** - once logged in, create wishlists that are stored in Supabase
+- **Cart**:
+  - adding and removing items functionality
+  - clear cart functionality
+  - total price calculation per-item and for the whole cart
+- **Orders** - once logged in place an order for items in the cart - this means storing order data in Supabase, NO PURCHASES ARE MADE
+- **Product Pages** - view details of games, such as rating, price, platforms, description, gallery and system requiremenst
 
-1. Install [degit](https://github.com/Rich-Harris/degit), if you don't have it yet
+## Screenshots
 
-```
-npm install -g degit
-```
+![Landing - Mobile view](./public/screenshots/landing-page-mobile.png)
+![Landing - Desktop view](./public/screenshots/landing-page.png)
+![Products - Mobile view](./public/screenshots/products-page-mobile.png)
+![Products - Desktop view](./public/screenshots/products-page.png)
 
-2. Open up the terminal and use:
-
-```
-degit github-user-name/template-mame my-new-project
-```
-
-where:
-
-- `github-user-name` is the username you use on GitHub
-- `template-name` is the name of the template that will be base of your project (such as `website-starter-react-template`)
-- `my-new-project` name of the project you're going to work on
-
-In my case the above could look the following:
-
-```
-degit ania221b/website-starter-react-template to-do-list
-```
-
-You can use the terminal in VS Code, Command Prompt, Windows Powershell or a tool like [Hyper](https://hyper.is/)
-
-3. Navigate to your new project, so:
-
-```
-cd my-new-project
-```
-
-4. Perform the installation
-
-```
-npm install
-```
-
-5. Open your project up in VS code
-
-```
-code .
-```
+## Links
 
 ## Project Structure
 
 📁 src/
+
+├── api/                      # Data fetching functions & queries
+
+├── app/                      # RTK store
 
 ├── assets/                      # Images & fonts
 
@@ -101,24 +82,51 @@ code .
 
 │ └── vendor/                    # Third party CSS
 
-├── App.jsx                      # Top-level UI component, sets up routes and suspense boundaries
+├── utils                      # Utility functions
+
+├── App.jsx                      # Top-level UI component
 
 ├── index.scss                   # Entry point that imports all styles
 
-└── main.jsx                     # React root
+├── main.jsx                   # Entry point that imports all styles
 
-## Acknowledgements
+└── router.jsx                     # Set up of routes and suspense boundaries
 
-- This template was build as part of [Beyond CSS](https://www.beyondcss.dev/) course by [Kevin Powell](https://www.kevinpowell.co/)
-- You can find Kevin's template on [his GitHub](https://github.com/kevin-powell)
+## Technologies Used
+
+- React.js
+- Redux Toolkit
+- React Router DOM
+- TanStack Query/React Query
+- React Suspense
+- Supabase
+- Semantic HTML 5 Markup
+- CSS Grid
+- Flexbox
+- SCSS
+
+## Known Linitations
+
+- **RAWG API rate limits apply**
+- **RAWG images are large and unoptimized**. Not much I can do about this since I don't control them.
+
+## Useful Resources
+
+## Getting Started
+
+1. Clone the repo
+2. Run `npm install`
+3. Create a `.env` file with:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_PUBLISHABLE_KEY`
+   - `VITE_RAWG_API_KEY`
+4. Run `npm run dev`
+
+## Credits
+
+- This solution was made using a template I build while taking [Beyond CSS](https://www.beyondcss.dev/) course by [Kevin Powell](https://www.kevinpowell.co/). You can find Kevin's template on [his GitHub](https://github.com/kevin-powell)
+- Game data powered by [RAWG API](https://rawg.io/apidocs).
+- Icons provided by [Lucide](https://lucide.dev)
+- Illustration used for Error component provided by [Storyset](https://storyset.com/web)
 
 ---
-
-## React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
