@@ -2,19 +2,19 @@ import { createBrowserRouter } from 'react-router-dom'
 import { queryClient } from './lib'
 import { lazy, Suspense } from 'react'
 import { HomeLayout } from './components/layout'
-const Account = lazy(() => import('./pages/Account'))
-const Cart = lazy(() => import('./pages/Cart'))
-const Checkout = lazy(() => import('./pages/Checkout'))
-const CheckoutThankYou = lazy(() => import('./pages/CheckoutThankYou'))
-const Genres = lazy(() => import('./pages/Genres'))
-const Landing = lazy(() => import('./pages/Landing'))
-const Login = lazy(() => import('./pages/Login'))
-const Orders = lazy(() => import('./pages/Orders'))
-const Products = lazy(() => import('./pages/Products'))
-const SingleGenre = lazy(() => import('./pages/SingleGenre'))
-const SingleOrder = lazy(() => import('./pages/SingleOrder'))
-const SingleProduct = lazy(() => import('./pages/SingleProduct'))
-const Wishlist = lazy(() => import('./pages/Wishlist'))
+const Account = lazy(() => import('./pages/Account.jsx'))
+const Cart = lazy(() => import('./pages/Cart.jsx'))
+const Checkout = lazy(() => import('./pages/Checkout.jsx'))
+const CheckoutThankYou = lazy(() => import('./pages/CheckoutThankYou.jsx'))
+const Genres = lazy(() => import('./pages/Genres.jsx'))
+const Landing = lazy(() => import('./pages/Landing.jsx'))
+const Login = lazy(() => import('./pages/Login.jsx'))
+const Orders = lazy(() => import('./pages/Orders.jsx'))
+const Products = lazy(() => import('./pages/Products.jsx'))
+const SingleGenre = lazy(() => import('./pages/SingleGenre.jsx'))
+const SingleOrder = lazy(() => import('./pages/SingleOrder.jsx'))
+const SingleProduct = lazy(() => import('./pages/SingleProduct.jsx'))
+const Wishlist = lazy(() => import('./pages/Wishlist.jsx'))
 import { Error } from './pages'
 import { Loader, ProtectedRoute } from './components/common'
 
