@@ -4,24 +4,8 @@ import { HeroImage, Pagination, SearchBar } from '../components/ui'
 import { ProductList } from '../components/lists'
 import FilterMenu from '../components/common/FilterMenu'
 import { heroImages } from '../data'
-import { platformsQuery } from '../api/queries'
 import { useQuery } from '@tanstack/react-query'
 import { Loader } from '../components/common'
-
-export const loader =
-  queryClient =>
-  async ({ request }) => {
-    const params = Object.fromEntries([
-      ...new URL(request.url).searchParams.entries()
-    ])
-
-    await Promise.all([
-      queryClient.ensureQueryData(gamesQuery(params)),
-      queryClient.ensureQueryData(platformsQuery())
-    ])
-
-    return params
-  }
 
 function Products () {
   const params = useLoaderData()

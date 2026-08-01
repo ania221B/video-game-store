@@ -1,14 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductList } from '../components/lists'
-import { wishlistQuery } from '../api/queries'
+import { wishlistQuery } from '../api'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { loadWishlist } from '../features/wishlist/wishlistSlice'
-
-export const loader = queryClient => async () => {
-  await queryClient.ensureQueryData(wishlistQuery())
-  return null
-}
 
 function Wishlist () {
   const dispatch = useDispatch()

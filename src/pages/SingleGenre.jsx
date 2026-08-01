@@ -5,23 +5,6 @@ import { Pagination, SearchBar } from '../components/ui'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { Loader } from '../components/common'
 
-export const loader =
-  queryClient =>
-  async ({ params, request }) => {
-    const { id, slug } = params
-
-    const searchParams = Object.fromEntries(new URL(request.url).searchParams)
-
-    const genreParams = { ...searchParams, genres: slug }
-
-    await Promise.all([
-      queryClient.ensureQueryData(singleGenreQuery(id)),
-      queryClient.ensureQueryData(gamesQuery(genreParams))
-    ])
-
-    return null
-  }
-
 function SingleGenre () {
   const { id, slug } = useParams()
   const [searchParams] = useSearchParams()

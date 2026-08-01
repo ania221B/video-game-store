@@ -18,18 +18,6 @@ import { checkAmount } from '../utils'
 import { placeholderImages } from '../data'
 import LightboxCarousel from '../components/ui/LightboxCarousel'
 
-export const loader = queryClient =>
-  async function ({ params }) {
-    const { id } = params
-
-    await Promise.all([
-      queryClient.ensureQueryData(singleGameQuery(id)),
-      queryClient.ensureQueryData(screenshotsQuery(id))
-    ])
-
-    return id
-  }
-
 function SingleProduct ({ min = 0, max = 100 }) {
   const dispatch = useDispatch()
   const { cartItems } = useSelector(store => store.cart)

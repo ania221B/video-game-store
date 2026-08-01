@@ -6,9 +6,12 @@ export {
   newestGamesQuery,
   trendingGamesQuery,
   criticallyAcclaimedGamesQuery,
+  ordersQuery,
+  platformsQuery,
   singleGameQuery,
   screenshotsQuery,
-  singleGenreQuery
+  singleGenreQuery,
+  wishlistQuery
 } from './queries'
 export { fetchPlatforms } from './fetchPlatforms'
 export { fetchOrders, fetchSingleOrder, saveOrder } from './fetchOrders'

@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
-import { genresQuery } from '../../api'
 import Header from './Header'
 import Footer from './Footer'
 import ScrollToTop from './ScrollToTop'
@@ -8,11 +7,6 @@ import SkipToMain from './SkipToMain'
 import { Modal } from '../../features'
 import LightboxCarousel from '../ui/LightboxCarousel'
 import { useSelector } from 'react-redux'
-
-export const loader = queryClient => async () => {
-  await queryClient.ensureQueryData(genresQuery())
-  return null
-}
 
 function HomeLayout () {
   const headerRef = useRef(null)

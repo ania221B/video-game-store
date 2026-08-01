@@ -1,23 +1,14 @@
-import { Link } from 'react-router-dom'
-import { Carousel } from '../components/ui'
-import { ArrowRight } from 'lucide-react'
 import {
   criticallyAcclaimedGamesQuery,
   genresQuery,
   newestGamesQuery,
   trendingGamesQuery
 } from '../api'
+import { Link } from 'react-router-dom'
+import { Carousel } from '../components/ui'
+import { ArrowRight } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { Loader } from '../components/common'
-
-export const loader = queryClient => async () => {
-  await Promise.all([
-    queryClient.ensureQueryData(newestGamesQuery()),
-    queryClient.ensureQueryData(trendingGamesQuery()),
-    queryClient.ensureQueryData(criticallyAcclaimedGamesQuery())
-  ])
-  return null
-}
 
 function Landing () {
   const genreQuery = useQuery(genresQuery())

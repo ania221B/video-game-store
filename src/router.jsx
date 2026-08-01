@@ -19,15 +19,16 @@ import { Error } from './pages'
 import { Loader, ProtectedRoute } from './components/common'
 
 // loaders
-import { loader as genresLoader } from './components/layout/HomeLayout'
-import { loader as landingLoader } from './pages/Landing'
-import { loader as productsLoader } from './pages/Products'
-import { loader as singleProductLoader } from './pages/SingleProduct'
-import { loader as singleGenreLoader } from './pages/SingleGenre'
-import { loader as wishlistLoader } from './pages/Wishlist'
-import { loader as ordersLoader } from './pages/Orders'
 
-// actions
+import {
+  genresLoader,
+  landingLoader,
+  productsLoader,
+  singleProductLoader,
+  singleGenreLoader,
+  wishlistLoader,
+  ordersLoader
+} from './loaders'
 
 export const router = createBrowserRouter([
   {

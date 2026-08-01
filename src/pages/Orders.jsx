@@ -1,13 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { ordersQuery } from '../api/queries'
+import { ordersQuery } from '../api'
 import { Link } from 'react-router-dom'
 import { formatId } from '../utils'
 import { OrderTable } from '../components/lists'
-
-export const loader = queryClient => async () => {
-  await queryClient.ensureQueryData(ordersQuery())
-  return null
-}
 
 function Orders () {
   const { data: orders, isLoading, isError } = useQuery(ordersQuery())
