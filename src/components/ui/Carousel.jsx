@@ -140,18 +140,19 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
   return (
     <div
       className='carousel'
-      tabIndex='0'
       aria-roledescription='carousel'
       aria-label={label}
       data-type={type === 'hero' ? 'hero' : null}
       ref={carouselRef}
       onKeyDown={handleKeyboard}
-      role='group'
+      role='region'
     >
       <button
         type='button'
         aria-controls='slides-list'
-        aria-label='display previous slide'
+        aria-label={`Display previous slide, currently showing ${
+          slideIndex - VISIBLE_SLIDES + 1
+        } of ${originals.length}`}
         className='carousel__btn btn'
         data-button='carousel-control'
         onClick={displayPreviousSlide}
@@ -224,7 +225,9 @@ function Carousel ({ slideList, label, type = 'games', route = 'products' }) {
       <button
         type='button'
         aria-controls='slides-list'
-        aria-label='display next slide'
+        aria-label={`Display next slide, currently showing ${
+          slideIndex - VISIBLE_SLIDES + 1
+        } of ${originals.length}`}
         className='carousel__btn btn'
         data-button='carousel-control'
         onClick={displayNextSlide}
