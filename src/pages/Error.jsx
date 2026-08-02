@@ -26,6 +26,37 @@ function Error () {
       </section>
     )
   }
+  if (
+    !error?.response ||
+    error?.response?.status >= 500 ||
+    error?.message === 'Network Error'
+  ) {
+    return (
+      <section className='section error-page error-page--not-found'>
+        <div className='container'>
+          <div className='img-container error-page__img'>
+            <ErrorImg></ErrorImg>
+          </div>
+          <div className='error-page__text-content flow text-center'>
+            <h2 className='error-page__title'>Error!</h2>
+            <p className='fs-500'>
+              We're having trouble connecting to our games database, please try
+              again later.
+            </p>
+            <button
+              type='button'
+              className='btn'
+              data-button='primary'
+              onClick={() => window.location.reload()}
+            >
+              <span>Try again</span>
+              <span aria-hidden='true'>Try again</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    )
+  }
   return (
     <section className='section error-page error-page--general'>
       <div className='container'>
