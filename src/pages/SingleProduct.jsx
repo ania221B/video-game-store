@@ -105,8 +105,8 @@ function SingleProduct ({ min = 0, max = 100 }) {
         </div>
         <div className='product__content'>
           <header>
-            {/* {user && <WishlistButton game={game}></WishlistButton>} */}
-            <WishlistButton game={game}></WishlistButton>
+            {user && <WishlistButton game={game}></WishlistButton>}
+
             <div className='flow'>
               <h1 className='product__name fs-900'>{name}</h1>
               <p className='uppercase letter-spacing-1'>
