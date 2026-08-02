@@ -100,12 +100,12 @@
   &__star {
     display: flex;
     gap: 0.125em;
-  }
 
-  .lucide-star {
-    inline-size: fs(500);
-    block-size: fs(500);
-    fill: clr(base, 800);
+    & > svg {
+      inline-size: fs(500);
+      block-size: fs(500);
+      fill: clr(base, 800);
+    }
   }
 
   &__cart {
