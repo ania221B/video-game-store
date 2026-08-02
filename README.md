@@ -10,7 +10,6 @@ This project is a video game store SPA. It fetches game data from RAWG API.
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
 - [Known Limitations]
-- [Useful Resources](#useful-resources)
 - [Getting Started](#getting-started)
 - [Credits](#credits)
 
@@ -35,12 +34,15 @@ Users have access to the following features and functionalites:
 
 ## Screenshots
 
-![Landing - Mobile view](./public/screenshots/landing-page-mobile.png)
 ![Landing - Desktop view](./public/screenshots/landing-page.png)
-![Products - Mobile view](./public/screenshots/products-page-mobile.png)
 ![Products - Desktop view](./public/screenshots/products-page.png)
+![Landing - Mobile view](./public/screenshots/landing-page-mobile.png)
+![Products - Mobile view](./public/screenshots/products-page-mobile.png)
 
 ## Links
+
+- Solution URL: [GitHub](https://github.com/ania221B/video-game-store)
+- Live Site URL: [Netlify](https://good-gamez.netlify.app)
 
 ## Project Structure
 
@@ -109,8 +111,12 @@ Users have access to the following features and functionalites:
 
 - **RAWG API rate limits apply**
 - **RAWG images are large and unoptimized**. Not much I can do about this since I don't control them.
-
-## Useful Resources
+- **RAWG data is not consistent**.
+  - Sometimes game descriptions are in English and another language, like Spanish.
+  - System requiremtens data does not have consistent shape, hence there are cases where minimum and recommended requirements are mixed.
+  - Some of the data is missing, this means there is no fully reliable way to filter out NSFW content. This is why additional measures (utility functions) were put in place, yet due to missing data these aren't foolproof either.
+- **RAWG doesn't provide price data**. Prices shown are derived using game ids.
+- **No payment processing demo**. Placing an order means storing in in Subabase. The order can then be displayed on user account page under orders. There is no screen for providing dummy payment data.
 
 ## Getting Started
 
