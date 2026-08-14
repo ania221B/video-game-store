@@ -1,11 +1,12 @@
 import { ChevronDown } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigation, useSearchParams } from 'react-router-dom'
 import { useClickOutside } from '../../hooks'
 import { checkIndex } from '../../utils'
 
 function CustomSelect () {
+  const navigation = useNavigation()
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedOrder = searchParams.get('ordering')
     ? searchParams.get('ordering')
@@ -97,7 +98,7 @@ function CustomSelect () {
     <div
       className='custom-select'
       data-state={isDropdownOpen ? 'open' : 'closed'}
-      ref={dropDownContainerRef}      
+      ref={dropDownContainerRef}
     >
       <button
         type='button'
@@ -114,8 +115,7 @@ function CustomSelect () {
         data-button='secondary'
       >
         <span className='custom-select__selected-value'>
-          {' '}
-          {customSelectLabel}
+          {navigation.state === 'loading' ? 'updating...' : customSelectLabel}
         </span>
 
         <ChevronDown></ChevronDown>

@@ -41,6 +41,10 @@
     place-content: center;
     position: relative;
 
+    &:disabled {
+      border: 0.0625em dotted clr(neutral, 200);
+    }
+
     &::before {
       content: '✓';
       font-size: 1.5em;

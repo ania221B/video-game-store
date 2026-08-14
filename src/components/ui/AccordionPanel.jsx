@@ -1,8 +1,9 @@
 import { ChevronDown } from 'lucide-react'
 import { useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigation, useSearchParams } from 'react-router-dom'
 
 function AccordionPanel ({ title, list }) {
+  const navigation = useNavigation()
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedFilters =
     searchParams.get(`${title}`) && searchParams.get(`${title}`) !== ''
@@ -10,8 +11,18 @@ function AccordionPanel ({ title, list }) {
       : []
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const panelRef = useRef(null)
+  const [checkedBoxes, setCheckedBoxes] = useState([])
 
   function handleChange (e) {
+    const isChecked = checkedBoxes.includes(e.target.name)
+
+    if (isChecked) {
+      const newCheckedBoxes = checkedBoxes.filter(box => box !== e.target.name)
+      setCheckedBoxes(newCheckedBoxes)
+    } else {
+      const newCheckedBoxes = [...checkedBoxes, e.target.name]
+      setCheckedBoxes(newCheckedBoxes)
+    }
     const newSearchParams = new URLSearchParams(searchParams)
     const filterList =
       newSearchParams.get(`${title}`) && searchParams.get(`${title}`) !== ''
@@ -84,9 +95,16 @@ function AccordionPanel ({ title, list }) {
                     type='checkbox'
                     id={name}
                     name={title === 'platforms' ? id : slug}
-                    checked={selectedFilters.includes(
-                      title === 'platforms' ? id.toString() : slug
-                    )}
+                    checked={
+                      navigation.state === 'loading'
+                        ? checkedBoxes.includes(
+                            title === 'platforms' ? id.toString() : slug
+                          )
+                        : selectedFilters.includes(
+                            title === 'platforms' ? id.toString() : slug
+                          )
+                    }
+                    disabled={navigation.state === 'loading'}
                     onChange={handleChange}
                   />
                   <label htmlFor={name}>{name}</label>
