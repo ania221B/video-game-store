@@ -33,9 +33,13 @@
       inset: 0;
     }
 
+    &.active {
+      color: clr(accent, 400);
+    }
+
     &:hover,
     &:focus {
-      color: clr(accent, 400);
+      color: clr(base, 200);
     }
   }
 }
