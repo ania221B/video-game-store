@@ -5,12 +5,16 @@
     --btn-bg: transparent;
     --btn-hover-bg: #{clr(primary, 400)};
     padding: 0;
+    block-size: 100%;
+    inline-size: 100%;
 
     &::after {
       inset: -2px;
     }
   }
+
   img {
     block-size: 100%;
+    inline-size: 100%;
   }
 }
