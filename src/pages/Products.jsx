@@ -6,12 +6,14 @@ import FilterMenu from '../components/common/FilterMenu'
 import { heroImages } from '../data'
 import { useQuery } from '@tanstack/react-query'
 import { Loader } from '../components/common'
+import { ProductsError } from '../components/sections'
 
 function Products () {
   const params = useLoaderData()
-  const { data: gamesData, isLoading } = useQuery(gamesQuery(params))
+  const { data: gamesData, isLoading, isError } = useQuery(gamesQuery(params))
 
   if (isLoading) return <Loader></Loader>
+  if (isError) return <ProductsError></ProductsError>
 
   const products = gamesData?.results || []
   const count = gamesData?.count ? gamesData.count : 0
