@@ -1,13 +1,24 @@
 import { gamesApi } from './gamesApi'
+import { mockFetchGenres, mockFetchSingleGenre } from './mockGamesApi'
 
 export async function fetchGenres () {
-  const { data } = await gamesApi.get('/genres')
+  try {
+    const { data } = await gamesApi.get('/genres')
 
-  return data
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchGenres()
+  }
 }
 
 export async function fetchSingleGenre (id) {
-  const { data } = await gamesApi.get(`/genres/${id}`)
+  try {
+    const { data } = await gamesApi.get(`/genres/${id}`)
 
-  return data
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchSingleGenre(id)
+  }
 }

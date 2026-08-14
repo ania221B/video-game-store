@@ -1,7 +1,13 @@
 import { gamesApi } from './gamesApi'
+import { mockFetchPlatforms } from './mockGamesApi'
 
 export async function fetchPlatforms () {
-  const { data } = await gamesApi.get('/platforms')
+  try {
+    const { data } = await gamesApi.get('/platforms')
 
-  return data
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachagble, using local data', error)
+    return mockFetchPlatforms()
+  }
 }

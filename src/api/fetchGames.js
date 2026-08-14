@@ -1,4 +1,12 @@
 import { gamesApi } from './gamesApi'
+import {
+  mockFetchCriticallyAcclaimedGames,
+  mockFetchGames,
+  mockFetchNewestGames,
+  mockFetchScreenshots,
+  mockFetchSingleGame,
+  mockFetchTrendingGames
+} from './mockGamesApi'
 
 const today = new Date()
 const year = today.getFullYear()
@@ -14,58 +22,88 @@ function formatDate (date) {
 
 export async function fetchGames (params) {
   const page = Number(params.page ?? 1)
-  const { data } = await gamesApi.get('/games', {
-    params: {
-      page_size: 20,
-      ...params,
-      page
-    }
-  })
-  return data
+  try {
+    const { data } = await gamesApi.get('/games', {
+      params: {
+        page_size: 20,
+        ...params,
+        page
+      }
+    })
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchGames({ ...params, page })
+  }
 }
 
 export async function fetchNewestGames () {
-  const { data } = await gamesApi.get('/games', {
-    params: {
-      dates: `${formatDate(lastWeek)},${formatDate(today)}`,
-      ordering: '-released',
-      page_size: 20
-    }
-  })
-  return data
+  try {
+    const { data } = await gamesApi.get('/games', {
+      params: {
+        dates: `${formatDate(lastWeek)},${formatDate(today)}`,
+        ordering: '-released',
+        page_size: 20
+      }
+    })
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchNewestGames()
+  }
 }
 
 export async function fetchTrendingGames () {
-  const { data } = await gamesApi.get('/games', {
-    params: {
-      dates: `${formatDate(sixMonthsAgo)},${formatDate(today)}`,
-      ordering: '-added',
-      page_size: 20
-    }
-  })
-  return data
+  try {
+    const { data } = await gamesApi.get('/games', {
+      params: {
+        dates: `${formatDate(sixMonthsAgo)},${formatDate(today)}`,
+        ordering: '-added',
+        page_size: 20
+      }
+    })
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchTrendingGames()
+  }
 }
 
 export async function fetchCriticallyAcclaimedGames () {
-  const { data } = await gamesApi.get('/games', {
-    params: {
-      ordering: '-metacritic',
-      metacritic: '80,100',
-      page_size: 20
-    }
-  })
+  try {
+    const { data } = await gamesApi.get('/games', {
+      params: {
+        ordering: '-metacritic',
+        metacritic: '80,100',
+        page_size: 20
+      }
+    })
 
-  return data
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchCriticallyAcclaimedGames()
+  }
 }
 
 export async function fetchSingleGame (id) {
-  const { data } = await gamesApi.get(`/games/${id}`)
+  try {
+    const { data } = await gamesApi.get(`/games/${id}`)
 
-  return data
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchSingleGame(id)
+  }
 }
 
 export async function fetchScreenshots (id) {
-  const { data } = await gamesApi.get(`/games/${id}/screenshots`)
+  try {
+    const { data } = await gamesApi.get(`/games/${id}/screenshots`)
 
-  return data
+    return data
+  } catch (error) {
+    console.warn('RAWG API unreachable, using local data', error)
+    return mockFetchScreenshots(id)
+  }
 }
