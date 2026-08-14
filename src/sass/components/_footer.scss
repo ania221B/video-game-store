@@ -1,6 +1,7 @@
 @use '../abstracts/' as *;
 
 .footer {
+  padding-block: 1.5rem;
   .container {
     justify-items: center;
     gap: 0.5rem;

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer () {
   return (
-    <footer className='footer section'>
+    <footer className='footer'>
       <div className='container'>
         <a
           href='https://rawg.io/apidocs'
