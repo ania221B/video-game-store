@@ -85,9 +85,10 @@
   grid-template-rows: 1fr min-content;
   gap: var(--_catalog-gap) 0;
   &__list {
+    grid-auto-rows: minmax(0, 28rem);
     @include mq(large) {
       li:only-child {
-        max-width: calc($card-base-width * 1.5);
+        max-inline-size: calc($card-base-width * 1.5);
       }
     }
   }

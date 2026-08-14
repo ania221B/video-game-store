@@ -22,11 +22,11 @@ body {
     align-items: center;
   }
 
-  & > *:first-child {
+  & > *:first-child(2) {
     grid-row: 1;
   }
 
-  & > *:nth-child(2) {
+  & > *:nth-child(3) {
     grid-row: 2;
   }
 
@@ -41,7 +41,7 @@ body {
 }
 
 #root:has(.cart, .orders, .wishlist) {
-  & > *:nth-child(2) {
+  & > *:nth-child(3) {
     align-self: center;
   }
 }
