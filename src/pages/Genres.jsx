@@ -13,10 +13,16 @@ function Genres () {
 
   if (!genres.length) {
     return (
-      <div>
-        <h1>Sorry... Nothing to display here.</h1>
-        <p>Genres data couldn't be loaded. Please try refreshing the page.</p>
-      </div>
+      <section>
+        <div className='container' data-container='small'>
+          <hgroup className='flow'>
+            <h1>Sorry... Nothing to display here.</h1>
+            <p>
+              Genres data couldn't be loaded. Please try refreshing the page.
+            </p>
+          </hgroup>
+        </div>
+      </section>
     )
   }
   return (

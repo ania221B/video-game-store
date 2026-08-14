@@ -39,7 +39,9 @@ function GenreCard ({ genre }) {
 
       <h2 className='genre-card__title fs-700'>{genre.name}</h2>
       <div className='genre-card__content'>
-        {isLoading && <h3>Loading. Please wait...</h3>}
+        {isLoading && (
+          <h3 className='genre-card__loading-text'>Loading. Please wait...</h3>
+        )}
         {data && <p>{normalizeText(data.description)}</p>}
       </div>
 
