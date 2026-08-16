@@ -49,3 +49,12 @@ body {
 main {
   padding-block-start: var(--header-height);
 }
+
+a:focus {
+  outline: none;
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

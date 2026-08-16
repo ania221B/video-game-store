@@ -19,6 +19,15 @@
     &:last-of-type {
       grid-column: 3;
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
   }
 
   &__content {
@@ -89,5 +98,14 @@
   .carousel__indicator.is-selected {
     --btn-bg: #{clr(primary, 400)};
     --btn-hover-bg: #{clr(primary, 400)};
+  }
+
+  .carousel__indicator:focus {
+    outline: none;
+  }
+
+  .carousel__indicator:focus-visible {
+    outline: 2px solid var(--btn-hover-bg);
+    outline-offset: 2px;
   }
 }

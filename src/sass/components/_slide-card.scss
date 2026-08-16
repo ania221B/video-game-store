@@ -31,8 +31,13 @@
   }
 
   &:hover::after,
-  &:focus::after {
+  &:focus::after,
+  &:focus-visible::after {
     opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
