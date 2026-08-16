@@ -1,6 +1,6 @@
 # About
 
-This project is a video game store SPA. It fetches game data from RAWG API.
+This project is a video game store SPA. It fetches game data from RAWG API. **IMPORTANT UPDATE: Local data added as a fallback to ensure availability**: at the time of writing this RAWG API is down, the connection timeouts with 522 error. To ensure the project isn't jut a blank page mock data was added. The data was generated and integrated using Claude Sonnet 5.
 
 ## Table of Contents
 
@@ -9,7 +9,7 @@ This project is a video game store SPA. It fetches game data from RAWG API.
 - [Links](#links)
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
-- [Known Limitations]
+- [Known Limitations](#known-linitations)
 - [Getting Started](#getting-started)
 - [Credits](#credits)
 
