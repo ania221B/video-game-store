@@ -12,16 +12,11 @@ import {
   wishlistQuery
 } from './api'
 
-export const genresLoader = queryClient => async () => {
-  await queryClient.ensureQueryData(genresQuery())
-  return null
-}
 export const landingLoader = queryClient => async () => {
-  await Promise.all([
+  queryClient.ensureQueryData(genresQuery()),
     queryClient.ensureQueryData(newestGamesQuery()),
     queryClient.ensureQueryData(trendingGamesQuery()),
     queryClient.ensureQueryData(criticallyAcclaimedGamesQuery())
-  ])
   return null
 }
 
@@ -33,6 +28,7 @@ export const productsLoader =
     ])
 
     await Promise.all([
+      queryClient.ensureQueryData(genresQuery()),
       queryClient.ensureQueryData(gamesQuery(params)),
       queryClient.ensureQueryData(platformsQuery())
     ])

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, useNavigation } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
@@ -7,11 +7,21 @@ import SkipToMain from './SkipToMain'
 import { Modal } from '../../features'
 import LightboxCarousel from '../ui/LightboxCarousel'
 import { useSelector } from 'react-redux'
+import { Loader } from '../common'
+import { useIsFetching, useQueryClient } from '@tanstack/react-query'
 
 function HomeLayout () {
   const headerRef = useRef(null)
   const [headerHeight, setHeaderHeight] = useState(0)
   const { content } = useSelector(state => state.modal)
+  const navigation = useNavigation()
+  const location = useLocation()
+  const isNavigating =
+    navigation.state === 'loading' &&
+    !(
+      navigation.location?.pathname === location.pathname &&
+      navigation.location?.search !== location.search
+    )
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
@@ -39,7 +49,7 @@ function HomeLayout () {
         id='main-content'
         style={{ '--header-height': `${headerHeight}px` }}
       >
-        <Outlet></Outlet>
+        {isNavigating ? <Loader></Loader> : <Outlet></Outlet>}
       </main>
       <Footer></Footer>
       {content && (

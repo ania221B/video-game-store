@@ -21,7 +21,6 @@ import { Loader, ProtectedRoute } from './components/common'
 // loaders
 
 import {
-  genresLoader,
   landingLoader,
   productsLoader,
   singleProductLoader,
@@ -36,7 +35,6 @@ export const router = createBrowserRouter([
     id: 'root',
     element: <HomeLayout></HomeLayout>,
     errorElement: <Error></Error>,
-    loader: genresLoader(queryClient),
 
     children: [
       {
