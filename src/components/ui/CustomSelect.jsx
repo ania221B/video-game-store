@@ -5,32 +5,34 @@ import { useNavigation, useSearchParams } from 'react-router-dom'
 import { useClickOutside } from '../../hooks'
 import { checkIndex } from '../../utils'
 
+const sortingOptions = [
+  {
+    id: 'name',
+    name: 'name',
+    value: 'name'
+  },
+  {
+    id: 'popularity',
+    name: 'popularity',
+    value: '-rating'
+  },
+  {
+    id: 'release-date',
+    name: 'release date',
+    value: '-released'
+  }
+]
+
 function CustomSelect () {
   const navigation = useNavigation()
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedOrder = searchParams.get('ordering')
     ? searchParams.get('ordering')
     : ''
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [dropdownState, setDropdownState] = useState('CLOSED')
+  const isDropdownOpen = dropdownState === 'OPEN'
   const [highlightedIndex, setHighlightedIndex] = useState(0)
-  const dropDownContainerRef = useRef(null)
-  const sortingOptions = [
-    {
-      id: nanoid(),
-      name: 'name',
-      value: 'name'
-    },
-    {
-      id: nanoid(),
-      name: 'popularity',
-      value: '-rating'
-    },
-    {
-      id: nanoid(),
-      name: 'release date',
-      value: '-released'
-    }
-  ]
+  const dropdownContainerRef = useRef(null)
 
   const selectedOption = sortingOptions.find(
     option => option.value === selectedOrder
@@ -50,7 +52,7 @@ function CustomSelect () {
       option => option.value === selectedOrder
     )
     const currentIndex = index !== -1 ? index : 0
-    setIsDropdownOpen(!isDropdownOpen)
+    setDropdownState(prev => (prev === 'OPEN' ? 'IS-CLOSING' : 'OPEN'))
     setHighlightedIndex(currentIndex)
   }
 
@@ -61,7 +63,7 @@ function CustomSelect () {
         ? setHighlightedIndex(prevIndex =>
             checkIndex(prevIndex + 1, sortingOptions)
           )
-        : setIsDropdownOpen(true)
+        : setDropdownState('OPEN')
     }
     if (e.key === 'ArrowUp') {
       e.preventDefault()
@@ -75,30 +77,38 @@ function CustomSelect () {
         option => option.value === selectedOrder
       )
       const currentIndex = index !== -1 ? index : 0
-      if (isDropdownOpen && sortingOptions[highlightedIndex]) {
+      if (dropdownState === 'OPEN' && sortingOptions[highlightedIndex]) {
         const highlightedValue = sortingOptions[highlightedIndex].value
 
         handleSelection(highlightedValue)
-        setIsDropdownOpen(false)
+        setDropdownState('IS-CLOSING')
       } else {
-        setIsDropdownOpen(true)
+        setDropdownState('OPEN')
         setHighlightedIndex(currentIndex)
       }
     }
     if (e.key === 'Escape') {
-      setIsDropdownOpen(false)
+      setDropdownState('IS-CLOSING')
     }
   }
 
-  useClickOutside(dropDownContainerRef, () => {
-    setIsDropdownOpen(false)
+  useClickOutside(dropdownContainerRef, () => {
+    if (dropdownState === 'OPEN') {
+      setDropdownState('IS-CLOSING')
+    }
   })
+
+  function handleAnimationEnd (e) {
+    if (e.animationName === 'closeDropdown') {
+      setDropdownState('CLOSED')
+    }
+  }
 
   return (
     <div
       className='custom-select'
-      data-state={isDropdownOpen ? 'open' : 'closed'}
-      ref={dropDownContainerRef}
+      data-state={dropdownState === 'OPEN' ? 'OPEN' : dropdownState}
+      ref={dropdownContainerRef}
     >
       <button
         type='button'
@@ -120,14 +130,15 @@ function CustomSelect () {
 
         <ChevronDown></ChevronDown>
       </button>
-      {isDropdownOpen && (
+
+      {dropdownState !== 'CLOSED' && (
         <ul
           id='sorting-list'
           aria-label='pick a filter to sort games list'
           className='custom-select__dropdown'
           role='listbox'
-          data-state={isDropdownOpen}
-          style={{ display: 'grid', gridAutoFlow: 'columns' }}
+          data-state={dropdownState === 'OPEN' ? 'OPEN' : dropdownState}
+          onAnimationEnd={handleAnimationEnd}
         >
           {sortingOptions.map((option, index) => {
             return (
@@ -138,7 +149,7 @@ function CustomSelect () {
                 aria-selected={option.value === selectedOrder || undefined}
                 onClick={() => {
                   handleSelection(option.value)
-                  setIsDropdownOpen(false)
+                  setDropdownState('IS-CLOSING')
                 }}
                 className={`custom-select__toggle btn ${
                   highlightedIndex === index ? ' highlighted' : ''

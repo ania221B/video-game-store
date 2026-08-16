@@ -15,14 +15,49 @@
     display: grid;
     grid-auto-flow: row;
 
-    background-color: clr(base, 800);
+    background-color: clr(base, 400);
     border: 1px solid clr(primary, 400);
     border-radius: size(4) size(4);
+    transform-origin: top;
 
     li {
+      opacity: 0;
       display: grid;
       grid-auto-flow: row;
     }
+  }
+
+  &__dropdown[data-state='CLOSED'] {
+    display: none;
+  }
+
+  &__dropdown[data-state='OPEN'] {
+    animation-name: openDropdown;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+
+  &__dropdown[data-state='IS-CLOSING'] {
+    animation-name: closeDropdown;
+    animation-duration: 500ms;
+    animation-delay: 350ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  &__dropdown[data-state='OPEN'] > * {
+    animation-name: fadeInContent;
+    animation-duration: 350ms;
+    animation-delay: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+
+  &__dropdown[data-state='IS-CLOSING'] > * {
+    animation-name: fadeOutContent;
+    animation-duration: 350ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 
   &__toggle {
@@ -45,11 +80,60 @@
       transform: rotate(0deg);
       transition: transform 500ms ease-in-out;
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+    }
   }
 
   &__btn[aria-expanded='true'] {
     & > svg {
       transform: rotate(180deg);
     }
+  }
+}
+
+@keyframes openDropdown {
+  0% {
+    opacity: 0.5;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+@keyframes closeDropdown {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes fadeInContent {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutContent {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

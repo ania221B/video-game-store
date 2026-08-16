@@ -60,7 +60,7 @@ function AccordionPanel ({ title, list }) {
   return (
     <div
       className='accordion__panel'
-      data-state={isPanelOpen ? 'opened' : 'closed'}
+      data-state={isPanelOpen ? 'OPEN' : 'CLOSED'}
     >
       <h3 className='accordion__title'>
         <button
