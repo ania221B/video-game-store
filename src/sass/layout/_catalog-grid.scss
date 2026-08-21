@@ -85,7 +85,7 @@
   grid-template-rows: 1fr min-content;
   gap: var(--_catalog-gap) 0;
   &__list {
-    grid-auto-rows: minmax(0, 28rem);
+    grid-auto-rows: minmax(0, 30rem);
     @include mq(large) {
       li:only-child {
         max-inline-size: calc($card-base-width * 1.5);
