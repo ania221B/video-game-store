@@ -55,14 +55,15 @@
   --btn-hover-fg: #{clr(base, 800)};
   padding-inline: 0;
   padding-block: 0;
-  display: block;
+  display: grid;
+  grid-auto-rows: 100%;
   color: var(--btn-fg);
+
   overflow: hidden;
 
   & > * {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     padding-block: 0.25em;
     padding-inline: 0.75em;
 
@@ -272,7 +273,6 @@
   --btn-fg: #{clr(neutral, 100)};
   --btn-hover-fg: #{clr(primary, 700)};
   --btn-hover-bg: transparent;
-  // position: absolute;
 }
 
 button[data-button='nav-link'] {
@@ -286,14 +286,17 @@ button[data-button='nav-link'] {
 }
 
 .filter-menu__btn {
-  gap: $grid-gap;
   inline-size: 100%;
   min-height: 50px;
   border-radius: size(4);
   font-size: fs(400) !important;
   font-weight: $fw-700;
   text-transform: uppercase;
-  justify-content: space-between;
+
+  &:not(.reset-btn) {
+    gap: $grid-gap;
+    justify-content: space-between;
+  }
 }
 
 .accordion__btn {

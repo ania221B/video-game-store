@@ -32,7 +32,6 @@
 
   header {
     display: grid;
-
     gap: var(--grid-gap, $grid-gap);
     text-align: center;
 
@@ -52,6 +51,11 @@
       grid-column: 2;
       grid-row: 1;
     }
+  }
+
+  &__name {
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   &__ratings {

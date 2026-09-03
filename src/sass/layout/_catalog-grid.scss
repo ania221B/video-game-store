@@ -11,12 +11,10 @@
   - min-content: filtering/search area takes only needed space
   - 1fr: product list fills remaining space, preventing layout shift
 */
-  grid-template-rows: auto min-content 1fr;
+  // grid-template-rows: auto min-content 1fr;
   gap: var(--_catalog-gap) 0;
 
-  & > header,
   & aside,
-  & .breadcrumb,
   & .search-menu,
   & .item-area {
     grid-column: 1 / -1;
@@ -27,16 +25,12 @@
     justify-self: center;
   }
 
-  @media (min-width: 45em) {
+  @include mq(medium) {
     gap: var(--_catalog-gap);
-    & > header {
-      grid-column: 1 / -1;
-      grid-row: 1;
-    }
 
     aside {
       grid-column: 1;
-      grid-row: 2 / 4;
+      grid-row: 1 / span 2;
     }
 
     .search-menu,
@@ -44,16 +38,12 @@
       grid-column: 2;
     }
 
-    .breadcrumb {
-      padding-block-start: 0;
-      grid-row: 1;
-    }
     .search-menu {
-      grid-row: 2;
+      grid-row: 1;
     }
 
     .item-area {
-      grid-row: 3;
+      grid-row: 2;
     }
 
     .pagination {
@@ -67,16 +57,25 @@
 .catalog-grid--no-filters {
   --_catalog-gap: #{calc($grid-gap * 3)};
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: unset;
   gap: var(--_catalog-gap) 0;
 
-  .search-menu {
+  .pagination {
+    grid-column: 1 / -1;
     justify-self: center;
-    min-inline-size: calc($card-base-width * 2);
   }
 
-  .pagination {
-    justify-self: end;
-    align-self: end;
+  @include mq(medium) {
+    .search-menu {
+      justify-self: center;
+      min-inline-size: calc($card-base-width * 2);
+    }
+
+    .pagination {
+      justify-self: end;
+      align-self: end;
+    }
   }
 }
 

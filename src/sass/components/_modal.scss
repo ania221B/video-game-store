@@ -18,11 +18,7 @@
 
   &__content > .btn {
     justify-self: end;
-
-    & > * {
-      padding-block: 0;
-      padding-inline: 2px;
-    }
+    aspect-ratio: 1;
   }
 }
 

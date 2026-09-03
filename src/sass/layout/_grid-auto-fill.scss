@@ -1,0 +1,11 @@
+@use '../abstracts/' as *;
+
+.grid-auto-fill {
+  --card-base-inline-size: #{$card-base-width};
+  display: grid;
+  gap: var(--grid-gap, $grid-gap);
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(var(--card-base-inline-size), 100%), 1fr)
+  );
+}

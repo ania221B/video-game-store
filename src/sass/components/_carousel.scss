@@ -4,7 +4,7 @@
   padding-block-start: $grid-gap;
   display: grid;
   grid-template-columns: max-content 1fr max-content;
-  grid-template-rows: 40dvh;
+  grid-template-rows: max(40dvh, 25rem);
   gap: 2rem;
 
   &__btn {
@@ -65,10 +65,10 @@
 .carousel[data-type='hero'] {
   grid-column: 1 / -1;
   padding-block: 0;
-  grid-template-rows: 65dvh;
+  grid-template-rows: max(65dvh, 25rem);
 
   @include mq(large) {
-    grid-template-rows: 70dvh;
+    grid-template-rows: max(70dvh, 25rem);
   }
 
   .carousel__content {

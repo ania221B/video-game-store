@@ -75,10 +75,12 @@
 
       &::placeholder {
         color: #{rgba(clr(primary, 400), 0.4)};
-    }
+      }
     }
 
     .btn {
+      padding-block: 0.25em;
+      padding-inline: 0.75em;
       border-radius: 0 size(4) size(4) 0;
       &:disabled {
         font-size: 0.6rem;

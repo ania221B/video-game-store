@@ -28,7 +28,7 @@ function FilterMenu () {
 
       <Link
         to='/products'
-        className='btn filter-menu__btn'
+        className='btn filter-menu__btn reset-btn'
         data-button='primary'
       >
         <span>Reset</span>

@@ -66,10 +66,10 @@ function Modal ({ children }) {
               data-button='primary'
             >
               <span>
-                <X></X>
+                <X size={20}></X>
               </span>
               <span>
-                <X></X>
+                <X size={20}></X>
               </span>
             </button>
             {children}

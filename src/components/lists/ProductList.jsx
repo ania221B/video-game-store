@@ -23,7 +23,7 @@ function ProductList ({
     )
   }
   return (
-    <ul className='item-area__list grid-auto-fit'>
+    <ul className='item-area__list grid-auto-fill'>
       {products.map(product => {
         return (
           <li key={product.id}>

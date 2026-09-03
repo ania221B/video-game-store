@@ -4,22 +4,39 @@
   display: grid;
   gap: $grid-gap;
   grid-template-columns: auto 1fr auto;
-  grid-template-rows: 65dvh auto;
+  grid-template-rows: 50vb auto;
+
+  @include mq(small) {
+    grid-template-rows: 65vb auto;
+  }
+
+  img {
+    block-size: 100%;
+    inline-size: 100%;
+  }
 
   &__preview {
     grid-column: 1 / span 3;
     grid-row: 1;
-
-    img {
-      block-size: 100%;
-      inline-size: 100%;
-    }
   }
 
   &__list {
     grid-column: 1 / span 3;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem;
+
+    > * {
+      width: 30%;
+    }
+
+    @include mq(small) {
+      flex-wrap: nowrap;
+      > * {
+        width: 100%;
+      }
+    }
   }
 
   &__btn {
@@ -39,6 +56,7 @@
     --btn-bg: transparent;
     --btn-hover-bg: #{clr(primary, 400)};
     padding: 0;
+    block-size: 100%;
 
     &::after {
       inset: -2px;

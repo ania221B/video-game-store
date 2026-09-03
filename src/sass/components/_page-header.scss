@@ -24,7 +24,7 @@
     align-self: end;
     text-align: center;
     font-size: fs(800);
-    padding-block-end: var(--padding-block-end);
+    padding-block: var(--padding-block-end);
     @include fluid-clamp($padding-hero, true, 'padding-block-end');
 
     h1 {

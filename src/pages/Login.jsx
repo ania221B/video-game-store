@@ -84,7 +84,7 @@ function Login () {
           <picture className='bg-img'>
             <img src={background} alt='' />
           </picture>
-          <div className='container main-content' data-container='x-small'>
+          <div className='main-content'>
             <div className='form-wrapper' style={{ height: `${formHeight}px` }}>
               <div
                 className={`
@@ -115,7 +115,7 @@ function Login () {
         <picture className='bg-img'>
           <img src={background} alt='' />
         </picture>
-        <div className='container main-content' data-container='x-small'>
+        <div className='main-content'>
           <div className='form-wrapper' ref={formRef}>
             <form
               className={`form form--login ${

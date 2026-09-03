@@ -4,8 +4,8 @@
   &-wrapper {
     inline-size: min(30rem, 100%);
     margin-inline: auto;
-    padding-block: 3.5em;
-    padding-inline: 3.5em;
+    padding-block: 3.5rem;
+    padding-inline: clamp(1rem, 0.2rem + 7vw, 3.5rem);
     backdrop-filter: blur(20px);
 
     position: relative;
